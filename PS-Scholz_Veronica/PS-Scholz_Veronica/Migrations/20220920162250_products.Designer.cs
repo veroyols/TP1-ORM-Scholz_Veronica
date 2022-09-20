@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PS_Scholz_Veronica.Persistence;
 
@@ -11,9 +12,10 @@ using PS_Scholz_Veronica.Persistence;
 namespace PS_Scholz_Veronica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220920162250_products")]
+    partial class products
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,17 +95,6 @@ namespace PS_Scholz_Veronica.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Cliente", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ClienteId = 1,
-                            Apellido = "",
-                            DNI = "",
-                            Direccion = "",
-                            Nombre = "admin",
-                            Telefono = ""
-                        });
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>

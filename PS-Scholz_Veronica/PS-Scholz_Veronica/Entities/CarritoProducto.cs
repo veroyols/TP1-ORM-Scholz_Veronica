@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PS_Scholz_Veronica.Persistence
+namespace PS_Scholz_Veronica.Entities
 {
     public class CarritoProducto
     {

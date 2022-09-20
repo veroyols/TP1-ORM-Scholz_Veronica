@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PS_Scholz_Veronica.Entities;
+using PS_Scholz_Veronica.Persistence;
+using PS_Scholz_Veronica.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,6 +59,21 @@ namespace PS_Scholz_Veronica.Menu
                     {
                         Console.WriteLine("1. Registrar Cliente");
                         Console.WriteLine("--------------------");
+                        
+                        using (var context = new AppDbContext())
+                        {
+                            var std = new Cliente()
+                            {
+                                DNI = "1234",
+                                Nombre = "vero",
+                                Apellido = "yols",
+                                Direccion = "calle1",
+                                Telefono = "1234",
+                            };
+                            context.ClienteDb.Add(std);
+                            context.SaveChanges();
+                        }
+
                         Console.ReadKey(true);
                         m1 = false;
                         //m1 = Menu1();

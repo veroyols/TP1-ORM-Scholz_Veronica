@@ -12,8 +12,8 @@ using PS_Scholz_Veronica.Persistence;
 namespace PS_Scholz_Veronica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220920124854_init")]
-    partial class init
+    [Migration("20220920140449_product1")]
+    partial class product1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace PS_Scholz_Veronica.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Carrito", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
                 {
                     b.Property<Guid>("CarritoId")
                         .HasColumnType("uniqueidentifier");
@@ -42,7 +42,7 @@ namespace PS_Scholz_Veronica.Migrations
                     b.ToTable("Carrito", (string)null);
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.CarritoProducto", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.CarritoProducto", b =>
                 {
                     b.Property<Guid>("CarritoId")
                         .HasColumnType("uniqueidentifier");
@@ -60,7 +60,7 @@ namespace PS_Scholz_Veronica.Migrations
                     b.ToTable("CarritoProducto", (string)null);
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Cliente", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Cliente", b =>
                 {
                     b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace PS_Scholz_Veronica.Migrations
                     b.ToTable("Cliente", (string)null);
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Orden", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>
                 {
                     b.Property<Guid>("OrdenId")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace PS_Scholz_Veronica.Migrations
                     b.ToTable("Orden", (string)null);
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Producto", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Producto", b =>
                 {
                     b.Property<int>("ProductoId")
                         .ValueGeneratedOnAdd()
@@ -153,17 +153,29 @@ namespace PS_Scholz_Veronica.Migrations
                     b.HasKey("ProductoId");
 
                     b.ToTable("Producto", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ProductoId = 1,
+                            Codigo = "ps2c2022-01",
+                            Descripcion = "Remeras lisas de colores",
+                            Image = "https://drive.google.com/file/d/1_B3cfaKCT0ASUHJ_--YVpxc1gd6QQ_oL/view?usp=sharing",
+                            Marca = "Simpl",
+                            Nombre = "Remera",
+                            Precio = 1000m
+                        });
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Carrito", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
                 {
-                    b.HasOne("PS_Scholz_Veronica.Persistence.Orden", "Orden")
+                    b.HasOne("PS_Scholz_Veronica.Entities.Orden", "Orden")
                         .WithOne("Carrito")
-                        .HasForeignKey("PS_Scholz_Veronica.Persistence.Carrito", "CarritoId")
+                        .HasForeignKey("PS_Scholz_Veronica.Entities.Carrito", "CarritoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PS_Scholz_Veronica.Persistence.Cliente", "Cliente")
+                    b.HasOne("PS_Scholz_Veronica.Entities.Cliente", "Cliente")
                         .WithMany("Carritos")
                         .HasForeignKey("ClienteId");
 
@@ -172,13 +184,13 @@ namespace PS_Scholz_Veronica.Migrations
                     b.Navigation("Orden");
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.CarritoProducto", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.CarritoProducto", b =>
                 {
-                    b.HasOne("PS_Scholz_Veronica.Persistence.Carrito", "Carrito")
+                    b.HasOne("PS_Scholz_Veronica.Entities.Carrito", "Carrito")
                         .WithMany("CarritoProducto")
                         .HasForeignKey("CarritoId");
 
-                    b.HasOne("PS_Scholz_Veronica.Persistence.Producto", "Producto")
+                    b.HasOne("PS_Scholz_Veronica.Entities.Producto", "Producto")
                         .WithMany("CarritoProducto")
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -189,23 +201,23 @@ namespace PS_Scholz_Veronica.Migrations
                     b.Navigation("Producto");
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Carrito", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
                 {
                     b.Navigation("CarritoProducto");
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Cliente", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Cliente", b =>
                 {
                     b.Navigation("Carritos");
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Orden", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>
                 {
                     b.Navigation("Carrito")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PS_Scholz_Veronica.Persistence.Producto", b =>
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Producto", b =>
                 {
                     b.Navigation("CarritoProducto");
                 });

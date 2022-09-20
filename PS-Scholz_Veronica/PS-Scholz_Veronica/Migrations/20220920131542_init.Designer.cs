@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PS_Scholz_Veronica.Persistence;
 
@@ -11,9 +12,10 @@ using PS_Scholz_Veronica.Persistence;
 namespace PS_Scholz_Veronica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220920131542_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,17 +95,6 @@ namespace PS_Scholz_Veronica.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Cliente", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ClienteId = 1,
-                            Apellido = "",
-                            DNI = "",
-                            Direccion = "",
-                            Nombre = "admin",
-                            Telefono = ""
-                        });
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>
@@ -162,108 +153,6 @@ namespace PS_Scholz_Veronica.Migrations
                     b.HasKey("ProductoId");
 
                     b.ToTable("Producto", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ProductoId = 1,
-                            Codigo = "ps2c2022-01",
-                            Descripcion = "Remera de algodon lisa, varios colores.",
-                            Image = "https://drive.google.com/file/d/1AWEbI7NFytjQr0PcRNfqGjlWLDcW1BDr/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Remera",
-                            Precio = 3000m
-                        },
-                        new
-                        {
-                            ProductoId = 2,
-                            Codigo = "ps2c2022-02",
-                            Descripcion = "Buzo de friza liso, varios colores.",
-                            Image = "https://drive.google.com/file/d/136zDTZUkUbs5Z4eoumK-Gm5J-Ex7aN2y/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Buzo",
-                            Precio = 4000m
-                        },
-                        new
-                        {
-                            ProductoId = 3,
-                            Codigo = "ps2c2022-03",
-                            Descripcion = "Canguro de friza liso, varios colores.",
-                            Image = "https://drive.google.com/file/d/1OoBv1FyptSBujAqBvTV61F3zkm6GLeb6/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Buzo Canguro",
-                            Precio = 4500m
-                        },
-                        new
-                        {
-                            ProductoId = 4,
-                            Codigo = "ps2c2022-04",
-                            Descripcion = "Campera de frisa lisa, varios colores.",
-                            Image = "https://drive.google.com/file/d/1zomCjyxcP1uyJxRonUVcAtDKC-y8LHmD/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Campera",
-                            Precio = 5000m
-                        },
-                        new
-                        {
-                            ProductoId = 5,
-                            Codigo = "ps2c2022-05",
-                            Descripcion = "Musculosa de algodon lisa, varios colores.",
-                            Image = "https://drive.google.com/file/d/1DGa8_Ows-LfNxczRkvcBrQwX5lsh89_n/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Musculosa",
-                            Precio = 2700m
-                        },
-                        new
-                        {
-                            ProductoId = 6,
-                            Codigo = "ps2c2022-06",
-                            Descripcion = "Pantalon jogging de friza.",
-                            Image = "https://drive.google.com/file/d/12P_zAj696O3cYBeWToXWM93nQEgIFlW0/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Pantalon Jogging",
-                            Precio = 4700m
-                        },
-                        new
-                        {
-                            ProductoId = 7,
-                            Codigo = "ps2c2022-07",
-                            Descripcion = "Campera de jean corta.",
-                            Image = "https://drive.google.com/file/d/11-i6M5B8fZySpeS2XjaaEioi3Puq2DCS/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Campera Jean",
-                            Precio = 4900m
-                        },
-                        new
-                        {
-                            ProductoId = 8,
-                            Codigo = "ps2c2022-08",
-                            Descripcion = "Pantalon de jean claro.",
-                            Image = "https://drive.google.com/file/d/1Vo-6YDNc4hoce7NkVrYVe3YQrf97QnG3/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Pantalon Jean",
-                            Precio = 6300m
-                        },
-                        new
-                        {
-                            ProductoId = 9,
-                            Codigo = "ps2c2022-09",
-                            Descripcion = "Sweater Bremer Negro.",
-                            Image = "https://drive.google.com/file/d/16kEM1AO29k__3ayUe8zbe2DqodGbUzZ_/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Sweater Bremer Negro",
-                            Precio = 5100m
-                        },
-                        new
-                        {
-                            ProductoId = 10,
-                            Codigo = "ps2c2022-10",
-                            Descripcion = "Camiseta algodon, varios colores.",
-                            Image = "https://drive.google.com/file/d/1udHiMsJF53vY67yJYEh9TRHon7e0w8vC/view?usp=sharing",
-                            Marca = "Simpl",
-                            Nombre = "Camiseta",
-                            Precio = 5200m
-                        });
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
