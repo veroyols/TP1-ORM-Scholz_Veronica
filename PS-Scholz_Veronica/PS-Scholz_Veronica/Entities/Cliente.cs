@@ -9,6 +9,15 @@ namespace PS_Scholz_Veronica.Entities
 {
     public class Cliente
     {
+        public Cliente() { }
+        public Cliente(string dNI, string nombre, string apellido, string direccion, string telefono)
+        {
+            DNI = dNI;
+            Nombre = nombre;
+            Apellido = apellido;
+            Direccion = direccion;
+            Telefono = telefono;
+        }
         [Key]
         public int ClienteId { get; set; }
         [MaxLength(10)]
@@ -20,7 +29,6 @@ namespace PS_Scholz_Veronica.Entities
         public string Direccion { get; set; }  
         [MaxLength(13)] 
         public string Telefono { get; set; }
-        
         //Relacion
         public IList<Carrito> Carritos { get; set; }
     }

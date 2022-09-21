@@ -1,30 +1,27 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Microsoft.EntityFrameworkCore;
+using PS_Scholz_Veronica._Command;
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Menu;
 using PS_Scholz_Veronica.Persistence;
-using PS_Scholz_Veronica.Services;
+using PS_Scholz_Veronica.Servicios;
 
-Console.WriteLine("Hello, World!");
+var service = new Service();
+var mainMenu = new MainMenu(service);
+bool view = true;
 
-//using (var context = new AppDbContext())
-//    {
+do
+{
+    mainMenu.ShowMenu();
+    view = mainMenu.ChooseOpt(mainMenu.InsertOption(-1));
+}
+while (view);
 
-//        var cli = new Cliente()
-//        {
-//            Nombre = "Bill"
-//        };
-
-//        context.ClienteDb.Add(cli);
-//        context.SaveChanges();
-//    }
-
-    var mainMenu = new MainMenu();
-    bool view = true;
-
-    do
-    {
-        mainMenu.ShowMenu();
-        int opt = mainMenu.InsertOption(0);
-        view = mainMenu.ChooseOpt(opt);
-    }
-    while (view);
+Carrito carro = new Carrito(2);
+AppDbContext context = new AppDbContext();
+context.CarritoDb.Add(carro);
+context.SaveChanges();
+var a = context.CarritoDb.Include(x => x.Cliente).ToList();
+Console.WriteLine(a);
+foreach (var item in a)
+    Console.WriteLine(item);

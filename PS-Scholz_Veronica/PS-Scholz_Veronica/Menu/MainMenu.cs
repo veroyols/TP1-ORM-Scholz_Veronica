@@ -1,6 +1,8 @@
-﻿using PS_Scholz_Veronica.Entities;
+﻿using PS_Scholz_Veronica._Command;
+using PS_Scholz_Veronica.EnterData;
+using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Persistence;
-using PS_Scholz_Veronica.Services;
+using PS_Scholz_Veronica.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,86 +11,56 @@ using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica.Menu
 {
-    public class MainMenu
+    public class MainMenu : MenuTemplate
     {
-        public void ShowMenu()
+        private readonly Service _service;
+        public MainMenu(Service service)
         {
-            Console.WriteLine("     MENU DE OPCIONES");
-            Console.WriteLine("1. Registrar un nuevo Cliente");
-            Console.WriteLine("2. Registrar una Venta de Productos");
-            Console.WriteLine("3. Reportar Ventas del dia");
-            Console.WriteLine("4. Buscar Productos Disponibles");
-            Console.WriteLine("5. Salir");
-            Console.Write("Ingrese un numero: ");
+            _service = service;
+        }
+        override public void ShowMenu()
+        {
+            Console.WriteLine("          ------------------");
+            Console.WriteLine("         | MENU DE OPCIONES |");
+            Console.WriteLine("          ------------------");
+            Console.WriteLine("     1. Registrar un nuevo Cliente");
+            Console.WriteLine("     2. Registrar una Venta de Productos");
+            Console.WriteLine("     3. Reportar Ventas del dia");
+            Console.WriteLine("     4. Productos Disponibles");
+            Console.WriteLine("     0. Salir");
+            Console.Write("\nIngrese un numero: ");
             return;
         }
-        public int InsertOption(int op)
-        {
-            try
-            {
-                op = int.Parse(Console.ReadLine());
-                Console.Clear();
-            }
-            catch (FormatException e)
-            {
-                Console.Write(e.Message + " \nPress any key to continue . . . ");
-                Console.ReadKey(true);
-            }
-            catch (OverflowException e)
-            {
-                Console.Write(e.Message + " \nPress any key to continue . . . ");
-                Console.ReadKey(true);
-            }
-            catch (Exception e)
-            {
-                Console.Write(e.Message + " \nPress any key to continue . . . ");
-                Console.ReadKey(true);
-            }
-            return op;  
-        }
-        public bool ChooseOpt(int opt)
+        override public bool ChooseOpt(int opt)
         {
             switch (opt)
             {
-                case 0:
-                    //Console.WriteLine("Ha ingresado cero. Revise el menu de opciones: ");
+                case -1:
                     return true;
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine("\n      -------------------------------------");
+                    Console.WriteLine("     | Gracias por utilizar este servicio. |");
+                    Console.WriteLine("      -------------------------------------");
+                    return false;
                 case 1:
-                    bool m1 = true;
-                    while (m1)
-                    {
-                        Console.WriteLine("1. Registrar Cliente");
-                        Console.WriteLine("--------------------");
-                        
-                        using (var context = new AppDbContext())
-                        {
-                            var std = new Cliente()
-                            {
-                                DNI = "1234",
-                                Nombre = "vero",
-                                Apellido = "yols",
-                                Direccion = "calle1",
-                                Telefono = "1234",
-                            };
-                            context.ClienteDb.Add(std);
-                            context.SaveChanges();
-                        }
-
-                        Console.ReadKey(true);
-                        m1 = false;
-                        //m1 = Menu1();
-                    }
+                    Console.WriteLine("      ----------------------");
+                    Console.WriteLine("     | 1. Registrar Cliente |");
+                    Console.WriteLine("      ----------------------");
+                    var cli = ClientData.EnterClientData();
+                    _service.commandClient.InsertClient(cli);
+                    int id = _service.queryClient.GetIdbyClient(cli);
+                    Console.WriteLine("Se ha registrado en el sistema con el Id {0}",id);
+                    Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 case 2:
+                    var submenu = SubMenu.getInstance();
                     bool m2 = true;
                     while (m2)
                     {
-                        Console.WriteLine("2. Registrar Ventas");
-                        Console.WriteLine("--------------------");
-                        Console.ReadKey(true);
-                        m2 = false;
-                        //m2 = Menu1();
+                        submenu.ShowMenu();                        
+                        m2 = submenu.ChooseOpt(submenu.InsertOption(-1));
                     }
                     Console.Clear();
                     return true;
@@ -96,8 +68,9 @@ namespace PS_Scholz_Veronica.Menu
                     bool m3 = true;
                     while (m3)
                     {
-                        Console.WriteLine("3. Reportar Ventas");
-                        Console.WriteLine("--------------------");
+                        Console.WriteLine("      --------------------");
+                        Console.WriteLine("     | 3. Reportar Ventas |");
+                        Console.WriteLine("      --------------------");
                         Console.ReadKey(true);
                         m3 = false;
                         //m3 = Menu1();
@@ -105,26 +78,21 @@ namespace PS_Scholz_Veronica.Menu
                     Console.Clear();
                     return true;
                 case 4:
-                    bool m4 = true;
-                    while (m4)
-                    {
-                        Console.WriteLine("4. Buscar Producto");
-                        Console.WriteLine("--------------------");
-                        Console.ReadKey(true);
-                        m4 = false;
-                        //m4 = Menu1();
-                    }
+                    Console.WriteLine("      --------------------------");
+                    Console.WriteLine("     | 4. Productos disponibles |");
+                    Console.WriteLine("      --------------------------");
+                    Console.WriteLine("Total: {0} productos. \nDetalle:",_service.queryProduct.CountAll());
+                    List<Producto> lp = _service.queryProduct.GetAll();
+                    foreach (Producto p in lp)
+                        Console.WriteLine("     Id: {0} -> *{1} ({2}): ${3}",p.ProductoId,p.Nombre,p.Marca,p.Precio);
+                    Console.ReadKey(true);
                     Console.Clear();
                     return true;
-                case 5:
-                    Console.Clear();
-                    Console.WriteLine("Gracias por utilizar este servicio.");
-                    Console.WriteLine("-----------------------------------");
-                    return false;
                 default:
                     Console.Clear();
                     Console.WriteLine("Ha ingresado un numero incorrecto. " +
-                        "\nRevise el menu e ingrese un valor entre 1 y 4:");
+                        "\nRevise el menu e ingrese un valor entre 1 y 4:" +
+                        "\n----------------------------------------------");
                     return true;
             }
         }

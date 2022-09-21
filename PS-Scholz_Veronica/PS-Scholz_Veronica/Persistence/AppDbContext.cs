@@ -164,6 +164,18 @@ namespace PS_Scholz_Veronica.Persistence
                 //RELACION: CartPRoduct
             });
 
+            //ORDEN
+            modelBuilder.Entity<Orden>(entity =>
+            {
+                entity.ToTable("Orden");
+                entity.HasKey(o => o.OrdenId);
+                entity.Property(o => o.Total).HasColumnType("decimal(15, 2)");
+                //entity
+                    //.HasOne<Carrito>(o => o.Carrito)
+                    //.WithOne(c => c.Orden)
+                    //.HasForeignKey<Carrito>(c => c.CarritoId);
+            });
+
             //CARRITO
             modelBuilder.Entity<Carrito>(entity =>
             {
@@ -173,20 +185,13 @@ namespace PS_Scholz_Veronica.Persistence
                 entity
                     .HasOne<Cliente>(car => car.Cliente)
                     .WithMany(cli => cli.Carritos)
-                    .HasForeignKey(car => car.ClienteId)
-                    .IsRequired(false); //?
-            });
-            //ORDEN
-            modelBuilder.Entity<Orden>(entity =>
-            {
-                entity.ToTable("Orden");
-                entity.HasKey(o => o.OrdenId);
-                entity.Property(o => o.Total).HasColumnType("decimal(15, 2)");
+                    .HasForeignKey(car => car.ClienteId);
                 entity
-                    .HasOne<Carrito>(o => o.Carrito)
-                    .WithOne(c => c.Orden)
-                    .HasForeignKey<Carrito>(c => c.CarritoId);
+                    .HasOne<Orden>(car => car.Orden)
+                    .WithOne(x => x.Carrito)
+                    .HasForeignKey<Orden>(x => x.CarritoId);
             });
+
             //CARRITOPRODUCTO 
             modelBuilder.Entity<CarritoProducto>(entity =>
             {
@@ -195,13 +200,13 @@ namespace PS_Scholz_Veronica.Persistence
 
                 entity
                     .HasOne<Carrito>(cp => cp.Carrito)
-                    .WithMany(cp => cp.CarritoProducto)
-                    .HasForeignKey(cp => cp.CarritoId)
-                    .IsRequired(false); //?
+                    .WithMany(c => c.CarritoProducto)
+                    .HasForeignKey(cp => cp.CarritoId);
+                    //.IsRequired(false); //?
 
                 entity
                     .HasOne<Producto>(cp => cp.Producto)
-                    .WithMany(cp => cp.CarritoProducto)
+                    .WithMany(p => p.CarritoProducto)
                     .HasForeignKey(cp => cp.ProductoId);
             });
         }
