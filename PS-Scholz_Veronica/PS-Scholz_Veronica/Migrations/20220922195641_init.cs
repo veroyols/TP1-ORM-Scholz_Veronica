@@ -27,20 +27,6 @@ namespace PS_Scholz_Veronica.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orden",
-                columns: table => new
-                {
-                    OrdenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CarritoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(15,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orden", x => x.OrdenId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Producto",
                 columns: table => new
                 {
@@ -73,12 +59,7 @@ namespace PS_Scholz_Veronica.Migrations
                         name: "FK_Carrito_Cliente_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Cliente",
-                        principalColumn: "ClienteId");
-                    table.ForeignKey(
-                        name: "FK_Carrito_Orden_CarritoId",
-                        column: x => x.CarritoId,
-                        principalTable: "Orden",
-                        principalColumn: "OrdenId",
+                        principalColumn: "ClienteId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -97,13 +78,56 @@ namespace PS_Scholz_Veronica.Migrations
                         name: "FK_CarritoProducto_Carrito_CarritoId",
                         column: x => x.CarritoId,
                         principalTable: "Carrito",
-                        principalColumn: "CarritoId");
+                        principalColumn: "CarritoId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CarritoProducto_Producto_ProductoId",
                         column: x => x.ProductoId,
                         principalTable: "Producto",
                         principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orden",
+                columns: table => new
+                {
+                    OrdenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarritoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(15,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orden", x => x.OrdenId);
+                    table.ForeignKey(
+                        name: "FK_Orden_Carrito_CarritoId",
+                        column: x => x.CarritoId,
+                        principalTable: "Carrito",
+                        principalColumn: "CarritoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cliente",
+                columns: new[] { "ClienteId", "Apellido", "DNI", "Direccion", "Nombre", "Telefono" },
+                values: new object[] { 1, "", "", "", "admin", "" });
+
+            migrationBuilder.InsertData(
+                table: "Producto",
+                columns: new[] { "ProductoId", "Codigo", "Descripcion", "Image", "Marca", "Nombre", "Precio" },
+                values: new object[,]
+                {
+                    { 1, "ps2c2022-01", "Remera de algodon lisa, varios colores.", "https://drive.google.com/file/d/1AWEbI7NFytjQr0PcRNfqGjlWLDcW1BDr/view?usp=sharing", "Simpl", "Remera", 3000m },
+                    { 2, "ps2c2022-02", "Buzo de friza liso, varios colores.", "https://drive.google.com/file/d/136zDTZUkUbs5Z4eoumK-Gm5J-Ex7aN2y/view?usp=sharing", "Simpl", "Buzo", 4000m },
+                    { 3, "ps2c2022-03", "Canguro de friza liso, varios colores.", "https://drive.google.com/file/d/1OoBv1FyptSBujAqBvTV61F3zkm6GLeb6/view?usp=sharing", "Simpl", "Buzo Canguro", 4500m },
+                    { 4, "ps2c2022-04", "Campera de frisa lisa, varios colores.", "https://drive.google.com/file/d/1zomCjyxcP1uyJxRonUVcAtDKC-y8LHmD/view?usp=sharing", "Simpl", "Campera", 5000m },
+                    { 5, "ps2c2022-05", "Musculosa de algodon lisa, varios colores.", "https://drive.google.com/file/d/1DGa8_Ows-LfNxczRkvcBrQwX5lsh89_n/view?usp=sharing", "Simpl", "Musculosa", 2700m },
+                    { 6, "ps2c2022-06", "Pantalon jogging de friza.", "https://drive.google.com/file/d/12P_zAj696O3cYBeWToXWM93nQEgIFlW0/view?usp=sharing", "Simpl", "Pantalon Jogging", 4700m },
+                    { 7, "ps2c2022-07", "Campera de jean corta.", "https://drive.google.com/file/d/11-i6M5B8fZySpeS2XjaaEioi3Puq2DCS/view?usp=sharing", "Simpl", "Campera Jean", 4900m },
+                    { 8, "ps2c2022-08", "Pantalon de jean claro.", "https://drive.google.com/file/d/1Vo-6YDNc4hoce7NkVrYVe3YQrf97QnG3/view?usp=sharing", "Simpl", "Pantalon Jean", 6300m },
+                    { 9, "ps2c2022-09", "Sweater Bremer Negro.", "https://drive.google.com/file/d/16kEM1AO29k__3ayUe8zbe2DqodGbUzZ_/view?usp=sharing", "Simpl", "Sweater Bremer Negro", 5100m },
+                    { 10, "ps2c2022-10", "Camiseta algodon, varios colores.", "https://drive.google.com/file/d/1udHiMsJF53vY67yJYEh9TRHon7e0w8vC/view?usp=sharing", "Simpl", "Camiseta", 5200m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -115,6 +139,12 @@ namespace PS_Scholz_Veronica.Migrations
                 name: "IX_CarritoProducto_ProductoId",
                 table: "CarritoProducto",
                 column: "ProductoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orden_CarritoId",
+                table: "Orden",
+                column: "CarritoId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -123,16 +153,16 @@ namespace PS_Scholz_Veronica.Migrations
                 name: "CarritoProducto");
 
             migrationBuilder.DropTable(
-                name: "Carrito");
+                name: "Orden");
 
             migrationBuilder.DropTable(
                 name: "Producto");
 
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "Carrito");
 
             migrationBuilder.DropTable(
-                name: "Orden");
+                name: "Cliente");
         }
     }
 }

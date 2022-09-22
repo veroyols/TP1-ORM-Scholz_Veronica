@@ -9,18 +9,19 @@ using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica._Command
 {
-    public class CommandProduct : ICommandProduct
+    public class CommandOrder : ICommandOrder
     {
         private readonly AppDbContext _context;
 
-        public CommandProduct(AppDbContext context)
+        public CommandOrder(AppDbContext context)
         {
             _context = context;
         }
-
-        public void DeleteProduct(Producto product)
+        public void InsertOrder(Orden order)
         {
-            _context.Remove(product);
+            _context.OrdenDb.Add(order);
+            _context.SaveChanges();
+            return;
         }
     }
 }

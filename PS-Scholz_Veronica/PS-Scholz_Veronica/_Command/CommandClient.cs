@@ -20,7 +20,7 @@ namespace PS_Scholz_Veronica._Command
         }
         public void InsertClient(Cliente cliente)
         {
-            _context.Add(cliente);
+            _context.ClienteDb.Add(cliente);
             _context.SaveChanges();
             return;
         }

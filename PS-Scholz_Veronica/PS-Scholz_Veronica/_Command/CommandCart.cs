@@ -24,5 +24,14 @@ namespace PS_Scholz_Veronica._Command
             _context.SaveChanges();
             return;
         }
+
+        public void StatusFalse(Guid id)
+        {
+            var up = _context.CarritoDb.First(x => x.CarritoId == id);
+            up.Estado = false;
+            _context.SaveChanges();
+            return;
+
+        }
     }
 }

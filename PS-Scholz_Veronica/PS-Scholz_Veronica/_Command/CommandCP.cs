@@ -20,7 +20,14 @@ namespace PS_Scholz_Veronica._Command
 
         public void InsertCP(CarritoProducto cp)
         {
-            _context.Add(cp);
+            _context.CarritoProductoDb.Add(cp);
+            _context.SaveChanges(); 
+            return;
+        }
+        public void UpdateCP(CarritoProducto cp)
+        {
+            var up = _context.CarritoProductoDb.First(c => c.CarritoId == cp.CarritoId && c.ProductoId == cp.ProductoId);
+            up.Cantidad++;
             _context.SaveChanges();
             return;
         }

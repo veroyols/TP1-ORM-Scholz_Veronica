@@ -11,5 +11,6 @@ namespace PS_Scholz_Veronica.Interfaces
     public interface ICommandCart
     {
         public void InsertCart(Carrito cart);
+        public void StatusFalse(Guid id);
     }
 }

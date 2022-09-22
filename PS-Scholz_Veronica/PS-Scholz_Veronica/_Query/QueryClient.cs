@@ -1,4 +1,5 @@
-﻿using PS_Scholz_Veronica.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
 using PS_Scholz_Veronica.Servicios;
@@ -20,7 +21,7 @@ namespace PS_Scholz_Veronica._Query
         }
         public Cliente GetClientbyId(int id)
         {
-            var cli = _context.ClienteDb.FirstOrDefault<Cliente>(cli => cli.ClienteId == id);
+            var cli = _context.ClienteDb.First<Cliente>(cli => cli.ClienteId == id);
             return cli;
         }
         public int GetIdbyClient(Cliente cli)
@@ -42,7 +43,7 @@ namespace PS_Scholz_Veronica._Query
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("No se ha encontrado cliente con ese ID, intente con otro.");
+                    Console.Write("No se ha encontrado cliente con ese ID, intente con otro ID: ");
                 }
             }
             return clientId;

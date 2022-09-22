@@ -1,5 +1,4 @@
 ﻿using PS_Scholz_Veronica.Entities;
-using PS_Scholz_Veronica.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica.Interfaces
 {
-    public interface ICommandProduct
+    public interface IQueryOrder
     {
-        public void DeleteProduct(Producto product);
+        public void GetProductsByCartId(Guid cartid);
+        public Orden GetOrderbyId(Guid id);
+        public void Print(Orden o);
     }
 }

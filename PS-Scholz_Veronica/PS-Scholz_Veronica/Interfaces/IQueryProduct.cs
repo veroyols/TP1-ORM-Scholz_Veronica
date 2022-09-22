@@ -15,6 +15,7 @@ namespace PS_Scholz_Veronica.Interfaces
         public void Print(int productoId);
         public void PrintAll();
         public int EnterId();
+        public decimal GetPreciobyId(int id);
 
     }
 }

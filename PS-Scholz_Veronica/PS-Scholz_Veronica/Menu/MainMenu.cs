@@ -1,4 +1,5 @@
 ﻿using PS_Scholz_Veronica._Command;
+using PS_Scholz_Veronica._Query;
 using PS_Scholz_Veronica.EnterData;
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Persistence;
@@ -46,34 +47,33 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("      ----------------------");
                     Console.WriteLine("     | 1. Registrar Cliente |");
                     Console.WriteLine("      ----------------------");
-                    var cli = ClientData.EnterClientData();
-                    _service.commandClient.InsertClient(cli);
-                    int id = _service.queryClient.GetIdbyClient(cli);
-                    Console.ReadKey(true);
-                    Console.Clear();
-                    Console.WriteLine("Se ha registrado en el sistema con el ID: {0}", id);
+                    _service.RegisterCliente();
                     return true;
                 case 2:
-                    var submenu = SubMenu.getInstance(_service);
-                    bool m2 = true;
-                    while (m2)
-                    {
-                        submenu.ShowMenu();                        
-                        m2 = submenu.ChooseOpt(submenu.InsertOption(-1));
-                    }
+                    Console.WriteLine("      --------------------");
+                    Console.WriteLine("     | 2. Registrar Venta |");
+                    Console.WriteLine("      --------------------");
+                    
+                    Console.WriteLine("Ingrese su ID de cliente: ");
+                    int clientId = _service.queryClient.EnterId(); //pide y busca - falta validar el state
+                    decimal total = _service.AddProductosToCart(clientId);
+                    var o = _service.RegisterOrder(clientId,total);
                     Console.Clear();
                     return true;
                 case 3:
+                    Console.WriteLine("      --------------------");
+                    Console.WriteLine("     | 3. Reportar Ventas |");
+                    Console.WriteLine("      --------------------");
+                    Console.ReadKey(true);
+
+                    var submenu = SubMenu.getInstance(_service);
                     bool m3 = true;
                     while (m3)
                     {
-                        Console.WriteLine("      --------------------");
-                        Console.WriteLine("     | 3. Reportar Ventas |");
-                        Console.WriteLine("      --------------------");
-                        Console.ReadKey(true);
-                        m3 = false;
-                        //m3 = Menu1();
+                        submenu.ShowMenu();
+                        m3 = submenu.ChooseOpt(submenu.InsertOption(-1));
                     }
+
                     Console.Clear();
                     return true;
                 case 4:

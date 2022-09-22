@@ -1,5 +1,4 @@
 ﻿using PS_Scholz_Veronica.Entities;
-using PS_Scholz_Veronica.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica.Interfaces
 {
-    public interface ICommandCP
+    public interface IQueryCP
     {
-        public void InsertCP(CarritoProducto cp);
-        public void UpdateCP(CarritoProducto cp);
+        public bool Exists(CarritoProducto cp);
+        public void Print(CarritoProducto cp);
+
     }
 }

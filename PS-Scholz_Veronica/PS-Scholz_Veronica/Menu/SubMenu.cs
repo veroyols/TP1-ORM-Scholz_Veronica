@@ -29,32 +29,8 @@ namespace PS_Scholz_Veronica.Menu
             Console.WriteLine("      --------------------");
             Console.WriteLine("     | 2. Registrar Venta |");
             Console.WriteLine("      --------------------");
-            
-            Console.WriteLine("Ingrese su ID de cliente: ");
-            int clientId = _service.queryClient.EnterId();
-            
-            Carrito carro = new Carrito(clientId);
-            _service.commandCart.InsertCart(carro);
-            
-            _service.queryProduct.PrintAll();
-            Console.WriteLine("Ingrese el ID del producto que desea comprar: ");
-            int productId = _service.queryProduct.EnterId();
 
-            Guid carritoId = _service.queryCart.GetGuidbyCart(carro);
-            _service.commandCP.InsertCP(new CarritoProducto(carritoId, productId, 1));
-
-            Console.Write("Se ha agregado al carrito: ");
-            _service.queryProduct.Print(productId);
-
-            Console.WriteLine("Desea agregar producots al carrito? " +
-                "\n1. Si" +
-                "\n2. No");
-            string rta = Console.ReadLine();
-
-
-            Console.WriteLine("     0. Volver al menu anterior");
-            Console.Write("Ingrese un numero: ");
-            return;
+            Console.ReadKey(true);
         }
         public override bool ChooseOpt(int opt)
         {
@@ -85,6 +61,16 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("Revise el menu e ingrese un valor entre 1 y 4:" +
                         "\n----------------------------------------------");
                     return true;
+            }
+        }
+        public bool m()
+        {
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    return true;
+                default:
+                    return false;
             }
         }
     }

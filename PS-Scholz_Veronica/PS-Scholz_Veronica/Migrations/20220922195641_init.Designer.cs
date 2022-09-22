@@ -12,8 +12,8 @@ using PS_Scholz_Veronica.Persistence;
 namespace PS_Scholz_Veronica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220920162250_products")]
-    partial class products
+    [Migration("20220922195641_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,7 @@ namespace PS_Scholz_Veronica.Migrations
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
                 {
                     b.Property<Guid>("CarritoId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ClienteId")
@@ -95,6 +96,17 @@ namespace PS_Scholz_Veronica.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Cliente", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ClienteId = 1,
+                            Apellido = "",
+                            DNI = "",
+                            Direccion = "",
+                            Nombre = "admin",
+                            Telefono = ""
+                        });
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>
@@ -113,6 +125,9 @@ namespace PS_Scholz_Veronica.Migrations
                         .HasColumnType("decimal(15,2)");
 
                     b.HasKey("OrdenId");
+
+                    b.HasIndex("CarritoId")
+                        .IsUnique();
 
                     b.ToTable("Orden", (string)null);
                 });
@@ -259,26 +274,22 @@ namespace PS_Scholz_Veronica.Migrations
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
                 {
-                    b.HasOne("PS_Scholz_Veronica.Entities.Orden", "Orden")
-                        .WithOne("Carrito")
-                        .HasForeignKey("PS_Scholz_Veronica.Entities.Carrito", "CarritoId")
+                    b.HasOne("PS_Scholz_Veronica.Entities.Cliente", "Cliente")
+                        .WithMany("Carritos")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PS_Scholz_Veronica.Entities.Cliente", "Cliente")
-                        .WithMany("Carritos")
-                        .HasForeignKey("ClienteId");
-
                     b.Navigation("Cliente");
-
-                    b.Navigation("Orden");
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.CarritoProducto", b =>
                 {
                     b.HasOne("PS_Scholz_Veronica.Entities.Carrito", "Carrito")
                         .WithMany("CarritoProducto")
-                        .HasForeignKey("CarritoId");
+                        .HasForeignKey("CarritoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PS_Scholz_Veronica.Entities.Producto", "Producto")
                         .WithMany("CarritoProducto")
@@ -291,20 +302,28 @@ namespace PS_Scholz_Veronica.Migrations
                     b.Navigation("Producto");
                 });
 
+            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>
+                {
+                    b.HasOne("PS_Scholz_Veronica.Entities.Carrito", "Carrito")
+                        .WithOne("Orden")
+                        .HasForeignKey("PS_Scholz_Veronica.Entities.Orden", "CarritoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carrito");
+                });
+
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Carrito", b =>
                 {
                     b.Navigation("CarritoProducto");
+
+                    b.Navigation("Orden")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Cliente", b =>
                 {
                     b.Navigation("Carritos");
-                });
-
-            modelBuilder.Entity("PS_Scholz_Veronica.Entities.Orden", b =>
-                {
-                    b.Navigation("Carrito")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("PS_Scholz_Veronica.Entities.Producto", b =>

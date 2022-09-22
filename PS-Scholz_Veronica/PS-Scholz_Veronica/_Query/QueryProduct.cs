@@ -25,6 +25,12 @@ namespace PS_Scholz_Veronica._Query
             var p = _context.ProductoDb.FirstOrDefault<Producto>(p => p.ProductoId == id);
             return p;
         }
+        public decimal GetPreciobyId(int id)
+        {
+            var p = _context.ProductoDb.FirstOrDefault<Producto>(p => p.ProductoId == id);
+            return p.Precio;
+        }
+
 
         public int CountAll()
         {
@@ -69,7 +75,6 @@ namespace PS_Scholz_Veronica._Query
                     Console.WriteLine("No se ha encontrado producto con ese ID, intente con otro.");
                 }
             }
-
             return productId;
         }
     }
