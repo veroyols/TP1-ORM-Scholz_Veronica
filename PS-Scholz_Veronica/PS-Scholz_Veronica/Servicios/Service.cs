@@ -18,6 +18,8 @@ namespace PS_Scholz_Veronica.Servicios
         public IQueryProduct queryProduct = new QueryProduct(_context);
         public IQueryCart queryCart = new QueryCart(_context);
         public ICommandCart commandCart = new CommandCart(_context);
+        public ICommandCP commandCP = new CommandCP(_context);
+
 
     }
 }

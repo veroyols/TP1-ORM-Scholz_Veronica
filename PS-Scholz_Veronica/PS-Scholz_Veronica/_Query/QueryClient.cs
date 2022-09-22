@@ -1,6 +1,7 @@
 ﻿using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
+using PS_Scholz_Veronica.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,26 @@ namespace PS_Scholz_Veronica._Query
         public int GetIdbyClient(Cliente cli)
         {
             return cli.ClienteId;
+        }
+
+        public int EnterId()
+        {
+            bool m = true;
+            int clientId = new int();
+            while (m)
+            {
+                try
+                {
+                    clientId = int.Parse(Console.ReadLine());
+                    GetClientbyId(clientId);
+                    m = false;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("No se ha encontrado cliente con ese ID, intente con otro.");
+                }
+            }
+            return clientId;
         }
     }
 }

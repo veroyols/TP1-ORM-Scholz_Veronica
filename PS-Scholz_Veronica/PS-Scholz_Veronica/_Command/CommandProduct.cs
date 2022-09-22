@@ -7,20 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PS_Scholz_Veronica._Query
+namespace PS_Scholz_Veronica._Command
 {
-    public class QueryCart : IQueryCart //consulta
+    public class CommandProduct : ICommandProduct
     {
         private readonly AppDbContext _context;
 
-        public QueryCart(AppDbContext context)
+        public CommandProduct(AppDbContext context)
         {
             _context = context;
         }
 
-        public Guid GetGuidbyCart(Carrito cart)
+        public void DeleteProduct(Producto product)
         {
-            return cart.CarritoId;
+            _context.Remove(product);
         }
     }
 }

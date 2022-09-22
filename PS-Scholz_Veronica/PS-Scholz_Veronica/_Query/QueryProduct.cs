@@ -2,6 +2,7 @@
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
+using PS_Scholz_Veronica.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace PS_Scholz_Veronica._Query
             _context = context;
         }
 
-        public Producto GeProductbyId(int id)
+        public Producto GetProductbyId(int id)
         {
             var p = _context.ProductoDb.FirstOrDefault<Producto>(p => p.ProductoId == id);
             return p;
@@ -34,6 +35,42 @@ namespace PS_Scholz_Veronica._Query
         {
             var p = _context.ProductoDb.ToList<Producto>();
             return p;
+        }
+
+        public void Print(int id)
+        {
+            var p = GetProductbyId(id);
+            Console.WriteLine("     Id: {0} -> *{1} ({2}): ${3}", p.ProductoId, p.Nombre, p.Marca, p.Precio);
+            return;
+        }
+        public void PrintAll()
+        {
+            Console.WriteLine("Disponibles: {0} productos. \nDetalle:", CountAll());
+            List<Producto> lp = GetAll();
+            foreach (Producto p in lp)
+                Console.WriteLine("     Id: {0} -> *{1} ({2}): ${3}", p.ProductoId, p.Nombre, p.Marca, p.Precio);
+            return;
+        }
+
+        public int EnterId()
+        {
+            bool m = true;
+            int productId = new int();
+            while (m)
+            {
+                try
+                {
+                    productId = int.Parse(Console.ReadLine());
+                    GetProductbyId(productId);
+                    m = false;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("No se ha encontrado producto con ese ID, intente con otro.");
+                }
+            }
+
+            return productId;
         }
     }
 }

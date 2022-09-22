@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PS_Scholz_Veronica.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,12 @@ namespace PS_Scholz_Veronica.Menu
 {
     abstract public class MenuTemplate
     {
+        protected readonly Service _service;
+
+        protected MenuTemplate(Service service)
+        {
+            _service = service;
+        }
         abstract public void ShowMenu();
         public int InsertOption(int op)
         {

@@ -9,8 +9,12 @@ namespace PS_Scholz_Veronica.Interfaces
 {
     public interface IQueryProduct
     {
-        public Producto GeProductbyId(int id);
+        public Producto GetProductbyId(int id);
         public List<Producto> GetAll();
         public int CountAll();
+        public void Print(int productoId);
+        public void PrintAll();
+        public int EnterId();
+
     }
 }

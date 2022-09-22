@@ -13,11 +13,10 @@ namespace PS_Scholz_Veronica.Menu
 {
     public class MainMenu : MenuTemplate
     {
-        private readonly Service _service;
-        public MainMenu(Service service)
+        public MainMenu(Service service) : base(service)
         {
-            _service = service;
         }
+
         override public void ShowMenu()
         {
             Console.WriteLine("          ------------------");
@@ -50,12 +49,12 @@ namespace PS_Scholz_Veronica.Menu
                     var cli = ClientData.EnterClientData();
                     _service.commandClient.InsertClient(cli);
                     int id = _service.queryClient.GetIdbyClient(cli);
-                    Console.WriteLine("Se ha registrado en el sistema con el Id {0}",id);
                     Console.ReadKey(true);
                     Console.Clear();
+                    Console.WriteLine("Se ha registrado en el sistema con el ID: {0}", id);
                     return true;
                 case 2:
-                    var submenu = SubMenu.getInstance();
+                    var submenu = SubMenu.getInstance(_service);
                     bool m2 = true;
                     while (m2)
                     {
@@ -81,10 +80,9 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("      --------------------------");
                     Console.WriteLine("     | 4. Productos disponibles |");
                     Console.WriteLine("      --------------------------");
-                    Console.WriteLine("Total: {0} productos. \nDetalle:",_service.queryProduct.CountAll());
-                    List<Producto> lp = _service.queryProduct.GetAll();
-                    foreach (Producto p in lp)
-                        Console.WriteLine("     Id: {0} -> *{1} ({2}): ${3}",p.ProductoId,p.Nombre,p.Marca,p.Precio);
+
+                    _service.queryProduct.PrintAll();
+                                       
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;

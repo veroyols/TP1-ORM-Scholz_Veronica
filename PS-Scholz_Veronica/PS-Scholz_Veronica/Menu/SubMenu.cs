@@ -1,6 +1,9 @@
-﻿using System;
+﻿using PS_Scholz_Veronica.Entities;
+using PS_Scholz_Veronica.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,24 +12,46 @@ namespace PS_Scholz_Veronica.Menu
     public class SubMenu : MenuTemplate
     {
         private static SubMenu unico = null;
-        private SubMenu() { }
-        public static SubMenu getInstance()
+
+        public SubMenu(Service service) : base(service)
+        {
+        }
+        public static SubMenu getInstance(Service service)
         {
             if (unico == null)
             {
-                unico = new SubMenu();
+                unico = new SubMenu(service);
             }
             return unico;
         }
         public override void ShowMenu()
         {
-            Console.WriteLine("      -------------------");
-            Console.WriteLine("     | 2. Menu de Ventas |");
-            Console.WriteLine("      -------------------");
-            Console.WriteLine("     1. Ingresar ID de cliente");
-            Console.WriteLine("     2. ");
-            Console.WriteLine("     3. ");
-            Console.WriteLine("     4. ");
+            Console.WriteLine("      --------------------");
+            Console.WriteLine("     | 2. Registrar Venta |");
+            Console.WriteLine("      --------------------");
+            
+            Console.WriteLine("Ingrese su ID de cliente: ");
+            int clientId = _service.queryClient.EnterId();
+            
+            Carrito carro = new Carrito(clientId);
+            _service.commandCart.InsertCart(carro);
+            
+            _service.queryProduct.PrintAll();
+            Console.WriteLine("Ingrese el ID del producto que desea comprar: ");
+            int productId = _service.queryProduct.EnterId();
+
+            Guid carritoId = _service.queryCart.GetGuidbyCart(carro);
+            _service.commandCP.InsertCP(new CarritoProducto(carritoId, productId, 1));
+
+            Console.Write("Se ha agregado al carrito: ");
+            _service.queryProduct.Print(productId);
+
+            Console.WriteLine("Desea agregar producots al carrito? " +
+                "\n1. Si" +
+                "\n2. No");
+            string rta = Console.ReadLine();
+
+
             Console.WriteLine("     0. Volver al menu anterior");
             Console.Write("Ingrese un numero: ");
             return;
