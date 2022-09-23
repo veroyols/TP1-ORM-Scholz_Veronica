@@ -35,12 +35,15 @@ namespace PS_Scholz_Veronica.Servicios
             Console.WriteLine("Se ha registrado en el sistema con el ID: {0}", id);
         }
         
-        public decimal AddProductosToCart(int clientId)
+        public Carrito OpenCart (int clientId)
         {
             Carrito carro = new Carrito(clientId);
             Guid carritoId = queryCart.GetGuidbyCart(carro);
             commandCart.InsertCart(carro);
-                        
+            return carro;
+        }
+        public decimal AddProductosToCart(Carrito carro)
+        {
             string op = "1";
             decimal precio = 0;
             while (op == "1")
@@ -49,7 +52,8 @@ namespace PS_Scholz_Veronica.Servicios
                 Console.WriteLine("\n       *Ingrese el ID del producto que desea comprar: ");
                 int productId = queryProduct.EnterId(); //pide y busca
 
-                var cp = new CarritoProducto(carritoId, productId, 1);
+                var cp = new CarritoProducto(carro.CarritoId, productId, 1);
+                
                 //validar clave compuesta
                 if (queryCP.Exists(cp))
                 {
@@ -68,7 +72,7 @@ namespace PS_Scholz_Veronica.Servicios
                 op = Console.ReadLine();
                 Console.Clear();                
             }
-            commandCart.StatusFalse(carritoId);
+            commandCart.StatusFalse(carro);
 
             Console.WriteLine("      -------------------------------------------");
             Console.WriteLine("     | Finalizo la carga de productos al carrito |");
@@ -77,13 +81,12 @@ namespace PS_Scholz_Veronica.Servicios
         }
        
 
-        public Orden RegisterOrder(int clientId, decimal monto)
+        public Orden RegisterOrder(Carrito carro, int clientId, decimal monto)
         {
-            var carro = queryCart.GetCartbyClientId(clientId);
-            Guid carritoId = queryCart.GetGuidbyCart(carro);
-            commandCart.InsertCart(carro);
+            //Guid carritoId = queryCart.GetGuidbyCart(carro);
+            //commandCart.InsertCart(carro);
 
-            Orden o = new Orden(carritoId, monto);
+            Orden o = new Orden(carro.CarritoId, monto);
             commandOrder.InsertOrder(o);//bd
             return o;
         }

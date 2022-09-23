@@ -11,6 +11,7 @@ namespace PS_Scholz_Veronica.Interfaces
     {
         public bool Exists(CarritoProducto cp);
         public void Print(CarritoProducto cp);
-
+        public HashSet<Guid> GetAllGuid();
+        public List<Producto> GetProductoByCarrito(Guid carritoId);
     }
 }

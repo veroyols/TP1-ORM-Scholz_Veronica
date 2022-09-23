@@ -25,9 +25,9 @@ namespace PS_Scholz_Veronica._Command
             return;
         }
 
-        public void StatusFalse(Guid id)
+        public void StatusFalse(Carrito carro)
         {
-            var up = _context.CarritoDb.First(x => x.CarritoId == id);
+            var up = _context.CarritoDb.First(x => x.Equals(carro));
             up.Estado = false;
             _context.SaveChanges();
             return;

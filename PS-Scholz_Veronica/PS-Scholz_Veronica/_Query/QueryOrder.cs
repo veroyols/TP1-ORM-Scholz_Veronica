@@ -34,9 +34,18 @@ namespace PS_Scholz_Veronica._Query
         }
         public void Print(Orden o)
         {
-            Console.WriteLine("Orden de compra: {0} " +
-                "\nCarrito: {1}" +
-                "\nMonto: ${3} ({2})", o.OrdenId, o.CarritoId, o.Fecha, o.Total);
+            Console.WriteLine(" ------------------------------------------------------");
+            Console.WriteLine("| Orden de compra: {0} | \n| Monto: ${1} ({2})", o.OrdenId, o.Total, o.Fecha);
+            Console.WriteLine(" ------------------------------------------------------");
+        }
+        public List<Orden> GetAll()
+        {
+            var l = _context.OrdenDb.FromSqlRaw("SELECT * FROM Orden").ToList();
+            return l;
+        }
+        public List<Guid> GetAllGuid()
+        {
+            return _context.OrdenDb.Select(x => x.OrdenId).ToList();
         }
     }
 }

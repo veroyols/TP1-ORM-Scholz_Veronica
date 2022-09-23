@@ -14,9 +14,7 @@ namespace PS_Scholz_Veronica.Menu
 {
     public class MainMenu : MenuTemplate
     {
-        public MainMenu(Service service) : base(service)
-        {
-        }
+        public MainMenu(Service service) : base(service) {}
 
         override public void ShowMenu()
         {
@@ -55,25 +53,36 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("      --------------------");
                     
                     Console.WriteLine("Ingrese su ID de cliente: ");
-                    int clientId = _service.queryClient.EnterId(); //pide y busca - falta validar el state
-                    decimal total = _service.AddProductosToCart(clientId);
-                    var o = _service.RegisterOrder(clientId,total);
+                    int clientId = _service.queryClient.EnterId(); //pide y busca
+                    Carrito carro = _service.OpenCart(clientId);
+                    decimal total = _service.AddProductosToCart(carro);
+                    var o = _service.RegisterOrder(carro,clientId,total);
+                    _service.queryOrder.Print(o);
+                    Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 case 3:
                     Console.WriteLine("      --------------------");
                     Console.WriteLine("     | 3. Reportar Ventas |");
                     Console.WriteLine("      --------------------");
-                    Console.ReadKey(true);
 
-                    var submenu = SubMenu.getInstance(_service);
-                    bool m3 = true;
-                    while (m3)
+                    List<Orden> l = _service.queryOrder.GetAll(); //lista de ordenes
+                    foreach (var item in l)
                     {
-                        submenu.ShowMenu();
-                        m3 = submenu.ChooseOpt(submenu.InsertOption(-1));
+                        _service.queryOrder.Print(item);
                     }
 
+                    var carritos = _service.queryCP.GetAllGuid();
+                    foreach (var carritoId in carritos)
+                    {
+                        Console.WriteLine("Carrito Id: {0}", carritoId);
+                        var list = _service.queryCP.GetProductoByCarrito(carritoId);
+                        foreach (var item in list)
+                        {
+                            _service.queryProduct.Print(item);
+                        }
+                    }
+                    Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 case 4:

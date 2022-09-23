@@ -33,5 +33,14 @@ namespace PS_Scholz_Veronica._Query
             var p = _context.CarritoProductoDb.ToList<CarritoProducto>();
             return p;
         }
+        public HashSet<Guid> GetAllGuid()
+        {
+            return _context.CarritoProductoDb.Select(x => x.CarritoId).ToHashSet();
+        }
+
+        public List<Producto> GetProductoByCarrito(Guid carritoId)
+        {
+            return _context.CarritoProductoDb.Where(x => x.CarritoId == carritoId).Select(x => x.Producto).ToList();
+        }
     }
 }

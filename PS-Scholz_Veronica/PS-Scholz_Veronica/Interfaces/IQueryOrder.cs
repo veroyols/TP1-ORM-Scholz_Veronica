@@ -12,5 +12,8 @@ namespace PS_Scholz_Veronica.Interfaces
         public void GetProductsByCartId(Guid cartid);
         public Orden GetOrderbyId(Guid id);
         public void Print(Orden o);
+        public List<Orden> GetAll();
+        public List<Guid> GetAllGuid();
+
     }
 }
