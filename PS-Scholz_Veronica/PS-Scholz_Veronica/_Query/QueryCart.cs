@@ -33,9 +33,13 @@ namespace PS_Scholz_Veronica._Query
         }
         public Carrito GetCartbyClientId(int clientId)
         {
-            //            var cart = _context.CarritoDb.Include(c => c.Cliente).First(x => x.ClienteId == clientId && x.Estado=true);
             var cart = _context.CarritoDb.Include(c => c.Cliente).First(x => x.ClienteId == clientId && x.Estado == true);
             return cart;
+        }
+        public int GetClientIdbyCarritoId(Guid cartId)
+        {
+            var cart = _context.CarritoDb.First(x => x.CarritoId == cartId);
+            return cart.ClienteId;
         }
     }
 }

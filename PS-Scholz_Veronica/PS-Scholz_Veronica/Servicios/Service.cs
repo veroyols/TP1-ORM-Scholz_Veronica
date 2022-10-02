@@ -97,10 +97,18 @@ namespace PS_Scholz_Veronica.Servicios
             
             foreach (var orden in l)
             {
+                int clientId = queryCart.GetClientIdbyCarritoId(orden.CarritoId);
+                Cliente cli = queryClient.GetClientbyId(clientId);
+
                 Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine("Ticket Numero: {0} \nFecha: {1}\nProducto/s: ",orden.OrdenId, orden.Fecha);
+                Console.WriteLine("Ticket Numero: {0} " +
+                    "\nFecha: {1} " +
+                    "\nCliente: {2} {3}" +
+                    "\nProductos:",orden.OrdenId,orden.Fecha,cli.Nombre,cli.Apellido);
+                
                 var listP = queryCP.GetProductoByCarrito(orden.CarritoId);
                 int[] arreglo = queryCP.GetCdadProductoByCarrito(orden.CarritoId);
+
                 int i = 0;
                 foreach (var p in listP)
                 {
