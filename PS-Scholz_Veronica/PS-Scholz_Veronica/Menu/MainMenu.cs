@@ -37,20 +37,20 @@ namespace PS_Scholz_Veronica.Menu
                     return true;
                 case 0:
                     Console.Clear();
-                    Console.WriteLine("\n      -------------------------------------");
-                    Console.WriteLine("     | Gracias por utilizar este servicio. |");
-                    Console.WriteLine("      -------------------------------------");
+                    Console.WriteLine("\n              -------------------------------------");
+                    Console.WriteLine("              | Gracias por utilizar este servicio. |");
+                    Console.WriteLine("               -------------------------------------");
                     return false;
                 case 1:
-                    Console.WriteLine("      ----------------------");
-                    Console.WriteLine("     | 1. Registrar Cliente |");
-                    Console.WriteLine("      ----------------------");
+                    Console.WriteLine("               ----------------------");
+                    Console.WriteLine("              | 1. Registrar Cliente |");
+                    Console.WriteLine("               ----------------------");
                     _service.RegisterCliente();
                     return true;
                 case 2:
-                    Console.WriteLine("      --------------------");
-                    Console.WriteLine("     | 2. Registrar Venta |");
-                    Console.WriteLine("      --------------------");
+                    Console.WriteLine("               --------------------");
+                    Console.WriteLine("              | 2. Registrar Venta |");
+                    Console.WriteLine("               --------------------");
                     
                     Console.WriteLine("Ingrese su ID de cliente: ");
                     int clientId = _service.queryClient.EnterId(); //pide y busca
@@ -62,33 +62,18 @@ namespace PS_Scholz_Veronica.Menu
                     Console.Clear();
                     return true;
                 case 3:
-                    Console.WriteLine("      --------------------");
-                    Console.WriteLine("     | 3. Reportar Ventas |");
-                    Console.WriteLine("      --------------------");
-
-                    List<Orden> l = _service.queryOrder.GetAll(); //lista de ordenes
-                    foreach (var item in l)
-                    {
-                        _service.queryOrder.Print(item);
-                    }
-
-                    var carritos = _service.queryCP.GetAllGuid();
-                    foreach (var carritoId in carritos)
-                    {
-                        Console.WriteLine("Carrito Id: {0}", carritoId);
-                        var list = _service.queryCP.GetProductoByCarrito(carritoId);
-                        foreach (var item in list)
-                        {
-                            _service.queryProduct.Print(item);
-                        }
-                    }
+                    Console.WriteLine("                -------------------");
+                    Console.WriteLine("               | 3. Ventas del dia |");
+                    Console.WriteLine("               |  Fecha " + DateTime.Now.ToShortDateString() + "  |");
+                    Console.WriteLine("                -------------------");
+                    _service.ReportarVentas();
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 case 4:
-                    Console.WriteLine("      --------------------------");
-                    Console.WriteLine("     | 4. Productos disponibles |");
-                    Console.WriteLine("      --------------------------");
+                    Console.WriteLine("               --------------------------");
+                    Console.WriteLine("              | 4. Productos disponibles |");
+                    Console.WriteLine("               --------------------------");
 
                     _service.queryProduct.PrintAll();
                                        

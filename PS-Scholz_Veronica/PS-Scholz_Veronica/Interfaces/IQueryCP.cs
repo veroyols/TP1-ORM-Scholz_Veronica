@@ -1,4 +1,5 @@
 ﻿using PS_Scholz_Veronica.Entities;
+using PS_Scholz_Veronica.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace PS_Scholz_Veronica.Interfaces
         public void Print(CarritoProducto cp);
         public HashSet<Guid> GetAllGuid();
         public List<Producto> GetProductoByCarrito(Guid carritoId);
+        public int[] GetCdadProductoByCarrito(Guid carritoId);
     }
 }

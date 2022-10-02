@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
+using PS_Scholz_Veronica.Model;
 using PS_Scholz_Veronica.Persistence;
 using System;
 using System.Collections.Generic;
@@ -32,20 +33,46 @@ namespace PS_Scholz_Veronica._Query
             var o = _context.OrdenDb.First<Orden>(or => or.OrdenId == id);
             return o;
         }
-        public void Print(Orden o)
+        public void Print(Orden orden)
         {
             Console.WriteLine(" ------------------------------------------------------");
-            Console.WriteLine("| Orden de compra: {0} | \n| Monto: ${1} ({2})", o.OrdenId, o.Total, o.Fecha);
+            Console.WriteLine("| Orden de compra: {0} | \n| Monto: ${1} ({2})", orden.OrdenId, orden.Total, orden.Fecha);
             Console.WriteLine(" ------------------------------------------------------");
         }
         public List<Orden> GetAll()
         {
-            var l = _context.OrdenDb.FromSqlRaw("SELECT * FROM Orden").ToList();
+            var l = _context.OrdenDb.ToList();
             return l;
         }
         public List<Guid> GetAllGuid()
         {
             return _context.OrdenDb.Select(x => x.OrdenId).ToList();
         }
+
+        public List<Orden> GetToday() //ordenes del dia
+        {
+            var c = DateTime.Now.Date;
+            var l = _context.OrdenDb
+                .Where(x => x.Fecha.Date.CompareTo(c) == 0)
+                .ToList();
+            return l;
+        }
+        //public InfoOrden Datos(Orden orden)
+        //{
+        //    var c = orden.CarritoId;
+        //    var i = _context.OrdenDb
+        //        .Include(o => o.Carrito)
+        //        .Include(x => x.Carrito.CarritoProducto)
+        //        .ThenInclude(c => c.Producto)
+        //        .Where(o => o.CarritoId == orden.CarritoId)
+        //        .Select(x => new InfoOrden
+        //        {
+        //            Fecha = orden.Fecha,
+        //            Nombre = x.Carrito.Cliente.Nombre,
+        //            Apellido = x.Carrito.Cliente.Apellido,
+        //            Total = orden.Total,
+        //        });
+        //    return (InfoOrden)i;
+        //}
     }
 }

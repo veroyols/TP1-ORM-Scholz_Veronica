@@ -30,12 +30,12 @@ namespace PS_Scholz_Veronica.Menu
             }
             catch (OverflowException e)
             {
-                Console.Write(e.Message + " \nPress any key to continue . . . ");
+                Console.Write("Debe ingresar un numero (" + e.Message + ") \nPress any key to continue . . . ");
                 Console.ReadKey(true);
             }
             catch (Exception e)
             {
-                Console.Write(e.Message + " \nPress any key to continue . . . ");
+                Console.Write("Debe ingresar un numero (" + e.Message + ") \nPress any key to continue . . . ");
                 Console.ReadKey(true);
             }
             finally

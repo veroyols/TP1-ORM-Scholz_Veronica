@@ -1,0 +1,14 @@
+﻿Trabajo Práctico 1
+Parte 1 - ORM (Entrega de prototipo con lógica de base de datos)
+Una tienda de comercio contrata su servicio para desarrollar el ecommerce de la tienda,
+dicha web debe permitir a los clientes registrarse y llevar a cabo sus compras, asi como
+tambien permitir que el personal del local pueda ver y gestionar las ventas. 
+
+Criterios de aceptación:
+1. Debe permitir registrar a los clientes.
+2. Debe permitir registrar las ventas del día.
+3. Debe realizar reportes de las ventas del día (Listado de ventas).
+	*Cliente 
+	*Información del producto 
+	*Fecha y hora de la venta
+4. Debe permitir realizar búsquedas por producto en el listado de ventas.

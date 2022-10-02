@@ -71,7 +71,7 @@ namespace PS_Scholz_Veronica._Query
                     GetProductbyId(productId);
                     m = false;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("No se ha encontrado producto con ese ID, intente con otro.");
                 }

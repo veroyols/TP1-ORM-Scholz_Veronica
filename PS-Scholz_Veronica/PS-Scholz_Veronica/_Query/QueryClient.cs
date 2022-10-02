@@ -28,7 +28,6 @@ namespace PS_Scholz_Veronica._Query
         {
             return cli.ClienteId;
         }
-
         public int EnterId()
         {
             bool m = true;

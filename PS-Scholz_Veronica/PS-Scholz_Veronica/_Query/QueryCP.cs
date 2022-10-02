@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
+using PS_Scholz_Veronica.Model;
 using PS_Scholz_Veronica.Persistence;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace PS_Scholz_Veronica._Query
         }
         public void Print(CarritoProducto cp)
         {
-            Console.WriteLine("{0} {1} {2}",cp.CarritoId.ToString(),cp.ProductoId,cp.Cantidad);
+            Console.WriteLine("{0} {1} {2}", cp.CarritoId.ToString(), cp.ProductoId, cp.Cantidad);
         }
         public List<CarritoProducto> GetAll()
         {
@@ -40,7 +41,17 @@ namespace PS_Scholz_Veronica._Query
 
         public List<Producto> GetProductoByCarrito(Guid carritoId)
         {
-            return _context.CarritoProductoDb.Where(x => x.CarritoId == carritoId).Select(x => x.Producto).ToList();
+            return _context.CarritoProductoDb
+                .Where(x => x.CarritoId == carritoId)
+                .Select(x => x.Producto)
+                .ToList();
+        }
+        public int[] GetCdadProductoByCarrito(Guid carritoId)
+        {
+            return _context.CarritoProductoDb
+                .Where(x => x.CarritoId == carritoId)
+                .Select(x => x.Cantidad)
+                .ToArray();
         }
     }
 }

@@ -65,27 +65,22 @@ namespace PS_Scholz_Veronica.Servicios
                 }
                 precio += queryProduct.GetPreciobyId(productId);
 
-                Console.WriteLine(" ------------------------------------------------- ");
-                Console.WriteLine("| Ingrese 1 para agregar mas productos al carrito:|");
-                Console.WriteLine("|   (cualquier tecla para Finalizar la compra)    |");
-                Console.WriteLine(" ------------------------------------------------- ");
+                Console.WriteLine("     ------------------------------------------------- ");
+                Console.WriteLine("    | Ingrese 1 para agregar mas productos al carrito:|");
+                Console.WriteLine("    |   (cualquier tecla para Finalizar la compra)    |");
+                Console.WriteLine("     ------------------------------------------------- ");
                 op = Console.ReadLine();
                 Console.Clear();                
             }
             commandCart.StatusFalse(carro);
 
-            Console.WriteLine("      -------------------------------------------");
-            Console.WriteLine("     | Finalizo la carga de productos al carrito |");
-            Console.WriteLine("      -------------------------------------------");
+            Console.WriteLine("          -------------------------------------------");
+            Console.WriteLine("         | Finalizo la carga de productos al carrito |");
+            Console.WriteLine("          -------------------------------------------");
             return precio;
         }
-       
-
         public Orden RegisterOrder(Carrito carro, int clientId, decimal monto)
         {
-            //Guid carritoId = queryCart.GetGuidbyCart(carro);
-            //commandCart.InsertCart(carro);
-
             Orden o = new Orden(carro.CarritoId, monto);
             commandOrder.InsertOrder(o);//bd
             return o;
@@ -95,6 +90,28 @@ namespace PS_Scholz_Veronica.Servicios
             var o = queryOrder.GetOrderbyId(orderId); 
             o.Total += monto;
             return;
+        }
+        public void ReportarVentas()
+        {
+            List<Orden> l = queryOrder.GetToday(); //lista de ordenes del dia
+            
+            foreach (var orden in l)
+            {
+                Console.WriteLine("---------------------------------------------------");
+                Console.WriteLine("Ticket Numero: {0} \nFecha: {1}\nProducto/s: ",orden.OrdenId, orden.Fecha);
+                var listP = queryCP.GetProductoByCarrito(orden.CarritoId);
+                int[] arreglo = queryCP.GetCdadProductoByCarrito(orden.CarritoId);
+                int i = 0;
+                foreach (var p in listP)
+                {
+                    Console.WriteLine(" (*) {0} x{1} ----- ${2}", p.Nombre, arreglo[i], p.Precio);
+                    i++;
+                }
+
+                Console.WriteLine("---------------------------------------------------");
+                Console.WriteLine("                   Total a pagar:       ${0}",orden.Total);
+                Console.WriteLine("---------------------------------------------------\n \n");
+            }
         }
     }
 }
