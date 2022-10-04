@@ -1,21 +1,11 @@
-﻿using PS_Scholz_Veronica._Command;
-using PS_Scholz_Veronica._Query;
-using PS_Scholz_Veronica.EnterData;
-using PS_Scholz_Veronica.Entities;
-using PS_Scholz_Veronica.Persistence;
+﻿using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Servicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica.Menu
 {
     public class MainMenu : MenuTemplate
     {
         public MainMenu(Service service) : base(service) {}
-
         override public void ShowMenu()
         {
             Console.WriteLine("          ------------------");
@@ -27,7 +17,6 @@ namespace PS_Scholz_Veronica.Menu
             Console.WriteLine("     4. Productos Disponibles");
             Console.WriteLine("     0. Salir");
             Console.Write("\nIngrese un numero: ");
-            return;
         }
         override public bool ChooseOpt(int opt)
         {
@@ -51,7 +40,6 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("               --------------------");
                     Console.WriteLine("              | 2. Registrar Venta |");
                     Console.WriteLine("               --------------------");
-                    
                     Console.WriteLine("Ingrese su ID de cliente: ");
                     int clientId = _service.queryClient.EnterId(); //pide y busca
                     Carrito carro = _service.OpenCart(clientId);
@@ -74,9 +62,7 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("               --------------------------");
                     Console.WriteLine("              | 4. Productos disponibles |");
                     Console.WriteLine("               --------------------------");
-
-                    _service.queryProduct.PrintAll();
-                                       
+                    _service.queryProduct.PrintAll();                                      
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;

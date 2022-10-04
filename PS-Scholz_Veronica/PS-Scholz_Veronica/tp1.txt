@@ -1,5 +1,4 @@
-﻿Trabajo Práctico 1
-Parte 1 - ORM (Entrega de prototipo con lógica de base de datos)
+﻿Trabajo Práctico 1 | Parte 1 - ORM (Entrega de prototipo con lógica de base de datos)
 Una tienda de comercio contrata su servicio para desarrollar el ecommerce de la tienda,
 dicha web debe permitir a los clientes registrarse y llevar a cabo sus compras, asi como
 tambien permitir que el personal del local pueda ver y gestionar las ventas. 
@@ -12,3 +11,24 @@ Criterios de aceptación:
 	*Información del producto 
 	*Fecha y hora de la venta
 4. Debe permitir realizar búsquedas por producto en el listado de ventas.
+
+Scholz:
+  CA:
+    - Descripción : 2. Debe permitir registrar las ventas del día.
+      Resultado : Correcto
+      Comentario: No se solicita la cantidad de productos a agregar al carrito
+    - Descripción : 3. Debe realizar reportes de las ventas del día (Listado de ventas).
+      Resultado : Correcto
+      Comentario: Se puede mejorar la presentación, las órdenes y los carritos aparecen desordenados
+    - Descripción : 4. Debe permitir realizar búsquedas por producto en el listado de ventas.
+      Resultado : Mal
+      Comentario: Se solicita una búsqueda de los productos en las ventas del día
+  Code:
+    CleanCode :
+    - se definen variables que no se utilizan
+    Arquitectura : 
+    - no se respeta la arquitectura propuesta
+    - las clases tipo Query tienen múltiples responsabilidades
+    Lógica :
+    - No se valida dni duplicados.
+    - No se valida el input en la selección del producto.

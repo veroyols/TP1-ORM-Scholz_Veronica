@@ -2,15 +2,10 @@
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica._Query
 {
-    public class QueryCart : IQueryCart //consulta
+    public class QueryCart : IQueryCart
     {
         private readonly AppDbContext _context;
 
@@ -33,7 +28,7 @@ namespace PS_Scholz_Veronica._Query
         }
         public Carrito GetCartbyClientId(int clientId)
         {
-            var cart = _context.CarritoDb.Include(c => c.Cliente).First(x => x.ClienteId == clientId && x.Estado == true);
+            var cart = _context.CarritoDb.Include(c => c.Cliente).First(x => x.ClienteId == clientId && x.Estado);
             return cart;
         }
         public int GetClientIdbyCarritoId(Guid cartId)

@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PS_Scholz_Veronica.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica.Persistence
 {
@@ -16,13 +11,11 @@ namespace PS_Scholz_Veronica.Persistence
         public DbSet<Carrito> CarritoDb { get; set; }
         public DbSet<Orden> OrdenDb { get; set; }
         public DbSet<CarritoProducto> CarritoProductoDb { get; set; }
-        
         //bd
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=VeronicaScholz;Trusted_Connection=True;");
         }
-
         //MODELADO -> FluentApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,7 +52,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Remera de algodon lisa, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-01",
-                        Precio = 3000,
+                        Precio = 3000.00M,
                         Image = "https://drive.google.com/file/d/1AWEbI7NFytjQr0PcRNfqGjlWLDcW1BDr/view?usp=sharing"
                     });
                 entity.HasData(
@@ -70,7 +63,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Buzo de friza liso, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-02",
-                        Precio = 4000,
+                        Precio = 4000.00M,
                         Image = "https://drive.google.com/file/d/136zDTZUkUbs5Z4eoumK-Gm5J-Ex7aN2y/view?usp=sharing"
                     });
                 entity.HasData(
@@ -81,7 +74,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Canguro de friza liso, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-03",
-                        Precio = 4500,
+                        Precio = 4500.00M,
                         Image = "https://drive.google.com/file/d/1OoBv1FyptSBujAqBvTV61F3zkm6GLeb6/view?usp=sharing"
                     });
                 entity.HasData(
@@ -92,7 +85,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Campera de frisa lisa, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-04",
-                        Precio = 5000,
+                        Precio = 5000.00M,
                         Image = "https://drive.google.com/file/d/1zomCjyxcP1uyJxRonUVcAtDKC-y8LHmD/view?usp=sharing"
                     });
                 entity.HasData(
@@ -103,7 +96,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Musculosa de algodon lisa, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-05",
-                        Precio = 2700,
+                        Precio = 2700.00M,
                         Image = "https://drive.google.com/file/d/1DGa8_Ows-LfNxczRkvcBrQwX5lsh89_n/view?usp=sharing"
                     });
                 entity.HasData(
@@ -114,7 +107,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Pantalon jogging de friza.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-06",
-                        Precio = 4700,
+                        Precio = 4700.00M,
                         Image = "https://drive.google.com/file/d/12P_zAj696O3cYBeWToXWM93nQEgIFlW0/view?usp=sharing"
                     });
                 entity.HasData(
@@ -125,7 +118,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Campera de jean corta.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-07",
-                        Precio = 4900,
+                        Precio = 4900.00M,
                         Image = "https://drive.google.com/file/d/11-i6M5B8fZySpeS2XjaaEioi3Puq2DCS/view?usp=sharing"
                     });
                 entity.HasData(
@@ -136,7 +129,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Pantalon de jean claro.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-08",
-                        Precio = 6300,
+                        Precio = 6300.00M,
                         Image = "https://drive.google.com/file/d/1Vo-6YDNc4hoce7NkVrYVe3YQrf97QnG3/view?usp=sharing"
                     });
                 entity.HasData(
@@ -147,7 +140,7 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Sweater Bremer Negro.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-09",
-                        Precio = 5100,
+                        Precio = 5100.00M,
                         Image = "https://drive.google.com/file/d/16kEM1AO29k__3ayUe8zbe2DqodGbUzZ_/view?usp=sharing"
                     });
                 entity.HasData(
@@ -158,24 +151,18 @@ namespace PS_Scholz_Veronica.Persistence
                         Descripcion = "Camiseta algodon, varios colores.",
                         Marca = "Simpl",
                         Codigo = "ps2c2022-10",
-                        Precio = 5200,
+                        Precio = 5200.00M,
                         Image = "https://drive.google.com/file/d/1udHiMsJF53vY67yJYEh9TRHon7e0w8vC/view?usp=sharing"
                     });
                 //RELACION: CartPRoduct
             });
-
             //ORDEN
             modelBuilder.Entity<Orden>(entity =>
             {
                 entity.ToTable("Orden");
                 entity.HasKey(o => o.OrdenId);
                 entity.Property(o => o.Total).HasColumnType("decimal(15, 2)");
-                //entity
-                    //.HasOne<Carrito>(o => o.Carrito)
-                    //.WithOne(c => c.Orden)
-                    //.HasForeignKey<Carrito>(c => c.CarritoId);
             });
-
             //CARRITO
             modelBuilder.Entity<Carrito>(entity =>
             {
@@ -191,19 +178,15 @@ namespace PS_Scholz_Veronica.Persistence
                     .WithOne(x => x.Carrito)
                     .HasForeignKey<Orden>(x => x.CarritoId);
             });
-
             //CARRITOPRODUCTO 
             modelBuilder.Entity<CarritoProducto>(entity =>
             {
                 entity.ToTable("CarritoProducto");
                 entity.HasKey(cp => new { cp.CarritoId, cp.ProductoId });
-
                 entity
                     .HasOne<Carrito>(cp => cp.Carrito)
                     .WithMany(c => c.CarritoProducto)
                     .HasForeignKey(cp => cp.CarritoId);
-                    //.IsRequired(false); //?
-
                 entity
                     .HasOne<Producto>(cp => cp.Producto)
                     .WithMany(p => p.CarritoProducto)

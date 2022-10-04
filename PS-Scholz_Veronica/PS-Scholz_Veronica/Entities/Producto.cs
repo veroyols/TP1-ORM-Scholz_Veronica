@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PS_Scholz_Veronica.Entities
 {
@@ -22,7 +17,5 @@ namespace PS_Scholz_Veronica.Entities
 
         //Relaciones
         public IList<CarritoProducto> CarritoProducto { get; set; }
-
-
     }
 }

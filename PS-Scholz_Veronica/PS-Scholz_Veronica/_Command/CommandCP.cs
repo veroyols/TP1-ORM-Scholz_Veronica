@@ -1,11 +1,7 @@
 ﻿using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PS_Scholz_Veronica._Command
 {
@@ -17,19 +13,16 @@ namespace PS_Scholz_Veronica._Command
         {
             _context = context;
         }
-
         public void InsertCP(CarritoProducto cp)
         {
             _context.CarritoProductoDb.Add(cp);
             _context.SaveChanges(); 
-            return;
         }
         public void UpdateCP(CarritoProducto cp)
         {
             var up = _context.CarritoProductoDb.First(c => c.CarritoId == cp.CarritoId && c.ProductoId == cp.ProductoId);
             up.Cantidad++;
             _context.SaveChanges();
-            return;
         }
     }
 }

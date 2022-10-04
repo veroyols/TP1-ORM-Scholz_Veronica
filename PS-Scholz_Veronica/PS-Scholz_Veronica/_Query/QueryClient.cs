@@ -2,16 +2,10 @@
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
-using PS_Scholz_Veronica.Servicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PS_Scholz_Veronica._Query
 {
-    public class QueryClient : IQueryClient //consulta
+    public class QueryClient : IQueryClient
     {
         private readonly AppDbContext _context;
 
@@ -28,7 +22,7 @@ namespace PS_Scholz_Veronica._Query
         {
             return cli.ClienteId;
         }
-        public int EnterId()
+        public int EnterId() // TODO: Presentation - EnterId de usuario 
         {
             bool m = true;
             int clientId = new int();
@@ -42,7 +36,7 @@ namespace PS_Scholz_Veronica._Query
                 }
                 catch (Exception e)
                 {
-                    Console.Write("No se ha encontrado cliente con ese ID, intente con otro ID: ");
+                    Console.Write("No se ha encontrado cliente con ese ID, intente con otro ID: "); 
                 }
             }
             return clientId;
