@@ -22,24 +22,5 @@ namespace PS_Scholz_Veronica._Query
         {
             return cli.ClienteId;
         }
-        public int EnterId() // TODO: Presentation - EnterId de usuario 
-        {
-            bool m = true;
-            int clientId = new int();
-            while (m)
-            {
-                try
-                {
-                    clientId = int.Parse(Console.ReadLine());
-                    GetClientbyId(clientId);
-                    m = false;
-                }
-                catch (Exception e)
-                {
-                    Console.Write("No se ha encontrado cliente con ese ID, intente con otro ID: "); 
-                }
-            }
-            return clientId;
-        }
     }
 }

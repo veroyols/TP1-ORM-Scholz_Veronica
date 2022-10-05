@@ -16,12 +16,6 @@ namespace PS_Scholz_Veronica._Query
             var o = _context.OrdenDb.First<Orden>(or => or.OrdenId == id);
             return o;
         }
-        public void Print(Orden orden) //TODO: Presentation - Print Orden
-        {
-            Console.WriteLine(" ------------------------------------------------------");
-            Console.WriteLine("| Orden de compra: {0} | \n| Monto: ${1} ({2})", orden.OrdenId, orden.Total, orden.Fecha);
-            Console.WriteLine(" ------------------------------------------------------");
-        }
         public List<Orden> GetAll()
         {
             var l = _context.OrdenDb.ToList();

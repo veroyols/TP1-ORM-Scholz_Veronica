@@ -1,4 +1,6 @@
-﻿using PS_Scholz_Veronica.Entities;
+﻿using PS_Scholz_Veronica.EnterData;
+using PS_Scholz_Veronica.Entities;
+using PS_Scholz_Veronica.PrintData;
 using PS_Scholz_Veronica.Servicios;
 
 namespace PS_Scholz_Veronica.Menu
@@ -14,7 +16,7 @@ namespace PS_Scholz_Veronica.Menu
             Console.WriteLine("     1. Registrar un nuevo Cliente");
             Console.WriteLine("     2. Registrar una Venta de Productos");
             Console.WriteLine("     3. Reportar Ventas del dia");
-            Console.WriteLine("     4. Productos Disponibles");
+            Console.WriteLine("     4. Filtrar Productos Vendidos");
             Console.WriteLine("     0. Salir");
             Console.Write("\nIngrese un numero: ");
         }
@@ -34,18 +36,20 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("               ----------------------");
                     Console.WriteLine("              | 1. Registrar Cliente |");
                     Console.WriteLine("               ----------------------");
-                    _service.RegisterCliente();
+                    int id = _service.RegisterCliente();
+                    Console.Clear();
+                    Console.WriteLine("Se ha registrado en el sistema con el ID: {0}", id);
                     return true;
                 case 2:
                     Console.WriteLine("               --------------------");
                     Console.WriteLine("              | 2. Registrar Venta |");
                     Console.WriteLine("               --------------------");
-                    Console.WriteLine("Ingrese su ID de cliente: ");
-                    int clientId = _service.queryClient.EnterId(); //pide y busca
+                    Console.WriteLine("\n       *Ingrese su Cliente ID: ");
+                    int clientId = int.Parse(Console.ReadLine()); // TODO: validar que exista
                     Carrito carro = _service.OpenCart(clientId);
-                    decimal total = _service.AddProductosToCart(carro);
-                    var o = _service.RegisterOrder(carro,clientId,total);
-                    _service.queryOrder.Print(o);
+                    decimal total = AddProductToCart.Add(_service, carro);
+                    var orden = _service.RegisterOrder(carro,clientId,total);
+                    PrintOrder.Print(orden);
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;
@@ -54,15 +58,18 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("               | 3. Ventas del dia |");
                     Console.WriteLine("               |  Fecha " + DateTime.Now.ToShortDateString() + "  |");
                     Console.WriteLine("                -------------------");
-                    _service.ReportarVentas();
+                    ReportSale.ReportOfDay(_service);
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 case 4:
-                    Console.WriteLine("               --------------------------");
-                    Console.WriteLine("              | 4. Productos disponibles |");
-                    Console.WriteLine("               --------------------------");
-                    _service.queryProduct.PrintAll();                                      
+                    Console.WriteLine("               ------------------------------");
+                    Console.WriteLine("              | 4. Buscar Productos Vendidos |");
+                    Console.WriteLine("               ------------------------------");
+                    PrintProducts.PrintDisponibles(_service.GetProducts());
+                    Console.WriteLine("         *Ingrese el ID del producto para ver las ventas: ");
+                    int productId = int.Parse(Console.ReadLine()); // TODO: validar que exista
+                    int cdad = _service.GetProductSaleToday(productId);
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;

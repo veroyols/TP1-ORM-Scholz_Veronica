@@ -30,32 +30,5 @@ namespace PS_Scholz_Veronica._Query
             var p = _context.ProductoDb.ToList<Producto>();
             return p;
         }
-        public void PrintAll() //TODO: Presentation - PrintAll
-        {
-            Console.WriteLine("Disponibles: {0} productos. \nDetalle:", CountAll());
-            List<Producto> lp = GetAll();
-            foreach (Producto p in lp)
-                Console.WriteLine("     Id: {0} -> *{1} ({2}): ${3}", p.ProductoId, p.Nombre, p.Marca, p.Precio);
-            return;
-        }
-        public int EnterId() //TODO: Presentation - Exception message
-        {
-            bool m = true;
-            int productId = new int();
-            while (m)
-            {
-                try
-                {
-                    productId = int.Parse(Console.ReadLine());
-                    GetProductbyId(productId);
-                    m = false;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("No se ha encontrado producto con ese ID, intente con otro.");
-                }
-            }
-            return productId;
-        }
     }
 }

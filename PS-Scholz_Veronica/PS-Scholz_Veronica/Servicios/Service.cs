@@ -3,6 +3,7 @@ using PS_Scholz_Veronica._Query;
 using PS_Scholz_Veronica.EnterData;
 using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
+using PS_Scholz_Veronica.Model;
 using PS_Scholz_Veronica.Persistence;
 
 namespace PS_Scholz_Veronica.Servicios
@@ -19,89 +20,79 @@ namespace PS_Scholz_Veronica.Servicios
         public IQueryCP queryCP = new QueryCP(_context);
         public ICommandOrder commandOrder = new CommandOrder(_context);
         public IQueryOrder queryOrder = new QueryOrder(_context);
-        public void RegisterCliente()
+
+        public int RegisterCliente()
         {
             var cli = ClientData.EnterClientData();
             commandClient.InsertClient(cli);
-            int id = queryClient.GetIdbyClient(cli);
-            Console.Clear();
-            Console.WriteLine("Se ha registrado en el sistema con el ID: {0}", id); //TODO: Presentation
+            return queryClient.GetIdbyClient(cli);
         }
-        public Carrito OpenCart (int clientId)
+        public Carrito OpenCart(int clientId)
         {
             Carrito carro = new Carrito(clientId);
             Guid carritoId = queryCart.GetGuidbyCart(carro);
             commandCart.InsertCart(carro);
             return carro;
         }
-        public decimal AddProductosToCart(Carrito carro) //TODO: Presentation - Enter y Print
+        public List<Producto> GetProducts()
         {
-            string op = "1";
-            decimal precio = 0;
-            while (op == "1")
+            return queryProduct.GetAll();
+        }
+        public decimal GetPreciobyProductId(int productId)
+        {
+            return queryProduct.GetPreciobyId(productId);
+        }
+        public void EndSale(Carrito carrito)
+        {
+            commandCart.StatusFalse(carrito);
+        }
+        public void ValidarCarritoProducto(CarritoProducto cp, int cdad)
+        {
+            if (queryCP.Exists(cp))
             {
-                queryProduct.PrintAll();
-                Console.WriteLine("\n       *Ingrese el ID del producto que desea comprar: ");
-                int productId = queryProduct.EnterId(); //pide y busca
-                var cp = new CarritoProducto(carro.CarritoId, productId, 1);
-                //validar clave compuesta
-                if (queryCP.Exists(cp))
-                {
-                    commandCP.UpdateCP(cp); //cdad ++
-                }
-                else
-                {
-                    commandCP.InsertCP(cp);
-                }
-                precio += queryProduct.GetPreciobyId(productId);
-                Console.WriteLine("     ------------------------------------------------- ");
-                Console.WriteLine("    | Ingrese 1 para agregar mas productos al carrito:|");
-                Console.WriteLine("    |   (cualquier tecla para Finalizar la compra)    |");
-                Console.WriteLine("     ------------------------------------------------- ");
-                op = Console.ReadLine();
-                Console.Clear();                
+                commandCP.UpdateCP(cp, cdad);
             }
-            commandCart.StatusFalse(carro);
-            Console.WriteLine("          -------------------------------------------");
-            Console.WriteLine("         | Finalizo la carga de productos al carrito |");
-            Console.WriteLine("          -------------------------------------------");
-            return precio;
+            else
+            {
+                commandCP.InsertCP(cp);
+            }
         }
         public Orden RegisterOrder(Carrito carro, int clientId, decimal monto)
         {
             Orden o = new Orden(carro.CarritoId, monto);
-            commandOrder.InsertOrder(o);//bd
+            commandOrder.InsertOrder(o);
             return o;
         }
         public void UpdateOrder(Guid orderId, decimal monto)
         {
-            var o = queryOrder.GetOrderbyId(orderId); 
+            var o = queryOrder.GetOrderbyId(orderId);
             o.Total += monto;
         }
-        public void ReportarVentas() //TODO: Presentation - Print
+        public List<Orden> GetOrderToday()
         {
-            List<Orden> l = queryOrder.GetToday(); //lista de ordenes del dia
-            foreach (var orden in l)
+            return queryOrder.GetToday();
+        }
+        public Cliente GetClientByOrder(Guid carritoId)
+        {
+            int clientId = queryCart.GetClientIdbyCarritoId(carritoId);
+            return queryClient.GetClientbyId(clientId);
+        }
+        public List<ProductoCantidad> GetProductoCantidad(Guid carritoId)
+        {
+            List<ProductoCantidad> lista = new List<ProductoCantidad>();
+            List<Producto> products = queryCP.GetProductoByCarrito(carritoId);
+            int[] cdad = queryCP.GetCdadProductoByCarrito(carritoId);
+            int i = 0;
+            foreach (var item in products)
             {
-                int clientId = queryCart.GetClientIdbyCarritoId(orden.CarritoId);
-                Cliente cli = queryClient.GetClientbyId(clientId);
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine("Ticket Numero: {0} " +
-                    "\nFecha: {1} " +
-                    "\nCliente: {2} {3}" +
-                    "\nProductos:",orden.OrdenId,orden.Fecha,cli.Nombre,cli.Apellido);
-                var listP = queryCP.GetProductoByCarrito(orden.CarritoId);
-                int[] arreglo = queryCP.GetCdadProductoByCarrito(orden.CarritoId);
-                int i = 0;
-                foreach (var p in listP)
-                {
-                    Console.WriteLine(" (*) {0} x{1} ----- ${2}", p.Nombre, arreglo[i], p.Precio);
-                    i++;
-                }
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine("                   Total a pagar:       ${0}",orden.Total);
-                Console.WriteLine("---------------------------------------------------\n \n");
+                lista.Add(new ProductoCantidad(item, cdad[i]));
+                i++;
             }
+            return lista;
+        }
+        public int GetProductSaleToday(int productId)
+        {
+            return 0;
         }
     }
 }

@@ -16,10 +16,10 @@ namespace PS_Scholz_Veronica._Query
         {
             return _context.CarritoProductoDb.Contains(cp);
         }
-        public void Print(CarritoProducto cp) // TODO: Presentation - Print CarritoProducto
-        {
-            Console.WriteLine("{0} {1} {2}", cp.CarritoId.ToString(), cp.ProductoId, cp.Cantidad);
-        }
+        //public void Print(CarritoProducto cp) // TODO: Presentation - Print CarritoProducto
+        //{
+        //    Console.WriteLine("{0} {1} {2}", cp.CarritoId.ToString(), cp.ProductoId, cp.Cantidad);
+        //}
         //public List<CarritoProducto> GetAll()
         //{
         //    var p = _context.CarritoProductoDb.ToList<CarritoProducto>();
