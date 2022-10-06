@@ -3,7 +3,8 @@
 namespace PS_Scholz_Veronica.Entities
 {
     public class Orden
-    {       
+    {
+        public Orden() { }
         public Orden(Guid carritoId, decimal monto)
         {
             OrdenId = Guid.NewGuid();

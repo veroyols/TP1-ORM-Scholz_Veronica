@@ -6,7 +6,8 @@ namespace PS_Scholz_Veronica.Interfaces
     {
         public Producto GetProductbyId(int id);
         public List<Producto> GetAll();
-        //public int CountAll();
         public decimal GetPreciobyId(int id);
+        public bool Exists(int productoId);
+
     }
 }

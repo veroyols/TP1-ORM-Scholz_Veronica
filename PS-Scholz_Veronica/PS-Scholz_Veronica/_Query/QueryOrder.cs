@@ -19,17 +19,6 @@ namespace PS_Scholz_Veronica._Query
             return o;
         }
 
-        //public List<Orden> GetAll()
-        //{
-        //    var l = _context.OrdenDb.ToList();
-        //    return l;
-        //}
-
-        //public List<Guid> GetAllGuid()
-        //{
-        //    return _context.OrdenDb.Select(x => x.OrdenId).ToList();
-        //}
-
         public List<Orden> GetToday()
         {
             var c = DateTime.Now.Date;

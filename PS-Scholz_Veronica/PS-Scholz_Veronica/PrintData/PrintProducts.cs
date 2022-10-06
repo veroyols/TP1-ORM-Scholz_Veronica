@@ -7,9 +7,11 @@ namespace PS_Scholz_Veronica.PrintData
     {
         public static void PrintDisponibles(List<Producto> lp)
         {
-            Console.WriteLine("Productos Disponibles:");
+            Console.WriteLine("\n         (*) Productos Disponibles: \n");
             foreach (Producto p in lp)
-                Console.WriteLine("     Id: {0} -> *{1} ({2}): ${3}", p.ProductoId, p.Nombre, p.Marca, p.Precio);
-        } 
+                Console.WriteLine("         Id: {0} -> *{1} ({2}): ${3}", p.ProductoId, p.Nombre, p.Marca, p.Precio);
+            Console.WriteLine("       ----------------------------------------------------");
+
+        }
     }
 }

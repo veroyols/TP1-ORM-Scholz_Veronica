@@ -13,25 +13,25 @@ namespace PS_Scholz_Veronica.EnterData
             while (op == "1")
             {
                 PrintProducts.PrintDisponibles(_service.GetProducts());
-                Console.WriteLine("\n       *Ingrese el ID del producto que desea comprar: ");
-                int productId = int.Parse(Console.ReadLine()); // TODO: validar que exista
-                Console.WriteLine("\n       *Ingrese la cantidad: ");
-                int cdad = int.Parse(Console.ReadLine()); // TODO: validar que exista
+
+                int productId = EnterId.Producto(_service);
+                int cdad = EnterId.Cantidad(_service);
+
                 var cp = new CarritoProducto(carrito.CarritoId, productId, cdad);
                 //crear o updatear el carrito
                 _service.ValidarCarritoProducto(cp, cdad);
                 total += _service.GetPreciobyProductId(productId) * cdad;
-                Console.WriteLine("     ------------------------------------------------- ");
-                Console.WriteLine("    | Ingrese 1 para agregar mas productos al carrito:|");
-                Console.WriteLine("    |   (cualquier tecla para Finalizar la compra)    |");
-                Console.WriteLine("     ------------------------------------------------- ");
+                Console.WriteLine("         ------------------------------------------------- ");
+                Console.WriteLine("        | Ingrese 1 para agregar mas productos al carrito:|");
+                Console.WriteLine("        |   (cualquier tecla para Finalizar la compra)    |");
+                Console.WriteLine("         ------------------------------------------------- ");
                 op = Console.ReadLine();
                 Console.Clear();
             }
             _service.EndSale(carrito);
-            Console.WriteLine("          -------------------------------------------");
-            Console.WriteLine("         | Finalizo la carga de productos al carrito |");
-            Console.WriteLine("          -------------------------------------------");
+            Console.WriteLine("              -------------------------------------------");
+            Console.WriteLine("             | Finalizo la carga de productos al carrito |");
+            Console.WriteLine("              -------------------------------------------");
             return total;
         }
     }

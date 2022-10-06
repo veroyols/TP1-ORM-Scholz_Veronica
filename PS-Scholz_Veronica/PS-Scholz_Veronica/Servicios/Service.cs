@@ -21,9 +21,9 @@ namespace PS_Scholz_Veronica.Servicios
         public ICommandOrder commandOrder = new CommandOrder(_context);
         public IQueryOrder queryOrder = new QueryOrder(_context);
 
-        public int RegisterCliente()
+        public int RegisterClient()
         {
-            var cli = ClientData.EnterClientData();
+            var cli = ClientData.EnterClientData(queryClient);
             commandClient.InsertClient(cli);
             return queryClient.GetIdbyClient(cli);
         }
@@ -61,6 +61,27 @@ namespace PS_Scholz_Veronica.Servicios
             {
                 commandCP.InsertCP(cp);
             }
+        }
+        public bool ValidarClienteId(int id)
+        {
+            return queryClient.Exists(id);
+        }
+        public bool ValidarProductoId(int id)
+        {
+            return queryProduct.Exists(id);
+        }
+
+        public bool ProductExist(int id)
+        {
+            return queryProduct.Exists(id);
+        }
+        public bool ClientExist(int id)
+        {
+            return queryClient.Exists(id);
+        }
+        public bool DniExists(string dni)
+        {
+            return queryClient.ExistsDni(dni);
         }
 
         public Orden RegisterOrder(Carrito carro, int clientId, decimal monto)

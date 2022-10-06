@@ -13,18 +13,18 @@ namespace PS_Scholz_Veronica.PrintData
             {
                 Cliente cli = _service.GetClientByOrder(orden.CarritoId);
 
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine("Ticket Numero: {0} " +
-                    "\nFecha: {1} " +
-                    "\nCliente: {2} {3}" +
-                    "\nProductos:", orden.OrdenId, orden.Fecha, cli.Nombre, cli.Apellido);
+                Console.WriteLine("     ---------------------------------------------------");
+                Console.WriteLine("     Ticket Numero: {0} " +
+                    "\n     Fecha: {1} " +
+                    "\n     Cliente: {2} {3}" +
+                    "\n     Productos:", orden.OrdenId, orden.Fecha, cli.Nombre, cli.Apellido);
 
                 List<ProductoCantidad> list = _service.GetProductoCantidad(orden.CarritoId);
                 foreach (var product in list)
-                    Console.WriteLine(" (*) {0} x{1} ----- ${2}", product.producto.Nombre, product.cantidad, product.producto.Precio);
-                Console.WriteLine("---------------------------------------------------");
-                Console.WriteLine("                   Total a pagar:       ${0}", orden.Total);
-                Console.WriteLine("---------------------------------------------------\n \n");
+                    Console.WriteLine("      (*) {0} x{1} ----- ${2}", product.producto.Nombre, product.cantidad, product.producto.Precio);
+                Console.WriteLine("     ---------------------------------------------------");
+                Console.WriteLine("                        Total a pagar:       ${0}", orden.Total);
+                Console.WriteLine("     ---------------------------------------------------\n \n");
             }
         }
     }

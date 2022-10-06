@@ -24,16 +24,16 @@ namespace PS_Scholz_Veronica._Query
             var p = _context.ProductoDb.FirstOrDefault<Producto>(p => p.ProductoId == id);
             return p.Precio;
         }
-        
-        //public int CountAll()
-        //{
-        //    return _context.ProductoDb.Count();
-        //}
-        
+               
         public List<Producto> GetAll()
         {
             var p = _context.ProductoDb.ToList<Producto>();
             return p;
+        }
+
+        public bool Exists(int productoId)
+        {
+            return _context.ProductoDb.Any(p => p.ProductoId == productoId);
         }
     }
 }

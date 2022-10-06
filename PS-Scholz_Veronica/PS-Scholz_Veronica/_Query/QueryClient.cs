@@ -23,5 +23,14 @@ namespace PS_Scholz_Veronica._Query
         {
             return cli.ClienteId;
         }
+        public bool Exists(int clienteId)
+        {
+            return _context.ClienteDb.Any(p => p.ClienteId == clienteId);
+        }
+        public bool ExistsDni(string dni)
+        {
+            return _context.ClienteDb.Any(p => p.DNI == dni);
+        }
+
     }
 }

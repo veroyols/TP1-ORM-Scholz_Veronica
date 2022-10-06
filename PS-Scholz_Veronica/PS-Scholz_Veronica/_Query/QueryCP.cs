@@ -18,11 +18,6 @@ namespace PS_Scholz_Veronica._Query
             return _context.CarritoProductoDb.Contains(cp);
         }
 
-        //public HashSet<Guid> GetAllGuid()
-        //{
-        //    return _context.CarritoProductoDb.Select(x => x.CarritoId).ToHashSet();
-        //}
-
         public List<Producto> GetProductoByCarrito(Guid carritoId)
         {
             return _context.CarritoProductoDb
