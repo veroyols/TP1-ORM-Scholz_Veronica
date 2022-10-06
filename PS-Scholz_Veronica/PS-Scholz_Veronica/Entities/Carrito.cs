@@ -4,18 +4,11 @@ namespace PS_Scholz_Veronica.Entities
 {
     public class Carrito
     {
-        public Carrito() {}
         public Carrito(int clienteId)
         {
             CarritoId = Guid.NewGuid();
             ClienteId = clienteId;
             Estado = true;
-        }
-        public Carrito(Guid carritoId, int clienteId, bool estado)
-        {
-            CarritoId = carritoId;
-            ClienteId = clienteId;
-            Estado = estado;
         }
         [Key]
         public Guid CarritoId { get; set; } 

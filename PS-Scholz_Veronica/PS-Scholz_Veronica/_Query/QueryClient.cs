@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PS_Scholz_Veronica.Entities;
+﻿using PS_Scholz_Veronica.Entities;
 using PS_Scholz_Veronica.Interfaces;
 using PS_Scholz_Veronica.Persistence;
 
@@ -13,11 +12,13 @@ namespace PS_Scholz_Veronica._Query
         {
             _context = context;
         }
+
         public Cliente GetClientbyId(int id)
         {
             var cli = _context.ClienteDb.First<Cliente>(cli => cli.ClienteId == id);
             return cli;
         }
+
         public int GetIdbyClient(Cliente cli)
         {
             return cli.ClienteId;

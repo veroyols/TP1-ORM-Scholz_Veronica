@@ -4,7 +4,6 @@ namespace PS_Scholz_Veronica.Entities
 {
     public class CarritoProducto
     {
-        public CarritoProducto() { }
         public CarritoProducto(Guid carritoId,int productoId,int cantidad)
         {
             CarritoId = carritoId;

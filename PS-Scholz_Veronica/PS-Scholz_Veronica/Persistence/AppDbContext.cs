@@ -14,7 +14,7 @@ namespace PS_Scholz_Veronica.Persistence
         //bd
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=VeronicaScholz;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=VeronicaScholzCorreccion;Trusted_Connection=True;");
         }
         //MODELADO -> FluentApi
         protected override void OnModelCreating(ModelBuilder modelBuilder)

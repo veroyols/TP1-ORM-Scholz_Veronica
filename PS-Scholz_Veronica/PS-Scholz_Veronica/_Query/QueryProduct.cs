@@ -7,24 +7,29 @@ namespace PS_Scholz_Veronica._Query
     public class QueryProduct : IQueryProduct
     {
         private readonly AppDbContext _context;
+
         public QueryProduct(AppDbContext context)
         {
             _context = context;
         }
+        
         public Producto GetProductbyId(int id)
         {
             var p = _context.ProductoDb.FirstOrDefault<Producto>(p => p.ProductoId == id);
             return p;
         }
+        
         public decimal GetPreciobyId(int id)
         {
             var p = _context.ProductoDb.FirstOrDefault<Producto>(p => p.ProductoId == id);
             return p.Precio;
         }
-        public int CountAll()
-        {
-            return _context.ProductoDb.Count();
-        }
+        
+        //public int CountAll()
+        //{
+        //    return _context.ProductoDb.Count();
+        //}
+        
         public List<Producto> GetAll()
         {
             var p = _context.ProductoDb.ToList<Producto>();

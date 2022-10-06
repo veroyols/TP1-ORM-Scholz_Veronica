@@ -11,6 +11,12 @@ Criterios de aceptación:
 	*Información del producto 
 	*Fecha y hora de la venta
 4. Debe permitir realizar búsquedas por producto en el listado de ventas.
+--> productId
+-->{ fecha, cdad, precio unitario, total}
+Las consultas de LINQ to Entities se pueden formular en sintaxis: 
+    * de expresiones de consulta 
+    * de consultas basadas en métodos. 
+
 
 Scholz:
   CA:

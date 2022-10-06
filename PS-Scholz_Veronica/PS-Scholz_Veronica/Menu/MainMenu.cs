@@ -1,5 +1,6 @@
 ﻿using PS_Scholz_Veronica.EnterData;
 using PS_Scholz_Veronica.Entities;
+using PS_Scholz_Veronica.Model;
 using PS_Scholz_Veronica.PrintData;
 using PS_Scholz_Veronica.Servicios;
 
@@ -44,7 +45,7 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("               --------------------");
                     Console.WriteLine("              | 2. Registrar Venta |");
                     Console.WriteLine("               --------------------");
-                    Console.WriteLine("\n       *Ingrese su Cliente ID: ");
+                    Console.Write("\n       *Ingrese su Cliente ID: ");
                     int clientId = int.Parse(Console.ReadLine()); // TODO: validar que exista
                     Carrito carro = _service.OpenCart(clientId);
                     decimal total = AddProductToCart.Add(_service, carro);
@@ -67,9 +68,23 @@ namespace PS_Scholz_Veronica.Menu
                     Console.WriteLine("              | 4. Buscar Productos Vendidos |");
                     Console.WriteLine("               ------------------------------");
                     PrintProducts.PrintDisponibles(_service.GetProducts());
-                    Console.WriteLine("         *Ingrese el ID del producto para ver las ventas: ");
+                    Console.Write("         *Ingrese el ID del producto para ver las ventas: ");
                     int productId = int.Parse(Console.ReadLine()); // TODO: validar que exista
-                    int cdad = _service.GetProductSaleToday(productId);
+                    List<ProductSold> listaDeVentasConProd = _service.GetProductSold(productId);
+                    Producto producto = _service.GetProductById(productId);
+                    PrintProduct.Print(producto);
+                    int unidades = 0;
+                    int contadorDeVentas = 0;
+                    foreach (var item in listaDeVentasConProd)
+                    {
+                        unidades += item.amount;
+                        contadorDeVentas++;
+                        Console.WriteLine("-------------------------------------------------------");
+                        Console.WriteLine("VENTA {0} - {1}", contadorDeVentas, item.date.ToShortDateString());
+                        Console.WriteLine("CLIENTE: {0} {1} --> {2} unidades", item.clientName, item.clientLastName, item.amount);
+                    }
+                    Console.WriteLine("-------------------------------------------------------");
+                    Console.WriteLine("Se vendieron {0} unidades en {1} ventas por un total de ${2}", unidades, listaDeVentasConProd.Count, unidades *producto.Precio);
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;

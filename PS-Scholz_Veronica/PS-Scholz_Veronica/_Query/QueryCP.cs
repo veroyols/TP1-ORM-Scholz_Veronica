@@ -12,23 +12,17 @@ namespace PS_Scholz_Veronica._Query
         {
             _context = context;
         }
+
         public bool Exists(CarritoProducto cp)
         {
             return _context.CarritoProductoDb.Contains(cp);
         }
-        //public void Print(CarritoProducto cp) // TODO: Presentation - Print CarritoProducto
+
+        //public HashSet<Guid> GetAllGuid()
         //{
-        //    Console.WriteLine("{0} {1} {2}", cp.CarritoId.ToString(), cp.ProductoId, cp.Cantidad);
+        //    return _context.CarritoProductoDb.Select(x => x.CarritoId).ToHashSet();
         //}
-        //public List<CarritoProducto> GetAll()
-        //{
-        //    var p = _context.CarritoProductoDb.ToList<CarritoProducto>();
-        //    return p;
-        //}
-        public HashSet<Guid> GetAllGuid()
-        {
-            return _context.CarritoProductoDb.Select(x => x.CarritoId).ToHashSet();
-        }
+
         public List<Producto> GetProductoByCarrito(Guid carritoId)
         {
             return _context.CarritoProductoDb
@@ -36,12 +30,24 @@ namespace PS_Scholz_Veronica._Query
                 .Select(x => x.Producto)
                 .ToList();
         }
+
         public int[] GetCdadProductoByCarrito(Guid carritoId)
         {
             return _context.CarritoProductoDb
                 .Where(x => x.CarritoId == carritoId)
                 .Select(x => x.Cantidad)
                 .ToArray();
+        }
+
+        public List<CarritoProducto> GetCPByProductId(int productId)
+        {
+            var q =
+                from cp in _context.CarritoProductoDb
+                where cp.ProductoId == productId
+                where cp.Carrito.Estado == false
+                select cp;
+            return q.ToList();
+
         }
     }
 }

@@ -12,11 +12,13 @@ namespace PS_Scholz_Veronica._Command
         {
             _context = context;
         }
+
         public void InsertCart(Carrito cart)
         {
             _context.Add<Carrito>(cart);
             _context.SaveChanges();
         }
+
         public void StatusFalse(Carrito carro)
         {
             var up = _context.CarritoDb.First(x => x.Equals(carro));

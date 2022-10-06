@@ -5,11 +5,14 @@ namespace PS_Scholz_Veronica.Menu
     abstract public class MenuTemplate
     {
         protected readonly Service _service;
+
         protected MenuTemplate(Service service)
         {
             _service = service;
         }
+
         abstract public void ShowMenu();
+        
         public int InsertOption(int op)
         {
             try

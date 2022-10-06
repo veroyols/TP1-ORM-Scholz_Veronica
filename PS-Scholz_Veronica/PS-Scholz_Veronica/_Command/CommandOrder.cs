@@ -12,9 +12,9 @@ namespace PS_Scholz_Veronica._Command
         {
             _context = context;
         }
-        public async void InsertOrder(Orden order)
+        public void InsertOrder(Orden order)
         {
-            await _context.OrdenDb.AddAsync(order);
+            _context.OrdenDb.AddAsync(order);
             _context.SaveChanges();
         }
     }

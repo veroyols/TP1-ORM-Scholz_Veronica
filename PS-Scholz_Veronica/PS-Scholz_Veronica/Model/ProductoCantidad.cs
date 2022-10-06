@@ -1,5 +1,4 @@
-﻿
-using PS_Scholz_Veronica.Entities;
+﻿using PS_Scholz_Veronica.Entities;
 
 namespace PS_Scholz_Veronica.Model
 {

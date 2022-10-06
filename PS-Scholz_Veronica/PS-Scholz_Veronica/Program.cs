@@ -11,3 +11,9 @@ do
     view = mainMenu.ChooseOpt(mainMenu.InsertOption(-1));
 }
 while (view);
+
+//Console.WriteLine("Hola, mi nombre es juana");
+//Console.ReadKey(true);
+//Console.WriteLine("Vos como te llamas?");
+//string unNombre = Console.ReadLine();
+//Console.WriteLine("Hola " + unNombre + ". Que lindo leerte.");

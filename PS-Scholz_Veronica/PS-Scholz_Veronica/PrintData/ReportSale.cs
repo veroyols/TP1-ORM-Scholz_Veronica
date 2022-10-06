@@ -6,7 +6,7 @@ namespace PS_Scholz_Veronica.PrintData
 {
     public class ReportSale
     {
-        public static void ReportOfDay(Service _service) //TODO
+        public static void ReportOfDay(Service _service)
         {
             List<Orden> listaDelDia = _service.GetOrderToday(); 
             foreach (var orden in listaDelDia)
