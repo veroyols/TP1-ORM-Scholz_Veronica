@@ -10,11 +10,12 @@ namespace Infrastructure.Persistence
         public DbSet<Comanda> ComandaDb { get; set; }
         public DbSet<Mercaderia> MercaderiaDb { get; set; }
         public DbSet<ComandaMercaderia> ComandaMercaderiaDb { get; set; }
-        
+
+
         //CONECTION STRING
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=TP1_VeronicaScholz;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=TP1-ORM-Scholz_Veronica;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         //MODELADO -> FluentApi
@@ -60,7 +61,197 @@ namespace Infrastructure.Persistence
                 entity.HasKey(c => c.MercaderiaId);
                 entity.HasData(new Mercaderia {
                     MercaderiaId = 1, 
-                    Nombre = "Plato1",
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 2,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 3,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 4,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 5,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 6,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 7,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 8,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 9,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 10,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 11,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 12,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 13,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 14,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 15,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 16,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 17,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 18,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 19,
+                    Nombre = "Provoleta",
+                    TipoMercaderiaId = 1,
+                    Precio = 100,
+                    Ingredientes = "ingredientes",
+                    Preparacion = "preparacion",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 20,
+                    Nombre = "Provoleta",
                     TipoMercaderiaId = 1,
                     Precio = 100,
                     Ingredientes = "ingredientes",
