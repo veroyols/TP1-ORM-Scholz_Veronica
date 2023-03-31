@@ -13,6 +13,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
         protected readonly SubMenu_Bebidas _subMenuBebidas;
         protected readonly SubMenu_Cerveza _subMenuCerveza;
         protected readonly SubMenu_Postres _subMenuPostres;
+        protected readonly SubMenu_FormaEntrega _subMenuFormaEntrega;
 
         public SubMenu() {
             _subMenuEntrada = new SubMenu_Entrada();
@@ -25,6 +26,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             _subMenuBebidas = new SubMenu_Bebidas();
             _subMenuCerveza = new SubMenu_Cerveza();
             _subMenuPostres = new SubMenu_Postres();
+            _subMenuFormaEntrega =  new SubMenu_FormaEntrega();
         }
 
         override public void ShowMenu()
@@ -58,6 +60,14 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine("\n                      -------------------");
                     Console.WriteLine("                     |  GUARDAR COMANDA. |");
                     Console.WriteLine("                      -------------------");
+                    bool viewSubMenuFormaEntrega = true;
+                    do
+                    {
+                        _subMenuFormaEntrega.ShowMenu();
+                        viewSubMenuFormaEntrega = _subMenuFormaEntrega.ChooseOpt(_subMenuFormaEntrega.InsertOption(-1));
+                    }
+                    while (viewSubMenuFormaEntrega);
+                    Console.Clear();
                     return false;
                 case 1: //entrada
                     bool viewSubMenuEntrada = true;

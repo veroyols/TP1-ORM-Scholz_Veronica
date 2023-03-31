@@ -39,8 +39,6 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                         viewSubMenu = _subMenu.ChooseOpt(_subMenu.InsertOption(-1));
                     }
                     while (viewSubMenu);
-
-                    Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 case 2:

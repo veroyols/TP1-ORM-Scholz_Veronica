@@ -11,7 +11,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("                     | AGREGAR PARRILLA |");
             Console.WriteLine("                      ----------------");
             Console.WriteLine("             1. Parrillada para uno");
-            Console.WriteLine("             2. Parrillada para uno");
+            Console.WriteLine("             2. Parrillada para dos");
             Console.WriteLine("             3. Provoleta");
             Console.WriteLine("             0. Ninguna");
             Console.WriteLine("            -------------------------------------");
