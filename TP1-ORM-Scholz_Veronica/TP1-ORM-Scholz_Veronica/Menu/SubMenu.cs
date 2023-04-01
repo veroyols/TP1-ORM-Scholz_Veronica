@@ -1,8 +1,12 @@
 ﻿
+using Application;
+
 namespace TP1_ORM_Scholz_Veronica.Menu
 {
     public class SubMenu : MenuTemplate
     {
+        protected readonly Services _services;
+
         protected readonly SubMenu_Entrada _subMenuEntrada;
         protected readonly SubMenu_Minuta _subMenuMinuta;
         protected readonly SubMenu_Pastas _subMenuPastas;
@@ -15,7 +19,9 @@ namespace TP1_ORM_Scholz_Veronica.Menu
         protected readonly SubMenu_Postres _subMenuPostres;
         protected readonly SubMenu_FormaEntrega _subMenuFormaEntrega;
 
-        public SubMenu() {
+        public SubMenu(Services services) {
+            _services = services;
+
             _subMenuEntrada = new SubMenu_Entrada();
             _subMenuMinuta = new SubMenu_Minuta();
             _subMenuPastas = new SubMenu_Pastas();
@@ -31,19 +37,14 @@ namespace TP1_ORM_Scholz_Veronica.Menu
 
         override public void ShowMenu()
         {
+            Console.WriteLine("Consulta al _services.GetAllTiposMercaderia();");
             Console.WriteLine("                      ---------------------");
             Console.WriteLine("                     |  REGISTRAR COMANDA  |");
             Console.WriteLine("                      ---------------------");
-            Console.WriteLine("             1. Agregar Entrada");
-            Console.WriteLine("             2. Agregar Minutas");
-            Console.WriteLine("             3. Agregar Pastas");
-            Console.WriteLine("             4. Agregar Parrilla");
-            Console.WriteLine("             5. Agregar Pizzas");
-            Console.WriteLine("             6. Agregar Sandwich");
-            Console.WriteLine("             7. Agregar Ensalada");
-            Console.WriteLine("             8. Agregar Bebidas");
-            Console.WriteLine("             9. Agregar Cerveza Artesanal");
-            Console.WriteLine("             10. Agregar Postres");
+            foreach (var item in _services.GetAllTiposMercaderia())
+            {
+                Console.WriteLine("             {0}. {1}", item.TipoMercaderiaId, item.Descripcion);
+            }
             Console.WriteLine("\n                      ---------------------");
             Console.WriteLine("                     | 0. GUARDAR COMANDA. |");
             Console.WriteLine("                      ---------------------");
