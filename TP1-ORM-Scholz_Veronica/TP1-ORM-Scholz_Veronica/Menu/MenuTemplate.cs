@@ -1,16 +1,9 @@
-﻿
-
-namespace TP1_ORM_Scholz_Veronica.Menu
+﻿namespace TP1_ORM_Scholz_Veronica.Menu
 {
     abstract public class MenuTemplate
     {
-        //protected readonly Service _service;
-
-        //protected MenuTemplate(Service service) { _service = service; }
-
         abstract public void ShowMenu();
         abstract public bool ChooseOpt(int opt);
-
         public int InsertOption(int op)
         {
             try

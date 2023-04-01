@@ -1,4 +1,4 @@
-﻿using TP1_ORM_Scholz_Veronica.Create;
+﻿using TP1_ORM_Scholz_Veronica.Create; //crea servicios en la capa superior
 using TP1_ORM_Scholz_Veronica.Menu;
 
 Console.WriteLine("Hello, World!");

@@ -5,10 +5,10 @@ namespace TP1_ORM_Scholz_Veronica.Menu
     public class MainMenu : MenuTemplate
     {
         protected readonly AllServices _services;
-        protected readonly SubMenu _subMenu;
+        protected readonly SubMenuTipo _subMenuTipo;
 
         public MainMenu(AllServices services) {
-            _subMenu = new SubMenu(services);
+            _subMenuTipo = new SubMenuTipo(services);
             _services = services;
         } 
 
@@ -35,14 +35,14 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine("              | GRACIAS POR UTILIZAR ESTE SERVICIO. |");
                     Console.WriteLine("               -------------------------------------");
                     return false;
-                case 1:
-                    bool viewSubMenu = true;
+                case 1: //lista de tipos de mercaderia
+                    bool viewSubMenuTipo = true;
                     do
                     {
-                        _subMenu.ShowMenu();
-                        viewSubMenu = _subMenu.ChooseOpt(_subMenu.InsertOption(-1));
+                        _subMenuTipo.ShowMenu();
+                        viewSubMenuTipo = _subMenuTipo.ChooseOpt(_subMenuTipo.InsertOption(-1));
                     }
-                    while (viewSubMenu);
+                    while (viewSubMenuTipo);
                     Console.Clear();
                     return true;
                 case 2:
@@ -57,8 +57,8 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.Clear();
                     Console.WriteLine("       ----------------------------------------------------");
                     Console.WriteLine("       Ha ingresado un numero incorrecto. " +
-                        "\n       Revise el menu e ingrese un valor entre 1 y 2:" +
-                        "\n       ----------------------------------------------------");
+                                    "\n       Revise el menu e ingrese un valor entre 1 y 2:" +
+                                    "\n       ----------------------------------------------------");
                     return true;
             }
         }

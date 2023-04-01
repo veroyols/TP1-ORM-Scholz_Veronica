@@ -33,6 +33,11 @@ namespace TP1_ORM_Scholz_Veronica.Create
             var list = _serviceMercaderia.GetAllMercaderias();
             return list;
         }
+        public List<Mercaderia> GetMercaderiasPorTipo(int tipoMercaderiaId)
+        {
+            var list = _serviceMercaderia.GetMercaderiasPorTipo(tipoMercaderiaId);
+            return list;
+        }
 
     }
 }

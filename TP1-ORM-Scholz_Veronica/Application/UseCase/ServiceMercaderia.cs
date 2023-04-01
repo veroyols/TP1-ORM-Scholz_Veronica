@@ -17,5 +17,11 @@ namespace Application.UseCase
             var list = _query.GetListMercaderia();
             return list;
         }
+
+        public List<Mercaderia> GetMercaderiasPorTipo(int tipoMercaderiaId)
+        {
+            var list = _query.GetListMercaderiaPorTipo(tipoMercaderiaId);
+            return list;
+        }
     }
 }
