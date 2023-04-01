@@ -1,13 +1,13 @@
-﻿
-using Application;
+﻿using TP1_ORM_Scholz_Veronica.Create;
 
 namespace TP1_ORM_Scholz_Veronica.Menu
 {
     public class MainMenu : MenuTemplate
     {
-        protected readonly Services _services;
+        protected readonly AllServices _services;
         protected readonly SubMenu _subMenu;
-        public MainMenu(Services services) {
+
+        public MainMenu(AllServices services) {
             _subMenu = new SubMenu(services);
             _services = services;
         } 

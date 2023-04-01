@@ -6,16 +6,16 @@ namespace Infrastructure.cqrs_Query
 {
     public class QueryTipoMercaderia : IQueryTipoMercaderia
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _appDbContext;
 
-        public QueryTipoMercaderia()
+        public QueryTipoMercaderia(AppDbContext appDbContext)
         {
-            _context = new AppDbContext();
+            _appDbContext = appDbContext;
         }
 
         public List<TipoMercaderia> GetListTiposMercaderia()
         {
-            var list = _context.TipoMercaderiaDb.ToList<TipoMercaderia>();
+            var list = _appDbContext.TipoMercaderiaDb.ToList<TipoMercaderia>();
             return list;
         }
     }

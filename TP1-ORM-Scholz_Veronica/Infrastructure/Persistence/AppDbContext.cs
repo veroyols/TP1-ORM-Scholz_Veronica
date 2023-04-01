@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<TipoMercaderia> TipoMercaderiaDb { get; set; }
         public DbSet<FormaEntrega> FormaEntregaDb { get; set; }
         public DbSet<Comanda> ComandaDb { get; set; }
         public DbSet<Mercaderia> MercaderiaDb { get; set; }
         public DbSet<ComandaMercaderia> ComandaMercaderiaDb { get; set; }
-
 
         //CONECTION STRING
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
