@@ -32,8 +32,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
         {
             if (idMercaderia-platosPorTipo < idMercaderiaSeleccionada && idMercaderiaSeleccionada <= idMercaderia)
             {
-                //AGREGAR idMercaderiaSeleccionada a una lista de mercaderias seleccionadas
-                Console.WriteLine("Entra en el if: plato = {0}", idMercaderiaSeleccionada);
+                //AGREGAR idMercaderiaSeleccionada a una lista con cantidad
                 _services.PrecargaMercaderia(idMercaderiaSeleccionada);
                 Console.ReadKey(true);
                 Console.Clear();

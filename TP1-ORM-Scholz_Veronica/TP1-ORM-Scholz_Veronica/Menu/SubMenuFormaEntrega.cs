@@ -1,10 +1,12 @@
-﻿using TP1_ORM_Scholz_Veronica.Create;
+﻿using Domain.Entities;
+using TP1_ORM_Scholz_Veronica.Create;
 
 namespace TP1_ORM_Scholz_Veronica.Menu
 {
     public class SubMenuFormaEntrega : MenuTemplate
     {
         protected readonly AllServices _services;
+        public int formaEntrega;
 
         public SubMenuFormaEntrega(AllServices services)
         {
@@ -30,9 +32,9 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                 case -1:
                     return true;
                 case 0:
-                    Console.WriteLine("                    -------------------");
-                    Console.WriteLine("                   | SALIR SIN GUARDAR |");
-                    Console.WriteLine("                    -------------------");
+                    Console.WriteLine("                     -----------------");
+                    Console.WriteLine("                    | CANCELAR PEDIDO |");
+                    Console.WriteLine("                     -----------------");
                     _services.LimpiarPrecargaMercaderia();
                     Console.ReadKey(true);
                     Console.Clear();
@@ -41,6 +43,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine("                ---------------------------");
                     Console.WriteLine("               | 1. ENVIAR PEDIDO AL SALON |");
                     Console.WriteLine("                ---------------------------");
+                    formaEntrega = 1;
                     Console.ReadKey(true);
                     Console.Clear();
                     return false;
@@ -48,6 +51,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine("              -------------------------------");
                     Console.WriteLine("             | 2. ENVIAR PEDIDO CON DELIVERY |");
                     Console.WriteLine("              -------------------------------");
+                    formaEntrega = 2;
                     Console.ReadKey(true);
                     Console.Clear();
                     return false;
@@ -55,6 +59,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine("                  ----------------------");
                     Console.WriteLine("                 | 3. RETIRA PEDIDOS YA |");
                     Console.WriteLine("                  ----------------------");
+                    formaEntrega = 3;
                     Console.ReadKey(true);
                     Console.Clear();
                     return false;

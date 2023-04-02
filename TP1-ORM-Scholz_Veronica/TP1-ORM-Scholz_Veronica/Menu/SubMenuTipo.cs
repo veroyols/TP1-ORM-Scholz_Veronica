@@ -22,7 +22,6 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("                     |  REGISTRAR COMANDA  |");
             Console.WriteLine("                      ---------------------");
 
-            //refactorizar en AllServicios
             cdadDeTipos = _services.GetCantidadDeTipos(op);
             //lista de TipoMercaderia
             foreach (var item in _services.GetAllTiposMercaderia())
@@ -65,6 +64,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                             viewSubMenuFormaEntrega = _subMenuFormaEntrega.ChooseOpt(_subMenuFormaEntrega.InsertOption(-1));
                         }
                         while (viewSubMenuFormaEntrega);
+                        _services.GuardarPedido(_subMenuFormaEntrega.formaEntrega);
                         Console.Clear();
                         return false;
                     default:
