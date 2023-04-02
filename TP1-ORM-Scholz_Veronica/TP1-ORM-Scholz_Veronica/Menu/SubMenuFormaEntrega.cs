@@ -1,5 +1,4 @@
-﻿
-using TP1_ORM_Scholz_Veronica.Create;
+﻿using TP1_ORM_Scholz_Veronica.Create;
 
 namespace TP1_ORM_Scholz_Veronica.Menu
 {

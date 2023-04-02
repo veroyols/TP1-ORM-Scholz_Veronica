@@ -3,8 +3,6 @@ using Application.UseCase;
 using Domain.Entities;
 using Infrastructure.cqrs_Query;
 using Infrastructure.Persistence;
-using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace TP1_ORM_Scholz_Veronica.Create
 {
@@ -74,6 +72,5 @@ namespace TP1_ORM_Scholz_Veronica.Create
         {
             mercaderiaSeleccionada.Clear();
         }
-
     }
 }
