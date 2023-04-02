@@ -13,6 +13,14 @@ namespace Infrastructure.cqrs_Query
             _appDbContext = context;
         }
 
+        public int GetCdadPorTipo(int tipoMercaderiaId)
+        {
+            int cdad = _appDbContext.MercaderiaDb
+                .Where(el => el.TipoMercaderiaId == tipoMercaderiaId)
+                .Count();
+            return cdad;
+        }
+
         public List<Mercaderia> GetListMercaderia()
         {
             var list = _appDbContext.MercaderiaDb.ToList<Mercaderia>();

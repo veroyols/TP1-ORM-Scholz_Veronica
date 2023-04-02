@@ -1,11 +1,11 @@
 ﻿
 namespace TP1_ORM_Scholz_Veronica.Menu
 {
-    public class SubMenu_FormaEntrega : MenuTemplate
+    public class SubMenuFormaEntrega : MenuTemplate
     {
-        public SubMenu_FormaEntrega() { }
+        public SubMenuFormaEntrega() { }
 
-        override public void ShowMenu()
+        public void ShowMenu() //logica de bd
         {
             Console.WriteLine("                -----------------------------");
             Console.WriteLine("               | SELECCIONE FORMA DE ENTREGA |");

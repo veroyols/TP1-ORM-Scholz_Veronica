@@ -2,7 +2,6 @@
 {
     abstract public class MenuTemplate
     {
-        abstract public void ShowMenu();
         abstract public bool ChooseOpt(int opt);
         public int InsertOption(int op)
         {

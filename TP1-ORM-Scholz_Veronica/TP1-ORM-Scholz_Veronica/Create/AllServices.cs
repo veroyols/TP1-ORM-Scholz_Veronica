@@ -3,6 +3,7 @@ using Application.UseCase;
 using Domain.Entities;
 using Infrastructure.cqrs_Query;
 using Infrastructure.Persistence;
+using System.Collections.Generic;
 
 namespace TP1_ORM_Scholz_Veronica.Create
 {
@@ -38,6 +39,15 @@ namespace TP1_ORM_Scholz_Veronica.Create
             var list = _serviceMercaderia.GetMercaderiasPorTipo(tipoMercaderiaId);
             return list;
         }
-
+        public int GetCantidadMercaderiasPorTipo(int tipoMercaderiaId)
+        {
+            int cdad = _serviceMercaderia.GetCdadMercaderiasPorTipo(tipoMercaderiaId);
+            return cdad;
+        }
+        public int GetCantidadDeTipos(int tipoMercaderiaId)
+        {
+            int cdad = _serviceTipoMercaderia.GetCantidadDeTipos(tipoMercaderiaId);
+            return cdad;
+        }
     }
 }

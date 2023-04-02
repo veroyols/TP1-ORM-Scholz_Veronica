@@ -6,5 +6,6 @@ namespace Application.Interfaces
     {
         public List<Mercaderia> GetListMercaderia();
         public List<Mercaderia> GetListMercaderiaPorTipo(int tipoMercaderiaId);
+        public int GetCdadPorTipo(int tipoMercaderiaId);
     }
 }

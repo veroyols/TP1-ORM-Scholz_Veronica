@@ -16,5 +16,11 @@ namespace Application.UseCase
             var list = _query.GetListTiposMercaderia();
             return list;
         }
+
+        public int GetCantidadDeTipos(int tipoMercaderiaId)
+        {
+            int cdad = _query.GetCantidad(tipoMercaderiaId);
+            return cdad;
+        }
     }
 }

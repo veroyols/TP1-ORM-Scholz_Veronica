@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence
         //CONECTION STRING
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=TP1-ORM-Scholz_Veronica;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=master;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         //MODELADO -> FluentApi
@@ -56,208 +56,338 @@ namespace Infrastructure.Persistence
             //MERCADERIA
             modelBuilder.Entity<Mercaderia>(entity =>
             {
-                entity.ToTable("Mercaderia");
-                entity.HasKey(c => c.MercaderiaId);
-                entity.HasData(new Mercaderia {
-                    MercaderiaId = 1, 
-                    Nombre = "Provoleta",
+            entity.ToTable("Mercaderia");
+            entity.HasKey(c => c.MercaderiaId);
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 1,
+                    Nombre = "Berenjenas en Escabeche",
                     TipoMercaderiaId = 1,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Berenjenas en Escabeche (ingredientes)",
+                    Preparacion = "Berenjenas en Escabeche (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 2,
-                    Nombre = "Provoleta",
+                    Nombre = "Porotos en Escabeche",
                     TipoMercaderiaId = 1,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Porotos en Escabeche (ingredientes)",
+                    Preparacion = "Porotos en Escabeche (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 3,
-                    Nombre = "Provoleta",
+                    Nombre = "Humus de Garbanzo",
                     TipoMercaderiaId = 1,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Humus de Garbanzo (ingredientes)",
+                    Preparacion = "Humus de Garbanzo (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 4,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Milanesa Napolitana",
+                    TipoMercaderiaId = 2,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Milanesa Napolitana (ingredientes)",
+                    Preparacion = "Milanesa Napolitana (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 5,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Papas Fritas",
+                    TipoMercaderiaId = 2,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Papas Fritas (ingredientes)",
+                    Preparacion = "Papas Fritas (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 6,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Empanada",
+                    TipoMercaderiaId = 2,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Empanada (ingredientes)",
+                    Preparacion = "Empanada (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 7,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Omelette",
+                    TipoMercaderiaId = 2,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Omelette (ingredientes)",
+                    Preparacion = "Omelette (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 8,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Tarta",
+                    TipoMercaderiaId = 2,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Tarta (ingredientes)",
+                    Preparacion = "Tarta (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 9,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Fideos con salsa cuatro quesos",
+                    TipoMercaderiaId = 3,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Fideos con salsa cuatro quesos (ingredientes)",
+                    Preparacion = "Fideos con salsa cuatro quesos (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 10,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Noquis con Salsa Bolognesa",
+                    TipoMercaderiaId = 3,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Noquis con Salsa Bolognesa (ingredientes)",
+                    Preparacion = "Noquis con Salsa Bolognesa (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 11,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Sorrentinos con Salsa Filetto",
+                    TipoMercaderiaId = 3,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Sorrentinos con Salsa Filetto (ingredientes)",
+                    Preparacion = "Sorrentinos con Salsa Filetto (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 12,
                     Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    TipoMercaderiaId = 4,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Provoleta (ingredientes)",
+                    Preparacion = "Provoleta (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 13,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Parrillada para 1",
+                    TipoMercaderiaId = 4,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Parrillada para 1 (ingredientes)",
+                    Preparacion = "Parrillada para 1 (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 14,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Parrillada para 2",
+                    TipoMercaderiaId = 4,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Parrillada para 2 (ingredientes)",
+                    Preparacion = "Parrillada para 2 (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 15,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Muzzarella",
+                    TipoMercaderiaId = 5,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Muzzarella (ingredientes)",
+                    Preparacion = "Muzzarella (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 16,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Napolitana",
+                    TipoMercaderiaId = 5,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Napolitana (ingredientes)",
+                    Preparacion = "Napolitana (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 17,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Roquefort",
+                    TipoMercaderiaId = 5,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Roquefort (ingredientes)",
+                    Preparacion = "Roquefort (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 18,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Fugazetta Rellena",
+                    TipoMercaderiaId = 5,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Fugazetta Rellena (ingredientes)",
+                    Preparacion = "Fugazetta Rellena (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 19,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Hamburguesa",
+                    TipoMercaderiaId = 6,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Hamburguesa (ingredientes)",
+                    Preparacion = "Hamburguesa (preparacion)",
                     Imagen = "url"
                 });
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 20,
-                    Nombre = "Provoleta",
-                    TipoMercaderiaId = 1,
+                    Nombre = "Pollo Cesar",
+                    TipoMercaderiaId = 6,
                     Precio = 100,
-                    Ingredientes = "ingredientes",
-                    Preparacion = "preparacion",
+                    Ingredientes = "Pollo Cesar (ingredientes)",
+                    Preparacion = "Pollo Cesar (preparacion)",
                     Imagen = "url"
                 });
-
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 21,
+                    Nombre = "Lechuga y Cebolla",
+                    TipoMercaderiaId = 7,
+                    Precio = 100,
+                    Ingredientes = "Lechuga y Cebolla (ingredientes)",
+                    Preparacion = "Lechuga y Cebolla (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 22,
+                    Nombre = "Agua",
+                    TipoMercaderiaId = 8,
+                    Precio = 100,
+                    Ingredientes = "Agua (ingredientes)",
+                    Preparacion = "Agua (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 23,
+                    Nombre = "Agua con Gas",
+                    TipoMercaderiaId = 8,
+                    Precio = 100,
+                    Ingredientes = "Agua con Gas (ingredientes)",
+                    Preparacion = "Agua con Gas (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 24,
+                    Nombre = "CocaCola",
+                    TipoMercaderiaId = 8,
+                    Precio = 100,
+                    Ingredientes = "CocaCola (ingredientes)",
+                    Preparacion = "CocaCola (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 25,
+                    Nombre = "Agua Tonica",
+                    TipoMercaderiaId = 8,
+                    Precio = 100,
+                    Ingredientes = "Agua Tonica (ingredientes)",
+                    Preparacion = "Agua Tonica (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 26,
+                    Nombre = "Vino",
+                    TipoMercaderiaId = 8,
+                    Precio = 100,
+                    Ingredientes = "Vino (ingredientes)",
+                    Preparacion = "Vino (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 27,
+                    Nombre = "Blonde",
+                    TipoMercaderiaId = 9,
+                    Precio = 100,
+                    Ingredientes = "Blonde (ingredientes)",
+                    Preparacion = "Blonde (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 28,
+                    Nombre = "Honey",
+                    TipoMercaderiaId = 9,
+                    Precio = 100,
+                    Ingredientes = "Honey (ingredientes)",
+                    Preparacion = "Honey (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 29,
+                    Nombre = "IPA",
+                    TipoMercaderiaId = 9,
+                    Precio = 100,
+                    Ingredientes = "IPA (ingredientes)",
+                    Preparacion = "IPA (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 30,
+                    Nombre = "Budin de Pan",
+                    TipoMercaderiaId = 10,
+                    Precio = 100,
+                    Ingredientes = "Budin de Pan (ingredientes)",
+                    Preparacion = "Budin de Pan (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 31,
+                    Nombre = "Copa Helada",
+                    TipoMercaderiaId = 10,
+                    Precio = 100,
+                    Ingredientes = "Copa Helada (ingredientes)",
+                    Preparacion = "Copa Helada (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 32,
+                    Nombre = "Panqueques con Dulce de Leche",
+                    TipoMercaderiaId = 10,
+                    Precio = 100,
+                    Ingredientes = "Panqueques con Dulce de Leche (ingredientes)",
+                    Preparacion = "Panqueques con Dulce de Leche (preparacion)",
+                    Imagen = "url"
+                });
+                entity.HasData(new Mercaderia
+                {
+                    MercaderiaId = 33,
+                    Nombre = "Frutilla con Crema",
+                    TipoMercaderiaId = 10,
+                    Precio = 100,
+                    Ingredientes = "Frutilla con Crema (ingredientes)",
+                    Preparacion = "Frutilla con Crema (preparacion)",
+                    Imagen = "url"
+                });
                 //RELACION
                 entity
                     .HasOne<TipoMercaderia>(mercaderia => mercaderia.TipoMercaderia)

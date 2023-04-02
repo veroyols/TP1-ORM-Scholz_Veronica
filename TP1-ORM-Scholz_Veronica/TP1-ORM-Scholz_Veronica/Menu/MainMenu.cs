@@ -12,7 +12,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             _services = services;
         } 
 
-        override public void ShowMenu()
+        public void ShowMenu()
         {
             Console.WriteLine("                      ------------------");
             Console.WriteLine("                     | MENU DE OPCIONES |");
@@ -39,7 +39,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     bool viewSubMenuTipo = true;
                     do
                     {
-                        _subMenuTipo.ShowMenu();
+                        _subMenuTipo.ShowMenu(1);
                         viewSubMenuTipo = _subMenuTipo.ChooseOpt(_subMenuTipo.InsertOption(-1));
                     }
                     while (viewSubMenuTipo);
