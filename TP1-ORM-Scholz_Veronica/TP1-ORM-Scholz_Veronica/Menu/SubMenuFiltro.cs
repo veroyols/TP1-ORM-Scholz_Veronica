@@ -6,6 +6,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
     {
         protected readonly AllServices _services;
         protected int platosPorTipo;
+        protected int idMercaderia;
 
         public SubMenuFiltro(AllServices services) {
             _services = services;
@@ -19,28 +20,28 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("                      --------------------");
             platosPorTipo = _services.GetCantidadMercaderiasPorTipo(op);
             //lista de Mercaderia por TipoMercaderia
-            int i = 1;
             foreach (var item in _services.GetMercaderiasPorTipo(op))
             {
-                Console.WriteLine("             {0}. {1} (${2})", i, item.Nombre, item.Precio);
-                i++;
+                Console.WriteLine("             {0}. {1} (${2})", item.MercaderiaId, item.Nombre, item.Precio);
+                idMercaderia = item.MercaderiaId;
             }
             Console.WriteLine("             0. Volver");
             Console.Write("\n               Ingrese un numero: ");
         }
-        override public bool ChooseOpt(int opt)
+        override public bool ChooseOpt(int idMercaderiaSeleccionada)
         {
-            if (0 < opt && opt < platosPorTipo)
+            if (idMercaderia-platosPorTipo < idMercaderiaSeleccionada && idMercaderiaSeleccionada <= idMercaderia)
             {
-                //AGREGAR opt a una lista de mercaderias seleccionadas
-                Console.WriteLine("Entra en el if: opt = {0}", opt);
+                //AGREGAR idMercaderiaSeleccionada a una lista de mercaderias seleccionadas
+                Console.WriteLine("Entra en el if: plato = {0}", idMercaderiaSeleccionada);
+                _services.PrecargaMercaderia(idMercaderiaSeleccionada);
                 Console.ReadKey(true);
                 Console.Clear();
                 return true;
             }
             else
             {
-                switch (opt)
+                switch (idMercaderiaSeleccionada)
                 {
                     case -1:
                         return true;

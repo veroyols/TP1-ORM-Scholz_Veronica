@@ -12,7 +12,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
         public SubMenuTipo(AllServices services) {
             _services = services;
             _subMenuFiltro = new SubMenuFiltro(services);
-            _subMenuFormaEntrega = new SubMenuFormaEntrega();
+            _subMenuFormaEntrega = new SubMenuFormaEntrega(services);
             cdadDeTipos = 0;
         }
 

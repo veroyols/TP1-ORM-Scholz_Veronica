@@ -1,9 +1,16 @@
 ﻿
+using TP1_ORM_Scholz_Veronica.Create;
+
 namespace TP1_ORM_Scholz_Veronica.Menu
 {
     public class SubMenuFormaEntrega : MenuTemplate
     {
-        public SubMenuFormaEntrega() { }
+        protected readonly AllServices _services;
+
+        public SubMenuFormaEntrega(AllServices services)
+        {
+            _services = services;
+        }
 
         public void ShowMenu() //logica de bd
         {
@@ -27,6 +34,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine("                    -------------------");
                     Console.WriteLine("                   | SALIR SIN GUARDAR |");
                     Console.WriteLine("                    -------------------");
+                    _services.LimpiarPrecargaMercaderia();
                     Console.ReadKey(true);
                     Console.Clear();
                     return false;

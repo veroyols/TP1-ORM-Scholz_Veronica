@@ -4,6 +4,7 @@ using Domain.Entities;
 using Infrastructure.cqrs_Query;
 using Infrastructure.Persistence;
 using System.Collections.Generic;
+using System.Text.Json.Nodes;
 
 namespace TP1_ORM_Scholz_Veronica.Create
 {
@@ -17,12 +18,15 @@ namespace TP1_ORM_Scholz_Veronica.Create
         private readonly IServiceMercaderia _serviceMercaderia;
         private readonly IServiceTipoMercaderia _serviceTipoMercaderia;
 
+        private Dictionary<int,int> mercaderiaSeleccionada;
+
         public AllServices() {
             _queryMercaderia = new QueryMercaderia(_context);
             _queryTipoMercaderia = new QueryTipoMercaderia(_context);
 
             _serviceMercaderia = new ServiceMercaderia(_queryMercaderia);
             _serviceTipoMercaderia = new ServiceTipoMercaderia(_queryTipoMercaderia);
+            mercaderiaSeleccionada = new Dictionary<int, int>();
         }
         public List<TipoMercaderia> GetAllTiposMercaderia()
         {
@@ -49,5 +53,27 @@ namespace TP1_ORM_Scholz_Veronica.Create
             int cdad = _serviceTipoMercaderia.GetCantidadDeTipos(tipoMercaderiaId);
             return cdad;
         }
+
+        internal void PrecargaMercaderia(int idMercaderiaSeleccionada)
+        {
+            if (mercaderiaSeleccionada.ContainsKey(idMercaderiaSeleccionada))
+            {
+                int cdad = mercaderiaSeleccionada[idMercaderiaSeleccionada];
+                mercaderiaSeleccionada[idMercaderiaSeleccionada] = cdad+1;
+            }
+            else
+            {
+                mercaderiaSeleccionada.Add(idMercaderiaSeleccionada, 1);
+            }
+            foreach (var item in mercaderiaSeleccionada)
+            {
+                Console.WriteLine("Clave (MercaderiaId): {0} - Valor (Cantidad) {1} ", item.Key, item.Value);
+            }
+        }
+        internal void LimpiarPrecargaMercaderia()
+        {
+            mercaderiaSeleccionada.Clear();
+        }
+
     }
 }
