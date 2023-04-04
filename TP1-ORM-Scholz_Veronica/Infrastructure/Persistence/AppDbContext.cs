@@ -24,7 +24,8 @@ namespace Infrastructure.Persistence
             modelBuilder.Entity<TipoMercaderia>(entity =>
             {
                 entity.ToTable("TipoMercaderia");
-                entity.HasKey(c => c.TipoMercaderiaId);
+                entity.HasKey(tm => tm.TipoMercaderiaId);
+                entity.Property(tm => tm.Descripcion).HasColumnType("nvarchar(50)");
                 entity.HasData(new TipoMercaderia { TipoMercaderiaId = 1, Descripcion = "Entrada" });
                 entity.HasData(new TipoMercaderia { TipoMercaderiaId = 2, Descripcion = "Minutas" });
                 entity.HasData(new TipoMercaderia { TipoMercaderiaId = 3, Descripcion = "Pastas" });
@@ -36,7 +37,7 @@ namespace Infrastructure.Persistence
                 entity.HasData(new TipoMercaderia { TipoMercaderiaId = 9, Descripcion = "Cerveza Artesanal" });
                 entity.HasData(new TipoMercaderia { TipoMercaderiaId = 10, Descripcion = "Postres" });
 
-                //RELACION: 0 a muchos con Mercaderia
+                //RELACION: 0 o muchos con Mercaderia
 
             });
 
@@ -44,12 +45,13 @@ namespace Infrastructure.Persistence
             modelBuilder.Entity<FormaEntrega>(entity =>
             {
                 entity.ToTable("FormaEntrega");
-                entity.HasKey(c => c.FormaEntregaId);
+                entity.HasKey(fe => fe.FormaEntregaId);
+                entity.Property(fe => fe.Descripcion).HasColumnType("nvarchar(50)");
                 entity.HasData(new FormaEntrega { FormaEntregaId = 1, Descripcion = "Salon" });
                 entity.HasData(new FormaEntrega { FormaEntregaId = 2, Descripcion = "Delivery" });
                 entity.HasData(new FormaEntrega { FormaEntregaId = 3, Descripcion = "Pedidos Ya" });
 
-                //RELACION: 0 a muchos con Comanda
+                //RELACION: 0 o muchos con Comanda
 
             });
 
@@ -57,7 +59,12 @@ namespace Infrastructure.Persistence
             modelBuilder.Entity<Mercaderia>(entity =>
             {
             entity.ToTable("Mercaderia");
-            entity.HasKey(c => c.MercaderiaId);
+            entity.HasKey(m => m.MercaderiaId);
+            entity.Property(m => m.Nombre).HasColumnType("nvarchar(50)");
+            entity.Property(m => m.Ingredientes).HasColumnType("nvarchar(255)");
+            entity.Property(m => m.Preparacion).HasColumnType("nvarchar(255)");
+            entity.Property(m => m.Imagen).HasColumnType("nvarchar(255)");
+
                 entity.HasData(new Mercaderia
                 {
                     MercaderiaId = 1,
@@ -400,6 +407,7 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("Comanda");
                 entity.HasKey(c => c.ComandaId);
+                entity.Property(c => c.Fecha).HasColumnType("date");
 
                 //RELACION
                 entity
