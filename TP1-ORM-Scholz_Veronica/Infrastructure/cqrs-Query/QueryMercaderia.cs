@@ -13,25 +13,25 @@ namespace Infrastructure.cqrs_Query
             _appDbContext = context;
         }
 
-        public int GetCdadPorTipo(int tipoMercaderiaId)
+        public async Task<int> GetCdadPorTipo(int tipoMercaderiaId)
         {
-            int cdad = _appDbContext.MercaderiaDb
+            int cdad = await Task.Run(() => _appDbContext.MercaderiaDb
                 .Where(el => el.TipoMercaderiaId == tipoMercaderiaId)
-                .Count();
+                .Count());
             return cdad;
         }
 
-        public List<Mercaderia> GetListMercaderia()
+        public async Task<List<Mercaderia>> GetListMercaderia()
         {
-            var list = _appDbContext.MercaderiaDb.ToList<Mercaderia>();
+            var list = await Task.Run(() => _appDbContext.MercaderiaDb.ToList<Mercaderia>());
             return list;
         }
 
-        public List<Mercaderia> GetListMercaderiaPorTipo(int tipoMercaderiaId)
+        public async Task<List<Mercaderia>> GetListMercaderiaPorTipo(int tipoMercaderiaId)
         {
-            var list = _appDbContext.MercaderiaDb
+            var list = await Task.Run(() => _appDbContext.MercaderiaDb
                 .Where(el => el.TipoMercaderiaId == tipoMercaderiaId)
-                .ToList<Mercaderia>();
+                .ToList<Mercaderia>());
             return list;
         }
     }

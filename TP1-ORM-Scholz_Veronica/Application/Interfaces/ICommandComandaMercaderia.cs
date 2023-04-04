@@ -1,9 +1,9 @@
-﻿using Application.Models;
+﻿using Domain.Entities;
 
 namespace Application.Interfaces
 {
     public interface ICommandComandaMercaderia
     {
-        public Task InsertarComandaMercaderia(ComandaDto comandaDto);
+        public Task InsertarComandaMercaderia(ComandaMercaderia comandaMercaderia);
     }
 }

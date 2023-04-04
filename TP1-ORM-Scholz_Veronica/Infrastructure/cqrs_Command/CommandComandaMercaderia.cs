@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using Application.Models;
+using Domain.Entities;
 using Infrastructure.Persistence;
 
 namespace Infrastructure.cqrs_Command
@@ -12,9 +12,9 @@ namespace Infrastructure.cqrs_Command
         {
             _appDbContext = appDbContext;
         }
-        public async Task InsertarComandaMercaderia(ComandaDto comandaDto)
+        public async Task InsertarComandaMercaderia(ComandaMercaderia comandaMercaderia)
         {
-            _appDbContext.Add(comandaDto);
+            _appDbContext.Add(comandaMercaderia);
             await _appDbContext.SaveChangesAsync();
         }
     }

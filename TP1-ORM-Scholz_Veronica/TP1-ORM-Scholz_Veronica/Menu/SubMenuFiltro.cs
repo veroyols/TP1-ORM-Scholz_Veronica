@@ -19,9 +19,9 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("                      --------------------");
             Console.WriteLine("                     | Agregar Mercaderia |");
             Console.WriteLine("                      --------------------");
-            platosPorTipo = _services.GetCantidadMercaderiasPorTipo(op);
+            platosPorTipo = _services.GetCantidadMercaderiasPorTipo(op).Result;
             //lista de Mercaderia por TipoMercaderia
-            foreach (var item in _services.GetMercaderiasPorTipo(op))
+            foreach (var item in _services.GetMercaderiasPorTipo(op).Result)
             {
                 Console.WriteLine("             {0}. {1} (${2})", item.MercaderiaId, item.Nombre, item.Precio);
                 idMercaderia = item.MercaderiaId;
@@ -30,12 +30,12 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("             0. Volver");
             Console.Write("\n               Ingrese un numero: ");
         }
-        public bool ChooseOpt(int idMercaderiaSeleccionada, int price)
+        public override bool ChooseOpt(int idMercaderiaSeleccionada)
         {
             if (idMercaderia-platosPorTipo < idMercaderiaSeleccionada && idMercaderiaSeleccionada <= idMercaderia)
             {
                 //AGREGAR idMercaderiaSeleccionada a una lista con cantidad
-                _services.PrecargaMercaderia(idMercaderiaSeleccionada, price);
+                _services.PrecargaMercaderia(idMercaderiaSeleccionada, priceMercaderia);
                 Console.ReadKey(true);
                 Console.Clear();
                 return true;

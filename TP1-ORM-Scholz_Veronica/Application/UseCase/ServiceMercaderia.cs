@@ -12,21 +12,21 @@ namespace Application.UseCase
         {
             _query = query;
         }
-        public List<Mercaderia> GetAllMercaderias()
+        public async Task<List<Mercaderia>> GetAllMercaderias()
         {
-            var list = _query.GetListMercaderia();
+            var list = await _query.GetListMercaderia();
             return list;
         }
 
-        public int GetCdadMercaderiasPorTipo(int tipoMercaderiaId)
+        public async Task<int> GetCdadMercaderiasPorTipo(int tipoMercaderiaId)
         {
-            int cdad = _query.GetCdadPorTipo(tipoMercaderiaId);
+            int cdad = await _query.GetCdadPorTipo(tipoMercaderiaId);
             return cdad;
         }
 
-        public List<Mercaderia> GetMercaderiasPorTipo(int tipoMercaderiaId)
+        public async Task<List<Mercaderia>> GetMercaderiasPorTipo(int tipoMercaderiaId)
         {
-            var list = _query.GetListMercaderiaPorTipo(tipoMercaderiaId);
+            var list = await _query.GetListMercaderiaPorTipo(tipoMercaderiaId);
             return list;
         }
     }

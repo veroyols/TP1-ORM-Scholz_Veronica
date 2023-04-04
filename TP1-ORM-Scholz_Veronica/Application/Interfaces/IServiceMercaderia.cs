@@ -4,9 +4,9 @@ namespace Application.Interfaces
 {
     public interface IServiceMercaderia
     {
-        public List<Mercaderia> GetAllMercaderias();
-        public List<Mercaderia> GetMercaderiasPorTipo(int tipoMercaderiaId);
-        public int GetCdadMercaderiasPorTipo(int tipoMercaderiaId);
-        
+        public Task<List<Mercaderia>> GetAllMercaderias();
+        public Task<List<Mercaderia>> GetMercaderiasPorTipo(int tipoMercaderiaId);
+        public Task<int> GetCdadMercaderiasPorTipo(int tipoMercaderiaId);
+       
     }
 }

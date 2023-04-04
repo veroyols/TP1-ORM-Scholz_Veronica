@@ -1,8 +1,8 @@
-﻿using TP1_ORM_Scholz_Veronica.Create; //crea servicios en la capa superior
+﻿using TP1_ORM_Scholz_Veronica.Create; 
 using TP1_ORM_Scholz_Veronica.Menu;
 
-var services = new AllServices();
-var mainMenu = new MainMenu(services); 
+AllServices services = new (); //crea servicios en la capa superior
+MainMenu mainMenu = new (services); 
 bool view = true;
 
 do

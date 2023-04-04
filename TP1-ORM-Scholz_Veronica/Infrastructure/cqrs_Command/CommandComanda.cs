@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using Application.Models;
+using Domain.Entities;
 using Infrastructure.Persistence;
 
 namespace Infrastructure.cqrs_Command
@@ -13,9 +13,9 @@ namespace Infrastructure.cqrs_Command
             _appDbContext = appDbContext;
         }
 
-        public async Task InsertarComanda(ComandaDto comandaDto)
+        public async Task InsertarComanda(Comanda comanda)
         {
-            _appDbContext.Add(comandaDto);
+            _appDbContext.Add(comanda);
             await _appDbContext.SaveChangesAsync();
         }
     }

@@ -1,7 +1,9 @@
-﻿namespace Application.Interfaces
+﻿using Application.Models;
+
+namespace Application.Interfaces
 {
     public interface IServiceComandaMercaderia
     {
-        public void InsertarMercaderias(Guid comandaId, int mercaderiaId);
+        public Task InsertarMercaderias(ComandaMercaderiaDto comandaMercaderiaDto);
     }
 }

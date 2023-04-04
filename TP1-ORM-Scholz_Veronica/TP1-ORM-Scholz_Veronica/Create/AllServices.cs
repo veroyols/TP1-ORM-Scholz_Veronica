@@ -5,7 +5,6 @@ using Domain.Entities;
 using Infrastructure.cqrs_Command;
 using Infrastructure.cqrs_Query;
 using Infrastructure.Persistence;
-using System.Text.Json.Nodes;
 
 namespace TP1_ORM_Scholz_Veronica.Create
 {
@@ -27,7 +26,6 @@ namespace TP1_ORM_Scholz_Veronica.Create
         //Lista de precarga
         private Dictionary<int, CantidadPrecioDto> mercaderiaSeleccionada;
 
-
         public AllServices() {
             _queryMercaderia = new QueryMercaderia(_context);
             _queryTipoMercaderia = new QueryTipoMercaderia(_context);
@@ -39,31 +37,31 @@ namespace TP1_ORM_Scholz_Veronica.Create
             _serviceComanda = new ServiceComanda(_commandComanda);
             _serviceComandaMercaderia = new ServiceComandaMercaderia(_commandComandaMercaderia);
 
-            mercaderiaSeleccionada = new Dictionary<int, CantidadPrecioDto>(); // [{id: 1, cdad: 1, precio: 1}]
+            mercaderiaSeleccionada = new Dictionary<int, CantidadPrecioDto>(); // [id: 1, {cdad: 1, precio: 1}]
         }
-        internal List<TipoMercaderia> GetAllTiposMercaderia()
+        internal async Task<List<TipoMercaderia>> GetAllTiposMercaderia()
         {
-            var list = _serviceTipoMercaderia.GetAllTiposMercaderia();
+            var list = await _serviceTipoMercaderia.GetAllTiposMercaderia();
             return list;
         }
-        internal List<Mercaderia> GetAllMercaderias()
+        internal async Task<List<Mercaderia>> GetAllMercaderias()
         {
-            var list = _serviceMercaderia.GetAllMercaderias();
+            var list = await _serviceMercaderia.GetAllMercaderias();
             return list;
         }
-        internal List<Mercaderia> GetMercaderiasPorTipo(int tipoMercaderiaId)
+        internal async Task<List<Mercaderia>> GetMercaderiasPorTipo(int tipoMercaderiaId)
         {
-            var list = _serviceMercaderia.GetMercaderiasPorTipo(tipoMercaderiaId);
+            var list = await _serviceMercaderia.GetMercaderiasPorTipo(tipoMercaderiaId);
             return list;
         }
-        internal int GetCantidadMercaderiasPorTipo(int tipoMercaderiaId)
+        internal async Task<int> GetCantidadMercaderiasPorTipo(int tipoMercaderiaId)
         {
-            int cdad = _serviceMercaderia.GetCdadMercaderiasPorTipo(tipoMercaderiaId);
+            int cdad = await _serviceMercaderia.GetCdadMercaderiasPorTipo(tipoMercaderiaId);
             return cdad;
         }
-        internal int GetCantidadDeTipos(int tipoMercaderiaId)
+        internal async Task<int> GetCantidadDeTipos(int tipoMercaderiaId)
         {
-            int cdad = _serviceTipoMercaderia.GetCantidadDeTipos(tipoMercaderiaId);
+            int cdad = await _serviceTipoMercaderia.GetCantidadDeTipos(tipoMercaderiaId);
             return cdad;
         }
 
@@ -73,35 +71,46 @@ namespace TP1_ORM_Scholz_Veronica.Create
             {
                 int cdad = mercaderiaSeleccionada[idMercaderiaSeleccionada].Cantidad;
                 cdad += 1;
-                mercaderiaSeleccionada[idMercaderiaSeleccionada] = new CantidadPrecioDto { Cantidad = cdad, Precio = price };
+                mercaderiaSeleccionada[idMercaderiaSeleccionada] = new CantidadPrecioDto { Cantidad = cdad, PrecioUnitario = price };
             }
             else
             {
-                mercaderiaSeleccionada.Add(idMercaderiaSeleccionada, new CantidadPrecioDto { Cantidad = 1, Precio = price});
-
+                mercaderiaSeleccionada.Add(idMercaderiaSeleccionada, new CantidadPrecioDto { Cantidad = 1, PrecioUnitario = price});
             }
             foreach (var item in mercaderiaSeleccionada)
             {
-                Console.WriteLine("Clave (MercaderiaId): {0} - Valor (cdad {1}, precio {2}) ", item.Key, item.Value.Cantidad, item.Value.Precio);
+                Console.WriteLine("Clave (MercaderiaId): {0} - Valor (cdad {1}, precio {2}) ", item.Key, item.Value.Cantidad, item.Value.PrecioUnitario);
             }
         }
         internal void LimpiarPrecargaMercaderia()
         {
             mercaderiaSeleccionada.Clear();
         }
-        internal void GuardarPedido(int formaEntrega)
+        internal async Task GuardarPedido(int formaEntrega)
         {
-            ComandaDto comandaDto = new ComandaDto
+            int monto = 0;
+            int total = 0;
+            foreach (var item in mercaderiaSeleccionada)
             {
-                ComandaId = new Guid(),
-                Fecha = new DateTime(),
-                FormaEntregaId = formaEntrega
-            };
+                monto = item.Value.Cantidad * item.Value.PrecioUnitario;
+                total += monto;
+            }
+
             //Crear Comanda
-            Guid comandaId = _serviceComanda.InsertarComanda(comandaDto, new Dictionary<int, int>());
-            //Agregar Mercaderias con ese Id
-            int mercaderiaId = 1;
-            _serviceComandaMercaderia.InsertarMercaderias(comandaId, mercaderiaId);
+            ComandaDto comandaDto = new ()
+            {
+                FormaEntregaId = formaEntrega,
+                PrecioTotal = total,
+            };
+            Guid comandaId = await _serviceComanda.InsertarComanda(comandaDto);
+            
+            //Agregar Mercaderias
+            ComandaMercaderiaDto comandaMercaderiaDto = new ()
+            {
+                ComandaId = comandaId,
+                mercaderiaSeleccionada = mercaderiaSeleccionada,
+            };
+            await _serviceComandaMercaderia.InsertarMercaderias(comandaMercaderiaDto);
         }
     }
 }

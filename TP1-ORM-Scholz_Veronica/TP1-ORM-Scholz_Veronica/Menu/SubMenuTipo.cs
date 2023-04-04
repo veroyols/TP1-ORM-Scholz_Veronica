@@ -22,25 +22,24 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("                     |  REGISTRAR COMANDA  |");
             Console.WriteLine("                      ---------------------");
 
-            cdadDeTipos = _services.GetCantidadDeTipos(op);
+            cdadDeTipos = _services.GetCantidadDeTipos(op).Result;
             //lista de TipoMercaderia
-            foreach (var item in _services.GetAllTiposMercaderia())
+            foreach (var item in _services.GetAllTiposMercaderia().Result)
             {
                 Console.WriteLine("             {0}. {1}", item.TipoMercaderiaId, item.Descripcion);
             }
             Console.WriteLine("             0. Volver");
             Console.Write("\n               Ingrese un numero: ");
         }
-        public bool ChooseOpt(int tipo)
+        public override bool ChooseOpt(int tipo)
         {
-            int price =0;
             if (0 < tipo && tipo <= cdadDeTipos)
             {
                 bool viewSubMenuFiltro = true;
                 do
                 {
                     _subMenuFiltro.ShowMenu(tipo);
-                    viewSubMenuFiltro = _subMenuFiltro.ChooseOpt(_subMenuFiltro.InsertOption(-1), price);
+                    viewSubMenuFiltro = _subMenuFiltro.ChooseOpt(_subMenuFiltro.InsertOption(-1));
                 }
                 while (viewSubMenuFiltro);
                 Console.Clear();

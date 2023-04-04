@@ -4,7 +4,7 @@ namespace Application.Interfaces
 {
     public interface IQueryTipoMercaderia
     {
-        public List<TipoMercaderia> GetListTiposMercaderia();
-        public int GetCantidad(int tipoMercaderia);
+        public Task<List<TipoMercaderia>> GetListTiposMercaderia();
+        public Task<int> GetCantidad(int tipoMercaderia);
     }
 }

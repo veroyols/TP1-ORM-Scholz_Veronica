@@ -11,15 +11,15 @@ namespace Application.UseCase
         {
             _query = query;
         }
-        public List<TipoMercaderia> GetAllTiposMercaderia()
+        public async Task<List<TipoMercaderia>> GetAllTiposMercaderia()
         {
-            var list = _query.GetListTiposMercaderia();
+            var list = await _query.GetListTiposMercaderia();
             return list;
         }
 
-        public int GetCantidadDeTipos(int tipoMercaderiaId)
+        public async Task<int> GetCantidadDeTipos(int tipoMercaderiaId)
         {
-            int cdad = _query.GetCantidad(tipoMercaderiaId);
+            int cdad = await _query.GetCantidad(tipoMercaderiaId);
             return cdad;
         }
     }

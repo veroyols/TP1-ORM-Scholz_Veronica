@@ -421,6 +421,7 @@ namespace Infrastructure.Persistence
             {
                 entity.ToTable("ComandaMercaderia");
                 entity.HasKey(c => c.ComandaMercaderiaId);
+                entity.Property(c => c.ComandaMercaderiaId).ValueGeneratedOnAdd();
 
                 //RELACION
                 entity

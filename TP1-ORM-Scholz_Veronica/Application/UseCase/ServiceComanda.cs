@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.Models;
+using Domain.Entities;
 
 namespace Application.UseCase
 {
@@ -11,15 +12,16 @@ namespace Application.UseCase
         {
             _command = command;
         }
-        public Guid InsertarComanda(ComandaDto comandaDto, Dictionary<int, int> precarga) 
+        public async Task<Guid> InsertarComanda(ComandaDto comandaDto) 
         {
-            int price = 0;
-            foreach (var item in precarga)
-            {
-//
-            }
-            comandaDto.PrecioTotal = price;
-            _command.InsertarComanda(comandaDto);
+            Comanda comanda = new () 
+            { 
+                ComandaId = comandaDto.ComandaId,
+                FormaEntregaId = comandaDto.FormaEntregaId,
+                PrecioTotal = comandaDto.PrecioTotal,
+                Fecha = comandaDto.Fecha,
+            };
+            await _command.InsertarComanda(comanda);
             return comandaDto.ComandaId;
         }
     }

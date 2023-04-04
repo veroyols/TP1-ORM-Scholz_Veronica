@@ -4,8 +4,8 @@ namespace Application.Interfaces
 {
     public interface IQueryMercaderia
     {
-        public List<Mercaderia> GetListMercaderia();
-        public List<Mercaderia> GetListMercaderiaPorTipo(int tipoMercaderiaId);
-        public int GetCdadPorTipo(int tipoMercaderiaId);
+        public Task<List<Mercaderia>> GetListMercaderia();
+        public Task<List<Mercaderia>> GetListMercaderiaPorTipo(int tipoMercaderiaId);
+        public Task<int> GetCdadPorTipo(int tipoMercaderiaId);
     }
 }

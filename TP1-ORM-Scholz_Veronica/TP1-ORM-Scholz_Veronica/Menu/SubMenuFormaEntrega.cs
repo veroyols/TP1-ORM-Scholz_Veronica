@@ -24,7 +24,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("            -------------------------------------");
             Console.Write("\n               Ingrese un numero: ");
         }
-        public bool ChooseOpt(int opt)
+        public override bool ChooseOpt(int opt)
         {
             switch (opt)
             {
