@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 
 namespace Application.UseCase
 {
@@ -10,11 +11,16 @@ namespace Application.UseCase
         {
             _command = command;
         }
-        public Guid InsertarComanda(int formaEntrega, Dictionary<int, int> precarga) //Dictionary<mercaderiaId,cdad>
+        public Guid InsertarComanda(ComandaDto comandaDto, Dictionary<int, int> precarga) 
         {
-            //crearComanda(formaEntrega, precio, fecha) devolver Guid
-            //crearComandaMercaderia(mercaderiaId, comandaId)
-            return new Guid();
+            int price = 0;
+            foreach (var item in precarga)
+            {
+//
+            }
+            comandaDto.PrecioTotal = price;
+            _command.InsertarComanda(comandaDto);
+            return comandaDto.ComandaId;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
-using Domain.Entities;
-using Domain.Models;
+using Application.Models;
 using Infrastructure.Persistence;
 
 namespace Infrastructure.cqrs_Command

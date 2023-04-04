@@ -7,6 +7,7 @@ namespace TP1_ORM_Scholz_Veronica.Menu
         protected readonly AllServices _services;
         protected int platosPorTipo;
         protected int idMercaderia;
+        protected int priceMercaderia;
 
         public SubMenuFiltro(AllServices services) {
             _services = services;
@@ -24,16 +25,17 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             {
                 Console.WriteLine("             {0}. {1} (${2})", item.MercaderiaId, item.Nombre, item.Precio);
                 idMercaderia = item.MercaderiaId;
+                priceMercaderia = item.Precio;
             }
             Console.WriteLine("             0. Volver");
             Console.Write("\n               Ingrese un numero: ");
         }
-        override public bool ChooseOpt(int idMercaderiaSeleccionada)
+        public bool ChooseOpt(int idMercaderiaSeleccionada, int price)
         {
             if (idMercaderia-platosPorTipo < idMercaderiaSeleccionada && idMercaderiaSeleccionada <= idMercaderia)
             {
                 //AGREGAR idMercaderiaSeleccionada a una lista con cantidad
-                _services.PrecargaMercaderia(idMercaderiaSeleccionada);
+                _services.PrecargaMercaderia(idMercaderiaSeleccionada, price);
                 Console.ReadKey(true);
                 Console.Clear();
                 return true;

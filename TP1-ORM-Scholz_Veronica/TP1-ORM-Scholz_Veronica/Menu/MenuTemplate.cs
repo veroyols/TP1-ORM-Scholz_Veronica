@@ -2,7 +2,7 @@
 {
     abstract public class MenuTemplate
     {
-        abstract public bool ChooseOpt(int opt);
+        //abstract public bool ChooseOpt(int opt);
         public int InsertOption(int op)
         {
             try

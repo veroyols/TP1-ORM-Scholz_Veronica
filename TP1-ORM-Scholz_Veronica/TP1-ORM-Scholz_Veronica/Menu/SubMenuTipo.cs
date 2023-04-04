@@ -31,15 +31,16 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             Console.WriteLine("             0. Volver");
             Console.Write("\n               Ingrese un numero: ");
         }
-        override public bool ChooseOpt(int tipo)
+        public bool ChooseOpt(int tipo)
         {
+            int price =0;
             if (0 < tipo && tipo <= cdadDeTipos)
             {
                 bool viewSubMenuFiltro = true;
                 do
                 {
                     _subMenuFiltro.ShowMenu(tipo);
-                    viewSubMenuFiltro = _subMenuFiltro.ChooseOpt(_subMenuFiltro.InsertOption(-1));
+                    viewSubMenuFiltro = _subMenuFiltro.ChooseOpt(_subMenuFiltro.InsertOption(-1), price);
                 }
                 while (viewSubMenuFiltro);
                 Console.Clear();

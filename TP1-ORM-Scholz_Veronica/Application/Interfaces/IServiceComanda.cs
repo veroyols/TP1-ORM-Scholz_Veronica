@@ -1,9 +1,9 @@
-﻿using Domain.Models;
+﻿using Application.Models;
 
 namespace Application.Interfaces
 {
     public interface IServiceComanda
     {
-        public Guid InsertarComanda(int formaEntrega, Dictionary<int,int> precarga);
+        public Guid InsertarComanda(ComandaDto comandaDto, Dictionary<int,int> precarga);
     }
 }

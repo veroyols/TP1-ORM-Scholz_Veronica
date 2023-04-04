@@ -1,11 +1,11 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Application.UseCase;
 using Domain.Entities;
-using Domain.Models;
 using Infrastructure.cqrs_Command;
 using Infrastructure.cqrs_Query;
 using Infrastructure.Persistence;
-using System.Runtime.CompilerServices;
+using System.Text.Json.Nodes;
 
 namespace TP1_ORM_Scholz_Veronica.Create
 {
@@ -25,7 +25,8 @@ namespace TP1_ORM_Scholz_Veronica.Create
         private readonly IServiceComandaMercaderia _serviceComandaMercaderia;
 
         //Lista de precarga
-        private Dictionary<int,int> mercaderiaSeleccionada;
+        private Dictionary<int, CantidadPrecioDto> mercaderiaSeleccionada;
+
 
         public AllServices() {
             _queryMercaderia = new QueryMercaderia(_context);
@@ -38,7 +39,7 @@ namespace TP1_ORM_Scholz_Veronica.Create
             _serviceComanda = new ServiceComanda(_commandComanda);
             _serviceComandaMercaderia = new ServiceComandaMercaderia(_commandComandaMercaderia);
 
-            mercaderiaSeleccionada = new Dictionary<int, int>();
+            mercaderiaSeleccionada = new Dictionary<int, CantidadPrecioDto>(); // [{id: 1, cdad: 1, precio: 1}]
         }
         internal List<TipoMercaderia> GetAllTiposMercaderia()
         {
@@ -66,20 +67,22 @@ namespace TP1_ORM_Scholz_Veronica.Create
             return cdad;
         }
 
-        internal void PrecargaMercaderia(int idMercaderiaSeleccionada)
+        internal void PrecargaMercaderia(int idMercaderiaSeleccionada, int price)
         {
             if (mercaderiaSeleccionada.ContainsKey(idMercaderiaSeleccionada))
             {
-                int cdad = mercaderiaSeleccionada[idMercaderiaSeleccionada];
-                mercaderiaSeleccionada[idMercaderiaSeleccionada] = cdad+1;
+                int cdad = mercaderiaSeleccionada[idMercaderiaSeleccionada].Cantidad;
+                cdad += 1;
+                mercaderiaSeleccionada[idMercaderiaSeleccionada] = new CantidadPrecioDto { Cantidad = cdad, Precio = price };
             }
             else
             {
-                mercaderiaSeleccionada.Add(idMercaderiaSeleccionada, 1);
+                mercaderiaSeleccionada.Add(idMercaderiaSeleccionada, new CantidadPrecioDto { Cantidad = 1, Precio = price});
+
             }
             foreach (var item in mercaderiaSeleccionada)
             {
-                Console.WriteLine("Clave (MercaderiaId): {0} - Valor (Cantidad) {1} ", item.Key, item.Value);
+                Console.WriteLine("Clave (MercaderiaId): {0} - Valor (cdad {1}, precio {2}) ", item.Key, item.Value.Cantidad, item.Value.Precio);
             }
         }
         internal void LimpiarPrecargaMercaderia()
@@ -88,7 +91,15 @@ namespace TP1_ORM_Scholz_Veronica.Create
         }
         internal void GuardarPedido(int formaEntrega)
         {
-            Guid comandaId = _serviceComanda.InsertarComanda(formaEntrega, mercaderiaSeleccionada);
+            ComandaDto comandaDto = new ComandaDto
+            {
+                ComandaId = new Guid(),
+                Fecha = new DateTime(),
+                FormaEntregaId = formaEntrega
+            };
+            //Crear Comanda
+            Guid comandaId = _serviceComanda.InsertarComanda(comandaDto, new Dictionary<int, int>());
+            //Agregar Mercaderias con ese Id
             int mercaderiaId = 1;
             _serviceComandaMercaderia.InsertarMercaderias(comandaId, mercaderiaId);
         }
