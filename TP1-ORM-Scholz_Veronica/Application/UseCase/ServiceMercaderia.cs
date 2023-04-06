@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
-using System;
 
 namespace Application.UseCase
 {

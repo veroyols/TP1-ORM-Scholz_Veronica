@@ -48,8 +48,9 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                 case 2:
                     Console.WriteLine("                  -----------------------");
                     Console.WriteLine("                 | 2. ENLISTAR COMANDAS |");
-                    Console.WriteLine("                 |    Fecha " + DateTime.Now.ToShortDateString() + "   |");
+                    Console.WriteLine("                 |    Fecha " + DateTime.Now.ToShortDateString() + "    |");
                     Console.WriteLine("                  -----------------------\n");
+                    _services.EnlistarComandas();
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;

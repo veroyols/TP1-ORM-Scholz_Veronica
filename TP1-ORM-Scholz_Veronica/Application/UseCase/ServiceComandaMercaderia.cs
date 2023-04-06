@@ -17,12 +17,16 @@ namespace Application.UseCase
             var list = comandaMercaderiaDto.mercaderiaSeleccionada;
             foreach (var item in list)
             {
-                ComandaMercaderia comandaMercaderia = new ()
+                for (int i = 0; i < item.Value.Cantidad; i++ )
                 {
-                    ComandaId = comandaMercaderiaDto.ComandaId,
-                    MercaderiaId = item.Key,
-                };
-                await _command.InsertarComandaMercaderia(comandaMercaderia);
+                    ComandaMercaderia comandaMercaderia = new ()
+                    {
+                        ComandaId = comandaMercaderiaDto.ComandaId,
+                        MercaderiaId = item.Key,
+                    };
+                    await _command.InsertarComandaMercaderia(comandaMercaderia);
+                    //o crear una lista e insertarlos juntos
+                }
             }
         }
     }
