@@ -34,5 +34,11 @@ namespace Infrastructure.cqrs_Query
                 .ToList<Mercaderia>());
             return list;
         }
+
+        public async Task<Mercaderia> GetMercaderiaById(int mercaderiaId)
+        {
+            Mercaderia mercaderia = await Task.Run(() => _appDbContext.MercaderiaDb.FirstOrDefault(el => el.MercaderiaId == mercaderiaId));
+            return mercaderia;
+        }
     }
 }

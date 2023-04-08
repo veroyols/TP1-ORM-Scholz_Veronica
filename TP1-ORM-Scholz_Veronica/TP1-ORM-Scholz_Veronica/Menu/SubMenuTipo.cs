@@ -18,18 +18,17 @@ namespace TP1_ORM_Scholz_Veronica.Menu
 
         public void ShowMenu(int op)
         {
-            Console.WriteLine("                      ---------------------");
-            Console.WriteLine("                     |  REGISTRAR COMANDA  |");
-            Console.WriteLine("                      ---------------------");
-
+            Console.WriteLine(" -------------------------------------------------------------");
+            Console.WriteLine("                   1. REGISTRAR COMANDA");
+            Console.WriteLine(" -------------------------------------------------------------\n");
             cdadDeTipos = _services.GetCantidadDeTipos(op).Result;
             //lista de TipoMercaderia
             foreach (var item in _services.GetAllTiposMercaderia().Result)
             {
                 Console.WriteLine("             {0}. {1}", item.TipoMercaderiaId, item.Descripcion);
             }
-            Console.WriteLine("             0. Volver");
-            Console.Write("\n               Ingrese un numero: ");
+            Console.WriteLine("\n             0. Finalizar");
+            Console.Write("\n                   Ingrese un numero: ");
         }
         public override bool ChooseOpt(int tipo)
         {
@@ -53,9 +52,6 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                         return true;
                     case 0:
                         Console.Clear();
-                        Console.WriteLine("\n                      -------------------");
-                        Console.WriteLine("                     |  GUARDAR COMANDA. |");
-                        Console.WriteLine("                      -------------------");
                         //Ingresar forma de entrega
                         bool viewSubMenuFormaEntrega = true;
                         do

@@ -11,6 +11,12 @@ namespace Application.UseCase
         {
             _query = query;
         }
+
+        public async Task<string> GetTipo(int tipoMercaderiaId)
+        {
+            string tipo = await Task.Run(() => _query.GetTipo(tipoMercaderiaId).Result.Descripcion);
+            return tipo;
+        }
         public async Task<List<TipoMercaderia>> GetAllTiposMercaderia()
         {
             var list = await _query.GetListTiposMercaderia();

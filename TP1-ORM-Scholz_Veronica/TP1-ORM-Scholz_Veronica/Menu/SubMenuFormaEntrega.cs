@@ -12,53 +12,33 @@ namespace TP1_ORM_Scholz_Veronica.Menu
             _services = services;
         }
 
-        public void ShowMenu() //logica de bd
+        public void ShowMenu() 
         {
-            Console.WriteLine("                -----------------------------");
-            Console.WriteLine("               | SELECCIONE FORMA DE ENTREGA |");
-            Console.WriteLine("                -----------------------------");
+            Console.WriteLine(" -------------------------------------------------------------");
+            Console.WriteLine("                SELECCIONE FORMA DE ENTREGA");
+            Console.WriteLine(" -------------------------------------------------------------\n");
             Console.WriteLine("             1. Salon");
             Console.WriteLine("             2. Delivery");
             Console.WriteLine("             3. PedidosYa");
-            Console.WriteLine("             0. Descartar Pedido");
-            Console.WriteLine("            -------------------------------------");
+            Console.WriteLine("\n             0. Descartar Pedido \n");
             Console.Write("\n               Ingrese un numero: ");
         }
         public override bool ChooseOpt(int opt)
         {
+            if(opt > 0 && opt <= 3)
+            {
+                formaEntrega = opt;
+                return false;
+            }
             switch (opt)
             {
                 case -1:
                     return true;
                 case 0:
-                    Console.WriteLine("                     -----------------");
-                    Console.WriteLine("                    | CANCELAR PEDIDO |");
-                    Console.WriteLine("                     -----------------");
+                    Console.WriteLine(" -------------------------------------------------------------");
+                    Console.WriteLine("                      CANCELANDO PEDIDO");
+                    Console.WriteLine(" -------------------------------------------------------------\n");
                     _services.LimpiarPrecargaMercaderia();
-                    Console.ReadKey(true);
-                    Console.Clear();
-                    return false;
-                case 1:
-                    Console.WriteLine("                ---------------------------");
-                    Console.WriteLine("               | 1. ENVIAR PEDIDO AL SALON |");
-                    Console.WriteLine("                ---------------------------");
-                    formaEntrega = 1;
-                    Console.ReadKey(true);
-                    Console.Clear();
-                    return false;
-                case 2:
-                    Console.WriteLine("              -------------------------------");
-                    Console.WriteLine("             | 2. ENVIAR PEDIDO CON DELIVERY |");
-                    Console.WriteLine("              -------------------------------");
-                    formaEntrega = 2;
-                    Console.ReadKey(true);
-                    Console.Clear();
-                    return false;
-                case 3:
-                    Console.WriteLine("                  ----------------------");
-                    Console.WriteLine("                 | 3. RETIRA PEDIDOS YA |");
-                    Console.WriteLine("                  ----------------------");
-                    formaEntrega = 3;
                     Console.ReadKey(true);
                     Console.Clear();
                     return false;

@@ -14,13 +14,12 @@ namespace TP1_ORM_Scholz_Veronica.Menu
 
         public void ShowMenu()
         {
-            Console.WriteLine("                      ------------------");
-            Console.WriteLine("                     | MENU DE OPCIONES |");
-            Console.WriteLine("                      ------------------");
+            Console.WriteLine("\n -------------------------------------------------------------");
+            Console.WriteLine("                       MENU DE OPCIONES.             ");
+            Console.WriteLine(" -------------------------------------------------------------\n");
             Console.WriteLine("             1. Registrar una Comanda");
             Console.WriteLine("             2. Enlistar Comandas");
-            Console.WriteLine("             0. Salir");
-            Console.WriteLine("            -------------------------------------");
+            Console.WriteLine("\n             0. Salir \n");
             Console.Write("\n               Ingrese un numero: ");
         }
         public override bool ChooseOpt(int opt)
@@ -31,11 +30,12 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     return true;
                 case 0:
                     Console.Clear();
-                    Console.WriteLine("\n               -------------------------------------");
-                    Console.WriteLine("              | GRACIAS POR UTILIZAR ESTE SERVICIO. |");
-                    Console.WriteLine("               -------------------------------------");
+                    Console.WriteLine("\n -------------------------------------------------------------");
+                    Console.WriteLine("              GRACIAS POR UTILIZAR ESTE SERVICIO.             ");
+                    Console.WriteLine(" -------------------------------------------------------------");
                     return false;
                 case 1: //lista de tipos de mercaderia
+                    _services.LimpiarPrecargaMercaderia();
                     bool viewSubMenuTipo = true;
                     do
                     {
@@ -46,20 +46,15 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.Clear();
                     return true;
                 case 2:
-                    Console.WriteLine("                  -----------------------");
-                    Console.WriteLine("                 | 2. ENLISTAR COMANDAS |");
-                    Console.WriteLine("                 |    Fecha " + DateTime.Now.ToShortDateString() + "    |");
-                    Console.WriteLine("                  -----------------------\n");
                     _services.EnlistarComandas();
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;
                 default:
                     Console.Clear();
-                    Console.WriteLine("       ----------------------------------------------------");
-                    Console.WriteLine("       Ha ingresado un numero incorrecto. " +
-                                    "\n       Revise el menu e ingrese un valor entre 1 y 2:" +
-                                    "\n       ----------------------------------------------------");
+                    Console.WriteLine("");
+                    Console.WriteLine("       Ha ingresado un numero incorrecto. \n" +
+                                      "       Revise el menu e ingrese un valor entre 1 y 2: \n");
                     return true;
             }
         }

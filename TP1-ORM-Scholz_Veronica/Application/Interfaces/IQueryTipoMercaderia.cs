@@ -6,5 +6,6 @@ namespace Application.Interfaces
     {
         public Task<List<TipoMercaderia>> GetListTiposMercaderia();
         public Task<int> GetCantidad(int tipoMercaderia);
+        public Task<TipoMercaderia> GetTipo(int tipoMercaderia);
     }
 }

@@ -28,5 +28,16 @@ namespace Application.UseCase
             var list = await _query.GetListMercaderiaPorTipo(tipoMercaderiaId);
             return list;
         }
+        public async Task<string> GetMercaderiaById(int id)
+        {
+            Mercaderia mercaderia = await _query.GetMercaderiaById(id);
+            return mercaderia.Nombre;
+        }
+
+        public async Task<int> GetPrecio(int id)
+        {
+            Mercaderia mercaderia = await _query.GetMercaderiaById(id);
+            return mercaderia.Precio;
+        }
     }
 }

@@ -41,6 +41,11 @@ namespace TP1_ORM_Scholz_Veronica.Create
 
             mercaderiaSeleccionada = new Dictionary<int, CantidadPrecioDto>(); // [id: 1, {cdad: 1, precio: 1}]
         }
+        internal async Task<string> GetTipo(int op)
+        {
+            string tipo = await _serviceTipoMercaderia.GetTipo(op);
+            return tipo;
+        }
         internal async Task<List<TipoMercaderia>> GetAllTiposMercaderia()
         {
             var list = await _serviceTipoMercaderia.GetAllTiposMercaderia();
@@ -66,7 +71,11 @@ namespace TP1_ORM_Scholz_Veronica.Create
             int cdad = await _serviceTipoMercaderia.GetCantidadDeTipos(tipoMercaderiaId);
             return cdad;
         }
-
+        internal async Task<int> GetPrecio(int idMercaderiaSeleccionada)
+        {
+            int precio = await _serviceMercaderia.GetPrecio(idMercaderiaSeleccionada);
+            return precio;
+        }
         internal void PrecargaMercaderia(int idMercaderiaSeleccionada, int price)
         {
             if (mercaderiaSeleccionada.ContainsKey(idMercaderiaSeleccionada))
@@ -79,10 +88,17 @@ namespace TP1_ORM_Scholz_Veronica.Create
             {
                 mercaderiaSeleccionada.Add(idMercaderiaSeleccionada, new CantidadPrecioDto { Cantidad = 1, PrecioUnitario = price});
             }
+            Console.WriteLine("\n -------------------------------------------------------------");
+            Console.WriteLine("                            PRECARGA");
+            Console.WriteLine(" -------------------------------------------------------------\n");
+            int i = 0;
             foreach (var item in mercaderiaSeleccionada)
             {
-                Console.WriteLine("Clave (MercaderiaId): {0} - Valor (cdad {1}, precio {2}) ", item.Key, item.Value.Cantidad, item.Value.PrecioUnitario);
+                i++;
+                string nombre = _serviceMercaderia.GetMercaderiaById(item.Key).Result;
+                Console.WriteLine("             {0}) {1} | {2} x ${3}) ", i, nombre, item.Value.Cantidad, item.Value.PrecioUnitario);
             }
+            Console.WriteLine("\n         Presione una tecla . . .");
         }
         internal void LimpiarPrecargaMercaderia()
         {
@@ -90,46 +106,75 @@ namespace TP1_ORM_Scholz_Veronica.Create
         }
         internal async Task GuardarPedido(int formaEntrega)
         {
-            int monto = 0;
-            int total = 0;
-            foreach (var item in mercaderiaSeleccionada)
+            if (mercaderiaSeleccionada.Count == 0)
             {
-                monto = item.Value.Cantidad * item.Value.PrecioUnitario;
-                total += monto;
+                Console.WriteLine("\n -------------------------------------------------------------");
+                Console.WriteLine("               SU PEDIDO NO CONTIENE PRODUCTOS.");
+                Console.WriteLine(" -------------------------------------------------------------\n");
+                Console.ReadKey(true);
             }
+            else
+            {
+                Console.WriteLine(" -------------------------------------------------------------");
+                Console.WriteLine("             MUCHAS GRACIAS POR SU COMPRA ");
+                Console.WriteLine("             ESTAMOS PREPARANDO SU PEDIDO ");
+                Console.WriteLine(" -------------------------------------------------------------\n");
+                Console.ReadKey(true);
+                int monto = 0;
+                int total = 0;
+                foreach (var item in mercaderiaSeleccionada)
+                {
+                    monto = item.Value.Cantidad * item.Value.PrecioUnitario;
+                    total += monto;
+                }
 
-            //Crear Comanda
-            ComandaDto comandaDto = new ()
-            {
-                FormaEntregaId = formaEntrega,
-                PrecioTotal = total,
-            };
-            Guid comandaId = await _serviceComanda.InsertarComanda(comandaDto);
+                //Crear Comanda
+                ComandaDto comandaDto = new ()
+                {
+                    FormaEntregaId = formaEntrega,
+                    PrecioTotal = total,
+                };
+                Guid comandaId = await _serviceComanda.InsertarComanda(comandaDto);
             
-            //Agregar Mercaderias
-            ComandaMercaderiaDto comandaMercaderiaDto = new ()
-            {
-                ComandaId = comandaId,
-                mercaderiaSeleccionada = mercaderiaSeleccionada,
-            };
-            await _serviceComandaMercaderia.InsertarMercaderias(comandaMercaderiaDto);
+                //Agregar Mercaderias
+                ComandaMercaderiaDto comandaMercaderiaDto = new ()
+                {
+                    ComandaId = comandaId,
+                    mercaderiaSeleccionada = mercaderiaSeleccionada,
+                };
+                await _serviceComandaMercaderia.InsertarMercaderias(comandaMercaderiaDto);
+            }
         }
         internal async Task EnlistarComandas()
         {
             List<TicketDto> ticketList = await _serviceComanda.GetAllComandas();
-            foreach (var comanda in ticketList)
+            if (ticketList.Count == 0)
             {
-                Console.WriteLine("{0} ({1}) - {2}",
-                    comanda.Fecha.ToShortDateString(), comanda.ComandaId, comanda.FormaEntregaDescripcion);
+                Console.WriteLine(" -------------------------------------------------------------");
+                Console.WriteLine("              Aun no se han registrado comandas               ");
+                Console.WriteLine(" -------------------------------------------------------------");
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\n -------------------------------------------------------------");
+                Console.WriteLine("                   2. ENLISTAR COMANDAS                       ");
+                Console.WriteLine(" -------------------------------------------------------------\n");
 
-                foreach (MercaderiaPrecioDto mercaderia in comanda.Mercaderias) //diccionario<string tipo, MercaderiaPrecioDto>
+                foreach (var comanda in ticketList)
                 {
-//                    Console.WriteLine("     " + mercaderia.Key);
-                    Console.WriteLine("         {0}: {1} ({2}x{3})", mercaderia.Tipo, mercaderia.MercaderiaNombre, mercaderia.Cantidad, mercaderia.PrecioUnitario);
+                    Console.WriteLine("\n {0} ({1}) - {2}\n",
+                        comanda.Fecha.ToShortDateString(), comanda.ComandaId, comanda.FormaEntregaDescripcion);
+
+                    foreach (MercaderiaPrecioDto mercaderia in comanda.Mercaderias) //diccionario<string tipo, MercaderiaPrecioDto>
+                    {
+                        //                    Console.WriteLine("     " + mercaderia.Key);
+                        Console.WriteLine("          {0}: {1} ({2}x{3})", mercaderia.Tipo, mercaderia.MercaderiaNombre, mercaderia.Cantidad, mercaderia.PrecioUnitario);
+                    }
+
+                    Console.WriteLine("\n          Total a pagar:.............................. ${0}\n", comanda.PrecioTotal);
+                    Console.WriteLine(" -------------------------------------------------------------");
                 }
-                
-                Console.WriteLine("         Total a pagar:.............................. ${0}", comanda.PrecioTotal);
-                Console.WriteLine("-------------------------------------------------------------");
             }
         }
     }

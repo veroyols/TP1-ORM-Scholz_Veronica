@@ -12,22 +12,19 @@
             }
             catch (FormatException e)
             {
-                Console.Write("Debe ingresar un numero (" + e.Message + ") \nPress any key to continue . . . ");
-                Console.ReadKey(true);
+                Console.Clear();
+                Console.WriteLine("  Debe ingresar un numero \n(" + e.Message + ")");
+
             }
             catch (OverflowException e)
             {
-                Console.Write("Debe ingresar un numero (" + e.Message + ") \nPress any key to continue . . . ");
-                Console.ReadKey(true);
+                Console.Clear();
+                Console.WriteLine("  Debe ingresar un numero \n(" + e.Message + ")");
             }
             catch (Exception e)
             {
-                Console.Write("Debe ingresar un numero (" + e.Message + ") \nPress any key to continue . . . ");
-                Console.ReadKey(true);
-            }
-            finally
-            {
                 Console.Clear();
+                Console.WriteLine("  Debe ingresar un numero \n(" + e.Message + ")");
             }
             return op;
         }

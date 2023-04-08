@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230408222123_menu")]
+    partial class menu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,7 +269,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             MercaderiaId = 13,
-                            Imagen = "http://drive.google.com/uc?export=view&id=1KwW_hTxoX1OCaowkrUa4zlWiGwyJONkG",
+                            Imagen = "url",
                             Ingredientes = "Asado, vacio, chorizo, morcilla, chinchulines, riñones, mollejas, sal y limón.",
                             Nombre = "Parrillada para 1",
                             Precio = 2000,
@@ -276,7 +279,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             MercaderiaId = 14,
-                            Imagen = "http://drive.google.com/uc?export=view&id=1tjBKJ7w5JIhhw3C3Fi5ZxLu798SSdbIL",
+                            Imagen = "url",
                             Ingredientes = "Asado, vacio, chorizo, morcilla, chinchulines, riñones, mollejas, sal y limón.",
                             Nombre = "Parrillada para 2",
                             Precio = 3000,
