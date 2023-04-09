@@ -13,7 +13,7 @@ namespace Infrastructure.cqrs_Command
             _appDbContext = appDbContext;
         }
 
-        public async Task InsertarComanda(Comanda comanda)
+        public async Task InsertComanda(Comanda comanda)
         {
             _appDbContext.Add(comanda);
             await _appDbContext.SaveChangesAsync();

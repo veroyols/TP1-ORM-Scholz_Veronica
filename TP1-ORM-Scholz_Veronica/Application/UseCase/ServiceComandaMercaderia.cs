@@ -12,20 +12,19 @@ namespace Application.UseCase
         {
             _command = command;
         }
-        public async Task InsertarMercaderias(ComandaMercaderiaDto comandaMercaderiaDto)
+        public async Task InsertMercaderia(MerchandiseOrderDto comandaMercaderiaDto)
         {
-            var list = comandaMercaderiaDto.mercaderiaSeleccionada;
+            var list = comandaMercaderiaDto.selectedMerchandise;
             foreach (var item in list)
             {
-                for (int i = 0; i < item.Value.Cantidad; i++ )
+                for (int i = 0; i < item.Value.Amount; i++ )
                 {
                     ComandaMercaderia comandaMercaderia = new ()
                     {
-                        ComandaId = comandaMercaderiaDto.ComandaId,
+                        ComandaId = comandaMercaderiaDto.OrderId,
                         MercaderiaId = item.Key,
                     };
-                    await _command.InsertarComandaMercaderia(comandaMercaderia);
-                    //o crear una lista e insertarlos juntos
+                    await _command.InsertComandaMercaderia(comandaMercaderia);
                 }
             }
         }

@@ -14,17 +14,17 @@ namespace Application.UseCase
             _command = command;
             _query = query;
         }
-        public async Task<Guid> InsertarComanda(ComandaDto comandaDto) 
+        public async Task<Guid> InsertComanda(OrderDto comandaDto) 
         {
             Comanda comanda = new () 
             { 
-                ComandaId = comandaDto.ComandaId,
-                FormaEntregaId = comandaDto.FormaEntregaId,
-                PrecioTotal = comandaDto.PrecioTotal,
-                Fecha = comandaDto.Fecha,
+                ComandaId = comandaDto.OrderId,
+                FormaEntregaId = comandaDto.MethodId,
+                PrecioTotal = comandaDto.Price,
+                Fecha = comandaDto.Date
             };
-            await _command.InsertarComanda(comanda);
-            return comandaDto.ComandaId;
+            await _command.InsertComanda(comanda);
+            return comandaDto.OrderId;
         }
         public async Task<List<TicketDto>> GetAllComandas()
         {
@@ -33,18 +33,18 @@ namespace Application.UseCase
             
             foreach (Comanda comanda in allComandas)
             {
-                List<MercaderiaPrecioDto> mercaderias = new ();
-                MercaderiaPrecioDto mercaderiaPrecioDto = new();
+                List<MerchandiseDto> mercaderias = new ();
+                MerchandiseDto merchandiseDto = new();
                 foreach (var subItem in comanda.ComandaMercaderias.ToList())
                 {
-                    mercaderiaPrecioDto = new()
+                    merchandiseDto = new()
                     {
-                        Tipo = subItem.Mercaderia.TipoMercaderia.Descripcion,
-                        MercaderiaNombre = subItem.Mercaderia.Nombre,
-                        PrecioUnitario = subItem.Mercaderia.Precio,
-                        Cantidad = 1
+                        Type = subItem.Mercaderia.TipoMercaderia.Descripcion,
+                        MerchandiseName = subItem.Mercaderia.Nombre,
+                        Price = subItem.Mercaderia.Precio,
+                        Amount = 1
                     };
-                    mercaderias.Add(mercaderiaPrecioDto);
+                    mercaderias.Add(merchandiseDto);
                 }
                 ticketList.Add(new TicketDto
                 {

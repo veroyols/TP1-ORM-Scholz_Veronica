@@ -5,17 +5,17 @@ namespace TP1_ORM_Scholz_Veronica.Menu
     public class MainMenu : MenuTemplate
     {
         protected readonly AllServices _services;
-        protected readonly SubMenuTipo _subMenuTipo;
+        protected readonly SubMenuType _subMenuType;
 
         public MainMenu(AllServices services) {
-            _subMenuTipo = new SubMenuTipo(services);
+            _subMenuType = new SubMenuType(services);
             _services = services;
         } 
 
         public void ShowMenu()
         {
             Console.WriteLine("\n -------------------------------------------------------------");
-            Console.WriteLine("                       MENU DE OPCIONES.             ");
+            Console.WriteLine("                            MENU             ");
             Console.WriteLine(" -------------------------------------------------------------\n");
             Console.WriteLine("             1. Registrar una Comanda");
             Console.WriteLine("             2. Enlistar Comandas");
@@ -35,18 +35,18 @@ namespace TP1_ORM_Scholz_Veronica.Menu
                     Console.WriteLine(" -------------------------------------------------------------");
                     return false;
                 case 1: //lista de tipos de mercaderia
-                    _services.LimpiarPrecargaMercaderia();
+                    _services.ClearMerchandisePreload();
                     bool viewSubMenuTipo = true;
                     do
                     {
-                        _subMenuTipo.ShowMenu(1);
-                        viewSubMenuTipo = _subMenuTipo.ChooseOpt(_subMenuTipo.InsertOption(-1));
+                        _subMenuType.ShowMenu(1);
+                        viewSubMenuTipo = _subMenuType.ChooseOpt(_subMenuType.InsertOption(-1));
                     }
                     while (viewSubMenuTipo);
                     Console.Clear();
                     return true;
                 case 2:
-                    _services.EnlistarComandas();
+                    _services.AllComandas();
                     Console.ReadKey(true);
                     Console.Clear();
                     return true;

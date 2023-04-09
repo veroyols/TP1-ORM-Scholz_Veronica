@@ -13,12 +13,12 @@ namespace Infrastructure.cqrs_Query
             _appDbContext = context;
         }
 
-        public async Task<int> GetCdadPorTipo(int tipoMercaderiaId)
+        public async Task<int> GetAmountByType(int tipoMercaderiaId)
         {
-            int cdad = await Task.Run(() => _appDbContext.MercaderiaDb
+            int amount = await Task.Run(() => _appDbContext.MercaderiaDb
                 .Where(el => el.TipoMercaderiaId == tipoMercaderiaId)
                 .Count());
-            return cdad;
+            return amount;
         }
 
         public async Task<List<Mercaderia>> GetListMercaderia()
@@ -27,7 +27,7 @@ namespace Infrastructure.cqrs_Query
             return list;
         }
 
-        public async Task<List<Mercaderia>> GetListMercaderiaPorTipo(int tipoMercaderiaId)
+        public async Task<List<Mercaderia>> GetListMercaderiaByType(int tipoMercaderiaId)
         {
             var list = await Task.Run(() => _appDbContext.MercaderiaDb
                 .Where(el => el.TipoMercaderiaId == tipoMercaderiaId)
@@ -37,7 +37,7 @@ namespace Infrastructure.cqrs_Query
 
         public async Task<Mercaderia> GetMercaderiaById(int mercaderiaId)
         {
-            Mercaderia mercaderia = await Task.Run(() => _appDbContext.MercaderiaDb.FirstOrDefault(el => el.MercaderiaId == mercaderiaId));
+            var mercaderia = await Task.Run(() => _appDbContext.MercaderiaDb.FirstOrDefault(el => el.MercaderiaId == mercaderiaId));
             return mercaderia;
         }
     }

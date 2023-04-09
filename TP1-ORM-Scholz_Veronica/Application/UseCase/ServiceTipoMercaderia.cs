@@ -12,9 +12,9 @@ namespace Application.UseCase
             _query = query;
         }
 
-        public async Task<string> GetTipo(int tipoMercaderiaId)
+        public async Task<string> GetType(int tipoMercaderiaId)
         {
-            string tipo = await Task.Run(() => _query.GetTipo(tipoMercaderiaId).Result.Descripcion);
+            string tipo = await Task.Run(() => _query.GetType(tipoMercaderiaId).Result.Descripcion);
             return tipo;
         }
         public async Task<List<TipoMercaderia>> GetAllTiposMercaderia()
@@ -23,9 +23,9 @@ namespace Application.UseCase
             return list;
         }
 
-        public async Task<int> GetCantidadDeTipos(int tipoMercaderiaId)
+        public async Task<int> GetAmountOfType(int tipoMercaderiaId)
         {
-            int cdad = await _query.GetCantidad(tipoMercaderiaId);
+            int cdad = await _query.GetAmount(tipoMercaderiaId);
             return cdad;
         }
     }

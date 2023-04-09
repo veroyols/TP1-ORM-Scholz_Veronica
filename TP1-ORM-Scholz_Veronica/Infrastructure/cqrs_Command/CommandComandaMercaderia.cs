@@ -12,7 +12,7 @@ namespace Infrastructure.cqrs_Command
         {
             _appDbContext = appDbContext;
         }
-        public async Task InsertarComandaMercaderia(ComandaMercaderia comandaMercaderia)
+        public async Task InsertComandaMercaderia(ComandaMercaderia comandaMercaderia)
         {
             _appDbContext.Add(comandaMercaderia);
             await _appDbContext.SaveChangesAsync();

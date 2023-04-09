@@ -6,7 +6,7 @@
         public int PrecioTotal { get; set; }
         public DateTime Fecha { get; set; }
         public string FormaEntregaDescripcion { get; set; }
-        public List<MercaderiaPrecioDto> Mercaderias { get; set; }
+        public List<MerchandiseDto> Mercaderias { get; set; }
 
     }
 }

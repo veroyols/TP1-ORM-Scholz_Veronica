@@ -4,6 +4,6 @@ namespace Application.Interfaces
 {
     public interface ICommandComandaMercaderia
     {
-        public Task InsertarComandaMercaderia(ComandaMercaderia comandaMercaderia);
+        public Task InsertComandaMercaderia(ComandaMercaderia comandaMercaderia);
     }
 }

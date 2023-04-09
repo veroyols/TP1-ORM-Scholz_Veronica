@@ -17,15 +17,15 @@ namespace Application.UseCase
             return list;
         }
 
-        public async Task<int> GetCdadMercaderiasPorTipo(int tipoMercaderiaId)
+        public async Task<int> GetAmountByType(int tipoMercaderiaId)
         {
-            int cdad = await _query.GetCdadPorTipo(tipoMercaderiaId);
+            int cdad = await _query.GetAmountByType(tipoMercaderiaId);
             return cdad;
         }
 
-        public async Task<List<Mercaderia>> GetMercaderiasPorTipo(int tipoMercaderiaId)
+        public async Task<List<Mercaderia>> GetMercaderiasByType(int tipoMercaderiaId)
         {
-            var list = await _query.GetListMercaderiaPorTipo(tipoMercaderiaId);
+            var list = await _query.GetListMercaderiaByType(tipoMercaderiaId);
             return list;
         }
         public async Task<string> GetMercaderiaById(int id)
@@ -34,7 +34,7 @@ namespace Application.UseCase
             return mercaderia.Nombre;
         }
 
-        public async Task<int> GetPrecio(int id)
+        public async Task<int> GetPrice(int id)
         {
             Mercaderia mercaderia = await _query.GetMercaderiaById(id);
             return mercaderia.Precio;

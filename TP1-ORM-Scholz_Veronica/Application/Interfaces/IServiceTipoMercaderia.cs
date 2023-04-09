@@ -5,8 +5,8 @@ namespace Application.Interfaces
     public interface IServiceTipoMercaderia
     {
         public Task<List<TipoMercaderia>> GetAllTiposMercaderia();
-        public Task<int> GetCantidadDeTipos(int tipoMercaderiaId);
-        public Task<string> GetTipo(int op);
+        public Task<int> GetAmountOfType(int tipoMercaderiaId);
+        public Task<string> GetType(int op);
 
 
     }

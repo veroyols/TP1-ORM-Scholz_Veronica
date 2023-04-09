@@ -12,17 +12,17 @@ namespace Infrastructure.cqrs_Query
         {
             _appDbContext = appDbContext;
         }
-        public async Task<TipoMercaderia> GetTipo(int tipoMercaderia)
+        public async Task<TipoMercaderia> GetType(int tipoMercaderia)
         {
-            var tipo = await Task.Run(() => _appDbContext.TipoMercaderiaDb
+            var type = await Task.Run(() => _appDbContext.TipoMercaderiaDb
                 .FirstOrDefault(item => item.TipoMercaderiaId == tipoMercaderia)
                 );
-            return tipo;
+            return type;
         }
-        public async Task<int> GetCantidad(int tipoMercaderia)
+        public async Task<int> GetAmount(int tipoMercaderia)
         {
-            int cdad = await Task.Run(() => _appDbContext.TipoMercaderiaDb.Count());
-            return cdad;
+            int amount = await Task.Run(() => _appDbContext.TipoMercaderiaDb.Count());
+            return amount;
         }
         public async Task<List<TipoMercaderia>> GetListTiposMercaderia()
         {
