@@ -16,3 +16,5 @@ Realice una aplicación de consola la cual cumpla con los criterios de aceptaci�
 ● La mercadería, los tipos de mercadería y formas de entrega deben ser cargados automáticamente en la creación de la base de datos.
 
 ● En el listado de comandas se debe visualizar: código de comanda, listado de mercadería solicitada, con su nombre y tipo, precio total y la forma de entrega.
+
+Tutorial EF core C#: https://www.entityframeworktutorial.net/efcore/entity-framework-core-console-application.aspx
