@@ -1,20 +1,39 @@
-# TP1-ORM-Scholz_Veronica | Parte 1
+# Menu Restaurant - Parte 1 - ORM | Gestión de Comandas con Entity Framework Core
 
-Criterios de aceptación:
-1. Debe permitir registrar las comandas (el pedido del cliente)
-2. Debe enlistar las comandas con el detalle de los platos
+Este proyecto corresponde a la primera parte del trabajo práctico de la materia Proyecto de Software. Se implementa una aplicación de consola en C# para la gestión de comandas (pedidos de clientes) utilizando Entity Framework Core como ORM y una base de datos relacional.
 
-Consigna:
-Realice una aplicación de consola la cual cumpla con los criterios de aceptación. La misma debe utilizar base de datos relacional.
+## Criterios de Aceptación
 
-● Se debe utilizar un ORM.
+La aplicación debe cumplir con los siguientes criterios:
 
-● El modelo de datos debe ser como el que visualiza la figura 1
+*   **Registro de Comandas:** Permitir el registro de nuevas comandas, capturando la información del pedido del cliente.
+*   **Listado de Comandas:** Mostrar un listado de las comandas registradas, incluyendo el detalle de los platos solicitados en cada una.
 
-● Se debe utilizar Code-First para crear el modelo de base de datos.
+## Consigna
 
-● La mercadería, los tipos de mercadería y formas de entrega deben ser cargados automáticamente en la creación de la base de datos.
+Desarrollar una aplicación de consola en C# que cumpla con los criterios de aceptación mencionados. Se deben seguir las siguientes directrices:
 
-● En el listado de comandas se debe visualizar: código de comanda, listado de mercadería solicitada, con su nombre y tipo, precio total y la forma de entrega.
+*   **Uso de ORM:** Implementar el acceso a la base de datos utilizando un ORM (Entity Framework Core).
+*   **Modelo de Datos:** El modelo de datos debe seguir la estructura definida en la figura 1 (incluir la figura en el README si es posible o una breve descripción).
+*   **Code-First:** Utilizar el enfoque Code-First para la creación y gestión del esquema de la base de datos.
+*   **Carga Inicial de Datos:** La mercadería, los tipos de mercadería y las formas de entrega deben ser cargados automáticamente al crear la base de datos. Esto asegura una configuración inicial consistente.
+*   **Detalle del Listado:** El listado de comandas debe mostrar la siguiente información:
+    *   Código de la comanda.
+    *   Listado de la mercadería solicitada, incluyendo el nombre y el tipo de cada artículo.
+    *   Precio total de la comanda.
+    *   Forma de entrega.
 
-Tutorial EF core C#: https://www.entityframeworktutorial.net/efcore/entity-framework-core-console-application.aspx
+## Tecnologías Utilizadas
+
+*   **C#**
+*   **.NET**
+*   **SQL Server**
+*   **Entity Framework Core**
+
+## Diagrama de la Base de Datos
+
+![Figura 1 - Diagrama del esquema de la base de datos](https://github.com/veroyols/TP1-ORM-Scholz_Veronica/blob/master/bd.png)
+
+## Referencias
+
+*   **Tutorial EF Core C#:** [https://www.entityframeworktutorial.net/efcore/entity-framework-core-console-application.aspx](https://www.entityframeworktutorial.net/efcore/entity-framework-core-console-application.aspx)
